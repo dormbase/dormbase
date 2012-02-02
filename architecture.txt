@@ -1,0 +1,101 @@
+architecture of the dormbase system
+
+--------------------------------------------------------------------------------
+Directory System
+
+    model User
+	roomID -> FK to Room
+	firstname
+	lastname
+	athena (Athena username may be null if not MIT student)
+	altemail (for non-MIT students)
+	url
+	about
+	bool active
+	bool livesInDorm
+	
+    model Room
+	room number
+	room meta-information-for-finding (Tower, Entry, etc)
+	GRT section
+	phone
+	
+search by any of these fields
+
+- authentication system - kerberos + non-kerberos (Shibboleth)
+
+--------------------------------------------------------------------------------
+Governance - handled through ACLs (with a special prefix)
+
+    model Legislation
+	status (proposed, tabled, fullforum, accepted, rejected)
+	title
+	summary
+	fulltext
+	proposeddate
+	author -> FK to User
+	funding
+
+    model Meeting
+    	proposals # FKs to list of legislation IDs considered
+
+--------------------------------------------------------------------------------
+Mailing Lists  
+
+	stores a (default) prefix for the mailing list names
+	stores default manager (moira or mailman)
+	for each ACL:
+	    add the prefix (default yes)
+	    synch to mailman / moira?
+
+--------------------------------------------------------------------------------
+Packages
+
+--------------------------------------------------------------------------------
+Guest Lists
+      
+    model GuestList
+	  ownerID -> FK to User
+	  name
+
+--------------------------------------------------------------------------------
+Resources
+
+	movies 
+	items behind desk
+
+--------------------------------------------------------------------------------
+ACLs
+
+    model Group
+	  bool auto # true if user was added to group automatically
+	  mailingList
+	  owner -> FK to GroupID or UserID
+
+    model GroupMembers
+	  memberID -> FK UserID
+	  isAdmin
+	  position -> string, used for government positions. can be null
+
+    ability to sync ACLs to Moira or Mailman
+
+
+APPLICATIONS
+priorities:
+1. users, groups, mailing lists, touchstone (core module)
+. must support authentication via cert, mit account creds, AND non-MIT accounts
+
+apps:
+- desk worker (package management, movie checkin/checkout, guest list)
+- directory app, user profile and user group editor for enduser (link FB, etc)
+- dorm info (show officers, GRTs)
+- movies
+- polls
+- guest list app
+- proposals {lounge, government} & finances
+- rooming, rooming lottery
+- chat app
+- "bon appetit dining menu" app
+
+simmons specific:
+- lounges
