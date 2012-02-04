@@ -87,12 +87,22 @@ priorities:
 
 apps:
 - desk worker (package management, movie checkin/checkout, guest list)
+  > add packages, movies, equipment, games, 
+  > packages - have to be committed after adding before user gets a notification. if 
+    uncommitted after N mins, email is sent to desk.
+  > spare keys? if no return in hour, problemo. 
+
+- cabsharing
+- simsell
+- library
+- reservations & tours
 - directory app, user profile and user group editor for enduser (link FB, etc)
 - dorm info (show officers, GRTs)
 - movies
 - polls
 - guest list app
 - proposals {lounge, government} & finances
+  - list of rooming assignments; each assignment is keyed to a table of the terms (term_id, term_name)
 - rooming, rooming lottery
 - chat app
 - "bon appetit dining menu" app
