@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import validate_slug
 
 class AbstractRoom(models.Model):
     """
@@ -25,15 +26,15 @@ class AbstractUser(models.Model):
     Abstract class containing all non-dorm-specific user attributes. 
     """
     room = models.ForeignKey(Room)
-    firstname = models.CharField(max_length = 200, verbose_name="first name")
-    lastname = models.CharField(max_length = 200, verbose_name="last name")
-    athena  = models.CharField(max_length = 200, verbose_name="athena id") # no "@mit.edu" suffix
-    altemail = models.EmailField(verbose_name="non-MIT email")
-    url = models.CharField(max_length = 1000)
-    about = models.TextField()
+    firstname = models.CharField(max_length = 64, verbose_name="first name")
+    lastname = models.CharField(max_length = 64, verbose_name="last name")
+    athena  = models.CharField(max_length = 8, verbose_name="athena id") # no "@mit.edu" suffix
+    year = models.IntegerField()
+    altemail = models.EmailField(verbose_name="non-MIT email", blank = True)
+    url = models.CharField(max_length = 256, blank = True)
+    about = models.TextField(blank = True)
     active = models.BooleanField()
     livesInDorm = models.BooleanField()
-    year = models.IntegerField()
     
     def __unicode__(self):
         return self.firstname + ' ' + self.lastname
@@ -45,22 +46,32 @@ class User(AbstractUser):
     """
     This class contians user attributes which are dorm-specific.
     """
-    title = models.CharField(max_length = 50)
-    cell = models.CharField(max_length = 20)
-    hometown = models.CharField(max_length = 200)
+    title = models.CharField(max_length = 50, blank = True)
+    cell = models.CharField(max_length = 20, blank = True)
+    hometown = models.CharField(max_length = 200, blank = True)
 
 class Group(models.Model):
+    name = models.CharField(max_length = 200)
+    mailingListName = models.CharField(max_length = 200, validators = [validate_slug])
     autoSync = models.BooleanField() # auto mailing list sync
-    mailingList = models.CharField(max_length = 200)
-    owner = models.ForeignKey("self")
-    members = models.ManyToManyField(User, through='GroupMembers')
+    owner = models.ForeignKey("self", related_name = "groupOwner", blank = True, null = True)
+    memacl = models.ForeignKey("self", related_name = "groupMemacl", blank = True, null = True)
+    members = models.ManyToManyField(User, through='GroupMember')
 
     def __unicode__(self):
-        return self.mailingList
+        return self.name
 
-class GroupMembers(models.Model):
+#    def save(self, *args, **kwargs):
+#        if not mailingListNameOK(args['mailingListName']):
+#            return
+#        super(Blog, self).save(*args, **kwargs) # Call the "real" save() method.
+            
+
+class GroupMember(models.Model):
     member = models.ForeignKey(User)
     group = models.ForeignKey(Group)
-    isAdmin = models.BooleanField()
-    position = models.CharField(max_length = 200) # used for government positions. can be null
+    position = models.CharField(max_length = 200, blank = True, null = True) # used for government positions. can be null
     autoMembership = models.BooleanField() # true if sync'd to this group via script
+
+    def __unicode__(self):
+        return str(self.member) + ' -> ' + str(self.group)
