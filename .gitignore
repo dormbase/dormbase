@@ -11,3 +11,5 @@ parts
 *~
 *.orig
 *.rej
+.#*
+db.dat
