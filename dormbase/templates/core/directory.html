@@ -15,25 +15,91 @@
         });
     });
 </script>
--->
 
-<h1>HI IM AUTOCOMPLETE</h1>
+<h1>Directory Search</h1>
 <div>
       <form class="well form-search">
         <input id="searchterm" type="text" class="input-medium search-query">
         <button type="submit" class="btn">Search</button>
       </form>
 </div>
-          
-<div>advanced search
-<label for="firstname">Firstname</label><input id="firstname" type="text" class="input-small">
-<label for="lastname">Lastname:</label><input id="lastname" type="text" class="input-small">
-<label for="title">Title:</label><input id="title" type="text" class="input-small">
-<label for="username">Username:</label><input id="username" type="text" class="input-small">
-<label for="room">Room:</label><input id="room" type="text" class="input-small">
-<label for="year">Year:</label><select id="year" class="input-small"></select>
-<label for="lounge">Lounge:</label><select id="lounge" class="input-small"></select>
-<label for="grt">GRT:</label><select id="grt" class="input-small"></select>
+-->
+
+<script>
+$("#firstname").keypress(function() {
+    alert("Handler for .keypress() called.");
+});
+</script>
+
+<div class="row">     
+<div class="span4">
+<form class="form-horizontal">
+<fieldset>
+<legend>Search the Directory</legend>
+<div><p><br/>Enter data in any or all of the below fields.
+'%' matches anything - e.g. username 'dram%' matches 'dramage'.</p></div>
+<p>&nbsp;</p>
+<div class="control-group">
+    <label for="firstname">First name</label>
+    <div class="controls">
+        <input id="firstname" type="text" class="input-medium">
+    </div>
 </div>
+<div class="control-group">
+    <label for="lastname">Last name:</label>
+    <div class="controls">
+        <input id="lastname" type="text" class="input-medium">
+    </div>
+</div>
+<div class="control-group">
+    <label for="title">Title:</label>
+    <div class="controls">
+        <input id="title" type="text" class="input-medium">
+    </div>
+</div>
+<div class="control-group">
+    <label for="username">Username:</label>
+    <div class="controls">
+        <input id="username" type="text" class="input-medium">
+    </div>
+</div>
+<div class="control-group">
+    <label for="room">Room:</label>
+    <div class="controls">
+        <input id="room" type="text" class="input-medium">
+    </div>
+</div>
+<div class="control-group">
+    <label for="year">Year:</label>
+    <div class="controls">
+        <select id="year" class="input-medium"></select>
+    </div>
+</div>
+<div class="control-group">
+    <label for="lounge">Lounge:</label>
+    <div class="controls">
+        <select id="lounge" class="input-medium"></select>
+    </div>
+</div>
+<div class="control-group">
+    <label for="grt">GRT:</label>
+    <div class="controls">
+        <select id="grt" class="input-medium"></select>
+    </div>
+</div>
+
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary">Search Directory</button>
+    <button type="reset" class="btn">Clear</button>
+</div>
+</fieldset>
+</form>
+</div>
+
+<div class="span8">
+<h2>Results</h2>
+hi im 8</div>
+</div>
+
 {% endblock %}
 
