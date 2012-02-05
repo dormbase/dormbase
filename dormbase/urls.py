@@ -21,6 +21,8 @@ urlpatterns = patterns('',
 
     # url(r'^$', 'dormbase.views.home', name='home'),
     # url(r'^dormbase/', include('dormbase.foo.urls')),
+    url(r'^directory$', 'dormbase.core.views.directory', name='directory'),
+    url(r'^directory_json$', 'dormbase.core.views.directory_json', name='directory_json'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
