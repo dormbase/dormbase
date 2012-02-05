@@ -7,8 +7,8 @@ class AbstractRoom(models.Model):
     Abstract class containing all non-dorm-specific room attributes. 
     """
     number = models.CharField(max_length = 100)
-    metaInformationForLocating = models.CharField(max_length = 1000)
-    phone = models.CharField(max_length = 20)    
+    metaInformationForLocating = models.CharField(max_length = 1000, blank = True)
+    phone = models.CharField(max_length = 20)
 
     def __unicode__(self):
         return self.number
@@ -20,7 +20,7 @@ class Room(AbstractRoom):
     """
     This class contians room attributes which are dorm-specific.
     """
-    grtSection = models.CharField(max_length = 100)
+    grtSection = models.CharField(max_length = 100, blank = True)
 
 class AbstractUser(models.Model):
     """
@@ -35,9 +35,6 @@ class AbstractUser(models.Model):
     url = models.CharField(max_length = 256, blank = True)
     about = models.TextField(blank = True)
     livesInDorm = models.BooleanField()
-    
-    def __unicode__(self):
-        return self.firstname + ' ' + self.lastname
 
     class Meta:
         abstract = True
