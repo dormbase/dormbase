@@ -6,11 +6,12 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
+from populate import movieData
 
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+class MovieTest(TestCase):
+    def movieBasic(self)
         """
-        Tests that 1 + 1 always equals 2.
+        Tests that movie model can be populated.
         """
         self.assertEqual(1 + 1, 2)
