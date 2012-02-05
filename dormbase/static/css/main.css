@@ -3363,3 +3363,48 @@ a.thumbnail:hover {
 .invisible {
   visibility: hidden;
 }
+body {
+  background: url(../img/background.png) top left repeat-x;
+}
+.darkPanel {
+  width: 100%;
+  height: 150px;
+  background: url(../img/darkPanel.png) bottom left repeat-x;
+}
+.container {
+  background: #ffffff;
+}
+#mainArea {
+  background: transparent;
+}
+#wideDarkPanel {
+  width: 100%;
+  background-image: url(../img/darkPanel.png);
+  background-repeat: repeat-x;
+  background-position: 0px 60px;
+}
+#simmons-logo {
+  background: url(../img/simmonsHall.png) bottom right no-repeat;
+  height: 44px;
+  padding-top: 16px;
+}
+#simmons-logo h1 {
+  display: none;
+}
+#simmons-pushdown {
+  height: 60px;
+  background: url(../img/background.png) top left repeat-x;
+}
+#simmons-nav {
+  height: 90px;
+}
+#colorful-simmons {
+  background: url(../img/colorfulSimmons.png) top left no-repeat;
+  height: 268px;
+  width: 185px;
+  float: left;
+  margin-left: 32px;
+}
+footer p {
+  text-align: center;
+}
