@@ -19,6 +19,9 @@ urlpatterns = patterns('',
              'document_root': settings.STATIC_ROOT,
              }),
 
+    # url(r'^$', 'dormbase.views.home', name='home'),
+    # url(r'^dormbase/', include('dormbase.foo.urls')),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
