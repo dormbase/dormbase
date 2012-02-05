@@ -21,23 +21,16 @@
   </head>
 
   <body>
-    <div id="wideDarkPanel">
-      <div class="container" id="mainArea">
-	<div id="colorful-simmons">
-	</div>
-	<div class="container" id="simmons-pushdown">
-	</div>
-	<div class="darkPanel" id="topPanel">
-	  <div id="simmons-logo">
-	    <h1>Simmons Hall</h1>
-	  </div>
-	  <div class="container" id="simmons-nav">
-	  </div>
-	</div>
-	<div class="container" id="content">
-	  {% block content %}
-	  {% endblock %}
-	</div>
+    <div class="topDarkPanel">
+      <div class="container" id="header">
+	<img id="simmons-hall" src="static/img/simmonsHall.png" width="475px" height="44px" alt="Simmons Hall" />
+	<img id="simmons-logo" src="static/img/colorfulSimmons.png" width="185px" height="268px" alt="Simmons logo" />
+      </div>
+      <div class="container" id="simmons-nav">
+      </div>
+      <div class="container" id="content">
+	{% block content %}
+	{% endblock %}
       </div>
       <div class="darkPanel" id="bottomPanel">
 	<div class="container" id="simmons-footer">
@@ -46,7 +39,7 @@
 	</div>
       </div>
     </div>
-
+    
     <script src="../static/js/jquery.js"></script>
     <script src="../static/js/bootstrap-transition.js"></script>
     <script src="../static/js/bootstrap-alert.js"></script>
@@ -60,6 +53,5 @@
     <script src="../static/js/bootstrap-collapse.js"></script>
     <script src="../static/js/bootstrap-carousel.js"></script>
     <script src="../static/js/bootstrap-typeahead.js"></script>
-
   </body>
 </html>

@@ -67,54 +67,51 @@ body {
 }
 
 .darkPanel {
-    width: 100%;
     height: 150px;
-    background: url(../img/darkPanel.png) bottom left repeat-x;
+    background: url(../img/darkPanel.png) top left repeat-x;
+}
+
+.topDarkPanel {
+    background-image: url(../img/darkPanel.png);
+    background-repeat: repeat-x;
+    background-position: 0px 60px;
 }
 
 .container {
     background: @white;
 }
 
-#mainArea {
+#header {
+    height: @spacing;
     background: transparent;
 }
 
-#wideDarkPanel {
-    width: 100%;
-    background-image: url(../img/darkPanel.png);
-    background-repeat: repeat-x;
-    background-position: 0px 60px;
-}
-
-#simmons-logo {
-    background: url(../img/simmonsHall.png) bottom right no-repeat;
-    height: 44px;
+#simmons-hall {
+    float: right;
+    position: relative;
+    right: -@padding;
+    margin-top: @spacing;
     padding-top: 16px;
 }
 
-#simmons-logo h1 {
-    display: none;
-}
-
-#simmons-pushdown {
-    height: 60px;
-    background: url(../img/background.png) top left repeat-x;
-}
-
 #simmons-nav {
-    height: 90px; // Remember there is 2*10px of padding
+    height: 90px; //150 - 44 -16
+    margin-top: @spacing;
+    padding: 0 @padding 0 @padding;
 }
 
-#colorful-simmons {
-    background: url(../img/colorfulSimmons.png) top left no-repeat;
-    height: 268px;
-    width: 185px;
-    float: left;
-    margin-left: 32px;
+#simmons-footer {
+    height: 90px;
+    padding: 0 @padding 0 @padding;
 }
 
 #content {
+    padding: @spacing @padding 0 @padding;
+}
+
+#simmons-logo {
+    float: left;
+    margin-left: 75px;
 }
 
 footer p {
