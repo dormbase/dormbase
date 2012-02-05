@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import validate_slug
+from django.contrib.auth.models import User as AuthUser
 
 class AbstractRoom(models.Model):
     """
@@ -23,17 +24,16 @@ class Room(AbstractRoom):
 
 class AbstractUser(models.Model):
     """
-    Abstract class containing all non-dorm-specific user attributes. 
+    Abstract class containing all non-dorm-specific user attributes.
+    Maintains a 1-1 with the auth app user module.
     """
+    authUser = models.ForeignKey(AuthUser, unique = True)
     room = models.ForeignKey(Room)
-    firstname = models.CharField(max_length = 64, verbose_name="first name")
-    lastname = models.CharField(max_length = 64, verbose_name="last name")
-    athena  = models.CharField(max_length = 8, verbose_name="athena id") # no "@mit.edu" suffix
+    athena  = models.CharField(max_length = 8, verbose_name = "athena id") # no "@mit.edu" suffix
     year = models.IntegerField()
     altemail = models.EmailField(verbose_name="non-MIT email", blank = True)
     url = models.CharField(max_length = 256, blank = True)
     about = models.TextField(blank = True)
-    active = models.BooleanField()
     livesInDorm = models.BooleanField()
     
     def __unicode__(self):
@@ -65,7 +65,7 @@ class Group(models.Model):
 #        if not mailingListNameOK(args['mailingListName']):
 #            return
 #        super(Blog, self).save(*args, **kwargs) # Call the "real" save() method.
-            
+
 
 class GroupMember(models.Model):
     member = models.ForeignKey(User)
