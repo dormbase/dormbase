@@ -1,4 +1,5 @@
-import os
+import sys
+sys.path.append('contrib/IMDBpy')
 
 # Django settings for dormbase project.
 import os
