@@ -1,5 +1,11 @@
 from django.db import models
 
+class Genre(models.Model):
+    name = models.CharField(max_length=64)
+
+    def __unicode__(self):
+        return self.name    
+
 class Movie(models.Model):
     title = models.CharField(max_length=128)
     year = models.CharField(max_length=4)
@@ -13,9 +19,3 @@ class Movie(models.Model):
    
     def __unicode__(self):
         return self.title
-
-class Genre(models.Model):
-    name = models.CharField(max_length=64)
-
-    def __unicode__(self):
-        return self.name    
