@@ -61,8 +61,8 @@ def movieData(movieID):
 
 def loadDb(filename):
     f = open(filename, 'r')
-    for line in f:
+    for movieId in f:
         try:
-            movieData(line)    
+            movieData(movieId)
         except:
             print "%s is not an IMDB movie ID" %s
