@@ -1,0 +1,6 @@
+[submodule "dormbase/static/less"]
+	path = dormbase/static/less
+	url = https://github.com/cloudhead/less.js.git
+[submodule "dormbase/static/bootstrap"]
+	path = dormbase/static/bootstrap
+	url = https://github.com/twitter/bootstrap.git
