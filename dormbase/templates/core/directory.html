@@ -1,39 +1,10 @@
 {% extends "base.html" %}
 {% block activeDirectory %}class="active"{% endblock %}
 {% block content %}
-<!--
-<script>
-    $(function() {
-        $("#searchterm").autocomplete({
-            source: "directory_json",
-            minLength: 2,
-            select: function( event, ui ) {
-                alert( ui.item ?
-                    "Selected: " + ui.item.value + " aka " + ui.item.id :
-                    "Nothing selected, input was " + this.value );
-            }
-        });
-    });
-</script>
-
-<h1>Directory Search</h1>
-<div>
-      <form class="well form-search">
-        <input id="searchterm" type="text" class="input-medium search-query">
-        <button type="submit" class="btn">Search</button>
-      </form>
-</div>
--->
-
-<script>
-$("#firstname").keypress(function() {
-    alert("Handler for .keypress() called.");
-});
-</script>
 
 <div class="row">     
 <div class="span4">
-<form class="form-horizontal">
+<form id="searchform" class="form-horizontal">
 <fieldset>
 <legend>Search the Directory</legend>
 <div><p><br/>Enter data in any or all of the below fields.
@@ -42,49 +13,49 @@ $("#firstname").keypress(function() {
 <div class="control-group">
     <label for="firstname">First name</label>
     <div class="controls">
-        <input id="firstname" type="text" class="input-medium">
+        <input id="firstname" name="firstname" type="text" class="input-medium">
     </div>
 </div>
 <div class="control-group">
     <label for="lastname">Last name:</label>
     <div class="controls">
-        <input id="lastname" type="text" class="input-medium">
+        <input id="lastname" name="lastname" type="text" class="input-medium">
     </div>
 </div>
 <div class="control-group">
     <label for="title">Title:</label>
     <div class="controls">
-        <input id="title" type="text" class="input-medium">
+        <input id="title" name="title" type="text" class="input-medium">
     </div>
 </div>
 <div class="control-group">
     <label for="username">Username:</label>
     <div class="controls">
-        <input id="username" type="text" class="input-medium">
+        <input id="username" name="username" type="text" class="input-medium">
     </div>
 </div>
 <div class="control-group">
     <label for="room">Room:</label>
     <div class="controls">
-        <input id="room" type="text" class="input-medium">
+        <input id="room" name="room" type="text" class="input-medium">
     </div>
 </div>
 <div class="control-group">
     <label for="year">Year:</label>
     <div class="controls">
-        <select id="year" class="input-medium"></select>
+        <input id="year" name="year" type="text" class="input-medium">
     </div>
 </div>
 <div class="control-group">
     <label for="lounge">Lounge:</label>
     <div class="controls">
-        <select id="lounge" class="input-medium"></select>
+        <select id="lounge" name="lounge" class="input-medium"></select>
     </div>
 </div>
 <div class="control-group">
     <label for="grt">GRT:</label>
     <div class="controls">
-        <select id="grt" class="input-medium"></select>
+        <select id="grt" name="grt" class="input-medium"></select>
     </div>
 </div>
 
@@ -98,8 +69,46 @@ $("#firstname").keypress(function() {
 
 <div class="span8">
 <h2>Results</h2>
-hi im 8</div>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th>Username</th><th>First Name</th><th>Last Name</th><th>Room</th><th>Year</th></tr>
+</thead>
+<tbody id="results" name="results"></tbody>
+</table>
 </div>
+</div>
+
+<script>
+function userToHTML(user) {
+    s = '<tr><td>' + user.username + '</td>';
+    s += '<td>' + user.firstname + '</td>';
+    s += '<td>' + user.lastname + '</td>';
+    s += '<td>' + user.room + '</td>';
+    s += '<td>' + user.year + '</td>';
+    s += '</tr>'
+    return s;
+}
+
+function search() {
+    $.ajax({
+	type: "GET",
+	url: "directory_json",
+	data: $("#searchform").serialize(),
+    }).done(function(search_json) {
+	$("#results").html("");
+	for (var index in search_json.result) {
+            $("#results").append(userToHTML(search_json.result[index]));
+	}
+    });
+}
+
+$("#firstname").keyup(function() { search(); });
+$("#lastname").keyup(function() { search(); });
+$("#title").keyup(function() { search(); });
+$("#username").keyup(function() { search(); });
+$("#room").keyup(function() { search(); });
+$("#year").keyup(function() { search(); });
+</script>
 
 {% endblock %}
 

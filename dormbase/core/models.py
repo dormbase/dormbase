@@ -27,7 +27,7 @@ class AbstractResident(models.Model):
     Abstract class containing all non-dorm-specific user attributes.
     Maintains a 1-1 with the auth app user module.
     """
-    authUser = models.ForeignKey(AuthUser, unique = True)
+    user = models.ForeignKey(AuthUser, unique = True)
     room = models.ForeignKey(Room)
     athena  = models.CharField(max_length = 8, verbose_name = "athena id") # no "@mit.edu" suffix
     year = models.IntegerField()
