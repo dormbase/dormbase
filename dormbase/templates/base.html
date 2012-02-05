@@ -27,6 +27,24 @@
 	<img id="simmons-logo" src="static/img/colorfulSimmons.png" width="185px" height="268px" alt="Simmons logo" />
       </div>
       <div class="container" id="simmons-nav">
+	<div class="subnav">
+	  <ul class="nav nav-pills">   
+	    <li {% block activeHome %}{% endblock %}><a href="/#">Home</a></li>
+	    <li {% block activeAbout %}{% endblock %}><a href="about#">About</a></li>
+	    <li {% block activeDirectory %}{% endblock %}><a href="directory#">Directory</a></li>
+	    <li {% block activeGovernment %}{% endblock %}><a href="government#">Government</a></li>
+	    <li {% block activeLounges %}{% endblock %}><a href="lounges#">Lounges</a></li>
+	    <li class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown" href="#">More<b class="caret"></b></a>
+	      <ul class="dropdown-menu">
+		<li><a href="#">Nav, tabs, pills</a></li>
+		<li><a href="#">Navbar</a></li>
+		<li><a href="#">Breadcrumbs</a></li>
+		<li><a href="#">Pagination</a></li>
+	      </ul>
+	    </li>
+	  </ul>
+	</div>
       </div>
       <div class="container" id="content">
 	{% block content %}
