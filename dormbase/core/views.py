@@ -36,7 +36,7 @@ def resident_to_dict(resident):
     }
 
 def room_to_dict(room):
-    return map(resident_to_dict, Resident.objects.filter(room__id = room.id))
+    return map(resident_to_dict, Resident.objects.select_related().filter(room__id = room.id))
 
 def directory(request):
     payload = {}
