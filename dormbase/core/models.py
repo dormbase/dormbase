@@ -22,7 +22,7 @@ class Room(AbstractRoom):
     """
     grtSection = models.CharField(max_length = 100, blank = True)
 
-class AbstractUser(models.Model):
+class AbstractResident(models.Model):
     """
     Abstract class containing all non-dorm-specific user attributes.
     Maintains a 1-1 with the auth app user module.
@@ -36,10 +36,13 @@ class AbstractUser(models.Model):
     about = models.TextField(blank = True)
     livesInDorm = models.BooleanField()
 
+    def __unicode__(self):
+        return self.athena
+    
     class Meta:
         abstract = True
 
-class User(AbstractUser):
+class Resident(AbstractResident):
     """
     This class contians user attributes which are dorm-specific.
     """
@@ -53,7 +56,7 @@ class Group(models.Model):
     autoSync = models.BooleanField() # auto mailing list sync
     owner = models.ForeignKey("self", related_name = "groupOwner", blank = True, null = True)
     memacl = models.ForeignKey("self", related_name = "groupMemacl", blank = True, null = True)
-    members = models.ManyToManyField(User, through='GroupMember')
+    members = models.ManyToManyField(Resident, through='GroupMember')
 
     def __unicode__(self):
         return self.name
@@ -65,7 +68,7 @@ class Group(models.Model):
 
 
 class GroupMember(models.Model):
-    member = models.ForeignKey(User)
+    member = models.ForeignKey(Resident)
     group = models.ForeignKey(Group)
     position = models.CharField(max_length = 200, blank = True, null = True) # used for government positions. can be null
     autoMembership = models.BooleanField() # true if sync'd to this group via script
