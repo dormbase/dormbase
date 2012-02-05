@@ -55,6 +55,9 @@ def directory_json(request):
             if not r['id'] in d:
                 d[r['id']] = r
         return d
+
+    # Make queries to User, Resident, and Room tables. Join the results
+    # via python set intersection on the User.id
     
     if one_not_empty(request.GET, ['firstname', 'lastname', 'username']):
         results = map(user_to_dict, User.objects.filter(
@@ -79,19 +82,12 @@ def directory_json(request):
         retrieved_ids.append(map(lambda x: x['id'], room_results))
         output = add_to_dict(output, room_results)
 
-    # early escape if only one query returned results
-    if len(retrieved_ids) <= 1:
-        jsons = json.dumps({'result' : list(results) + list(resident_results) + list(room_results)})
-        return HttpResponse(jsons, mimetype='application/json')
+    s = set([])
+    if len(retrieved_ids) > 0:
+        s = set(retrieved_ids[0])
+        if len(retrieved_ids) > 1:
+            for idset in retrieved_ids[1:]:
+                s = s.intersection(set(idset))
 
-    print retrieved_ids
-    s = set(retrieved_ids[0])
-    for idset in retrieved_ids[1:]:
-        s = s.intersection(set(idset))
-
-    final = []
-    for id in s:
-        final.extend([output[id]])
-    
-    jsons = json.dumps({'result' : final})
+    jsons = json.dumps({'result' : [output[id] for id in s]})
     return HttpResponse(jsons, mimetype='application/json')
