@@ -11,29 +11,29 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <link href="../static/css/main.css" rel="stylesheet">
-    <link href="../static/css/responsive.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/main.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/responsive.css" rel="stylesheet">
 
-    <link rel="shortcut icon" href="../static/ico/favicon.png">
-    <link rel="apple-touch-icon" href="../static/ico/apple-57x57.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="../static/ico/apple-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="../static/ico/apple-114x114.png">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.png">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}ico/apple-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ STATIC_URL }}ico/apple-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ STATIC_URL }}ico/apple-114x114.png">
   </head>
 
   <body>
     <div class="topDarkPanel">
       <div class="container" id="header">
-	<img id="simmons-hall" src="static/img/simmonsHall.png" width="475px" height="44px" alt="Simmons Hall" />
-	<img id="simmons-logo" src="static/img/colorfulSimmons.png" width="185px" height="268px" alt="Simmons logo" />
+	<img id="simmons-hall" src="{{ STATIC_URL }}img/simmonsHall.png" width="475px" height="44px" alt="Simmons Hall" />
+	<img id="simmons-logo" src="{{ STATIC_URL }}img/colorfulSimmons.png" width="185px" height="268px" alt="Simmons logo" />
       </div>
       <div class="container" id="simmons-nav">
 	<div class="subnav">
 	  <ul class="nav nav-pills">   
 	    <li {% block activeHome %}{% endblock %}><a href="/#">Home</a></li>
-	    <li {% block activeAbout %}{% endblock %}><a href="about#">About</a></li>
-	    <li {% block activeDirectory %}{% endblock %}><a href="directory#">Directory</a></li>
-	    <li {% block activeGovernment %}{% endblock %}><a href="government#">Government</a></li>
-	    <li {% block activeLounges %}{% endblock %}><a href="lounges#">Lounges</a></li>
+	    <li {% block activeAbout %}{% endblock %}><a href="about">About</a></li>
+	    <li {% block activeDirectory %}{% endblock %}><a href="directory">Directory</a></li>
+	    <li {% block activeGovernment %}{% endblock %}><a href="government">Government</a></li>
+	    <li {% block activeLounges %}{% endblock %}><a href="lounges">Lounges</a></li>
 	    <li class="dropdown">
 	      <a class="dropdown-toggle" data-toggle="dropdown" href="#">More<b class="caret"></b></a>
 	      <ul class="dropdown-menu">
@@ -58,18 +58,18 @@
       </div>
     </div>
     
-    <script src="../static/js/jquery.js"></script>
-    <script src="../static/js/bootstrap-transition.js"></script>
-    <script src="../static/js/bootstrap-alert.js"></script>
-    <script src="../static/js/bootstrap-modal.js"></script>
-    <script src="../static/js/bootstrap-dropdown.js"></script>
-    <script src="../static/js/bootstrap-scrollspy.js"></script>
-    <script src="../static/js/bootstrap-tab.js"></script>
-    <script src="../static/js/bootstrap-tooltip.js"></script>
-    <script src="../static/js/bootstrap-popover.js"></script>
-    <script src="../static/js/bootstrap-button.js"></script>
-    <script src="../static/js/bootstrap-collapse.js"></script>
-    <script src="../static/js/bootstrap-carousel.js"></script>
-    <script src="../static/js/bootstrap-typeahead.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-transition.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-alert.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-modal.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-scrollspy.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-tab.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-tooltip.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-popover.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-button.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-carousel.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-typeahead.js"></script>
   </body>
 </html>

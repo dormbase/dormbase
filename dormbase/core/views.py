@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.template import RequestContext
 
 from django.contrib.auth.models import User
 from dormbase.core.models import Resident
@@ -39,8 +40,7 @@ def room_to_dict(room):
     return map(resident_to_dict, Resident.objects.select_related().filter(room__id = room.id))
 
 def directory(request):
-    payload = {}
-    return render_to_response('core/directory.html', request, payload)
+    return render_to_response('core/directory.html', context_instance = RequestContext(request))
 
 def directory_json(request):
     results, resident_results, room_results = [], [], []
