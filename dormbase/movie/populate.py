@@ -31,11 +31,12 @@ def movieData(movieID):
             'full-size cover url': ''}
     
     movie = IMDb().get_movie(movieID)
+
     title = unicodedata.normalize('NFKD', movie['title']).encode('ascii','ignore')
 
     for key in data:
         if movie.has_key(key):
-            if type(movie[key]) == type([]):
+            if type(movie[key]) == type([]) and key != 'genres':
                 movie[key] = movie[key][0]
         
             if type(movie[key]) == type(''):
@@ -59,10 +60,7 @@ def movieData(movieID):
     m.save()
 
     gs = [Genre.objects.filter(name = g) for g in data['genres']]
-
     gs.append(Genre.objects.filter(name = 'New'))
-
-    print gs
 
     fg = []
     for g in gs: 
@@ -79,4 +77,9 @@ def loadDb(filename):
 
     f = open(filename, 'r')
     for movieId in f:
-        movieData(movieId)
+        try:
+            movieData(movieId)
+        except:
+            print 'ERROR! {} is not an IMDB movie ID'.format(movieId)
+
+    print '- END -'
