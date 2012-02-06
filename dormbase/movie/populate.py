@@ -1,6 +1,6 @@
 import sys
 sys.path.append('../contrib/IMDBpy')
-
+import unicodedata
 from imdb import IMDb
 from dormbase.movie.models import Genre
 from dormbase.movie.models import Movie
@@ -9,11 +9,11 @@ from dormbase.movie.models import Movie
 def initGenre():
     genreList = ['Action', 'Adventure', 'Animation', 'Biography',
                  'Comedy', 'Crime', 'Documentary', 'Drama',
-                 'Family', 'Fantasy', 'Film-Noir', 'Game-Show'
+                 'Family', 'Fantasy', 'Film-Noir', 'Game-Show',
                  'History', 'Horror', 'Music', 'Musical',
                  'Mystery', 'News', 'Reality-TV', 'Romance',
-                 'Sci-Fi' 'Sport', 'Talk-Show', 'Thriller',
-                 'War', 'Western']
+                 'Sci-Fi', 'Sport', 'Talk-Show', 'Thriller',
+                 'War', 'Western', 'New'] # List was taken from IMDB genre page. 
 
     for i in genreList:
         g = Genre(name = i)
@@ -21,7 +21,7 @@ def initGenre():
 
 def movieData(movieID):
     data = {'title': '',
-            'year': '',
+            'year': None,
             'rating': None,
             'plot': '',
             'plot outline': '',
@@ -31,28 +31,39 @@ def movieData(movieID):
             'full-size cover url': ''}
     
     movie = IMDb().get_movie(movieID)
-    
+    title = unicodedata.normalize('NFKD', movie['title']).encode('ascii','ignore')
+
     for key in data:
-        try:
+        if movie.has_key(key):
+            if type(movie[key]) == type([]):
+                movie[key] = movie[key][0]
+        
+            if type(movie[key]) == type(''):
+                movie[key] = unicodedata.normalize('NFKD', movie[key]).encode('ascii','ignore')
+
             data[key] = movie[key]
-            # print data[key]
-        except:
-            print 'ERROR retrieving %s' %key
+
+        else:
+            print 'Error! {} not available in {}'.format(key, title)
 
     m = Movie(title = data['title'],
-                     year = data['year'],
-                     plot = data['plot'],
-                     plotOutline = data['plot outline'],
-                     mpaa = data['mpaa'],
-                     runtimes = data['runtimes'],
-                     coverUrl = data['full-size cover url']
-                     )
+              plot = data['plot'],
+              plotOutline = data['plot outline'],
+              mpaa = data['mpaa'],
+              runtimes = data['runtimes'],
+              coverUrl = data['full-size cover url'],
+              rating = data['rating'],
+              year = data['year']
+              )
 
-    if data['rating'] != None:
-        m.rating = data['rating']
-    
     m.save()
+
     gs = [Genre.objects.filter(name = g) for g in data['genres']]
+
+    gs.append(Genre.objects.filter(name = 'New'))
+
+    print gs
+
     fg = []
     for g in gs: 
         if len(g) > 0: fg.append(g[0])
@@ -60,9 +71,12 @@ def movieData(movieID):
     m.save()
 
 def loadDb(filename):
+    try:
+        initGenre() # Genre's must be intialized before loading movie data!
+        print 'Genres successfully intialized.'
+    except:
+        print 'ERROR! Unable to intialize genres!'
+
     f = open(filename, 'r')
     for movieId in f:
-        try:
-            movieData(movieId)
-        except:
-            print "%s is not an IMDB movie ID" %s
+        movieData(movieId)
