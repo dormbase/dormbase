@@ -6,7 +6,13 @@ from dormbase.movie.models import Movie, Genre
 
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 
-def list_movies(request):
+def listMovies(request):
     payload = {'movies' : Movie.objects.all()}
     print payload
     return render_to_response('movie/movies.html', payload, context_instance=RequestContext(request))
+
+def listGenre(request, genreType):
+    payload = {'movies' : Movie.objects.filter(genres = Genre.objects.filter(name = genreType))}
+    print payload
+    return render_to_response('movie/movies.html', payload, context_instance=RequestContext(request))
+

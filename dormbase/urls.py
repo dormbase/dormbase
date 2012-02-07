@@ -11,11 +11,11 @@ urlpatterns = patterns('',
     url(r'^$', 'dormbase.views.home', name='home'),
     url(r'^directory$', 'dormbase.core.views.directory', name='directory'),
     url(r'^directory_json$', 'dormbase.core.views.directory_json', name='directory_json'),
-    url(r'^movies$', 'dormbase.movie.views.list_movies', name='directory_json'),
-
+    url(r'^movies$', 'dormbase.movie.views.listMovies', name='directory_json'),
+    url(r'^movies/(?P<genreType>.*)/$', 'dormbase.movie.views.listGenre', name='directory_json'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
              'document_root': settings.MEDIA_ROOT,
-             }),
+             }), 
 
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
              'document_root': settings.STATIC_ROOT,
