@@ -2,11 +2,22 @@
 {% block content %}
 
 <h1>Movie Database</h1>
-<p>
-<ul>
-{% for movie in movies %}
-<li>{{ movie.title }}</li>
-{% endfor %}
-</ul>
-</p>
+<div class="row">
+  {% for movie in movies %}
+  <div class="span6">
+    <a class="btn" rel="popover" data-content="{{movie.plotOutline}}" data-original-title="{{movie.title}}">{{ movie.title }}
+    </a>
+  </div>
+  {% endfor %}
+</div>
+
+
+
+
+<script type="text/javascript">
+$(function() {
+    $('a[rel="popover"]').popover();
+});
+</script>
+
 {% endblock %}
