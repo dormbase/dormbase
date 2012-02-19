@@ -2,18 +2,21 @@
 {% block content %}
 
 <h1>Movie Database</h1>
+{% for genre,films in selectFilms %}
+<h3>{{genre}}</h3>
 <div class="row-fluid">
-<ul class="thumbnails">
-  {% for movie in movies %}
-  <li class="span2" >
-    <div class="thumbnail" rel="popover" data-content="{{movie.plotOutline}} {{movie.mpaa}}" data-original-title="{{movie.title}} ({{movie.year}})">
-      <img src="{{movie.coverUrl}}" alt="">
-      <h5>{{movie.title}}</h5>
-    </div>
-  </li>
-  {% endfor %}
-</ul>
+  <ul class="thumbnails">
+    {% for movie in films %}
+    <li class="span2" >
+      <div class="thumbnail" rel="popover" data-content="{{movie.plotOutline}} {{movie.mpaa}}" data-original-title="{{movie.title}} ({{movie.year}})">
+	<img src="{{movie.coverUrl}}" alt="">
+	<h5>{{movie.title}}</h5>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
 </div>
+{% endfor %}
 
 
 <script type="text/javascript">
