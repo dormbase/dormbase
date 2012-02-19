@@ -28,19 +28,61 @@
       </div>
       <div class="container" id="simmons-nav">
 	<div class="subnav">
-	  <ul class="nav nav-pills">   
+	 <ul class="nav nav-pills">   
 	    <li {% block activeHome %}{% endblock %}><a href="/#">Home</a></li>
-	    <li {% block activeAbout %}{% endblock %}><a href="about">About</a></li>
 	    <li {% block activeDirectory %}{% endblock %}><a href="directory">Directory</a></li>
-	    <li {% block activeGovernment %}{% endblock %}><a href="government">Government</a></li>
-	    <li {% block activeLounges %}{% endblock %}><a href="lounges">Lounges</a></li>
-	    <li class="dropdown">
-	      <a class="dropdown-toggle" data-toggle="dropdown" href="#">More<b class="caret"></b></a>
+	    <li {% block activePersonal %}{% endblock %} class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown" href="personal">
+		Personal
+		<b class="caret"></b>
+	      </a>
 	      <ul class="dropdown-menu">
-		<li><a href="#">Nav, tabs, pills</a></li>
-		<li><a href="#">Navbar</a></li>
-		<li><a href="#">Breadcrumbs</a></li>
-		<li><a href="#">Pagination</a></li>
+		<li><a href="/#">Packages</a></li>
+		<li><a href="/#">Guest List</a></li>
+		<li><a href="/#">Lounges</a></li>
+		<li><a href="/#">Mailing Lists</a></li>
+		<li><a href="/#">Reuse</a></li>
+		<li class="divider"></li>
+		<li><a href="/#">Profile</a></li>
+	      </ul>
+	    </li>
+	    <li {% block activeMediaContent %}{% endblock %} class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown" href="mediaContent">
+		Media
+		<b class="caret"></b>
+	      </a>
+	      <ul class="dropdown-menu">
+		<li><a href="/movies">Movies</a></li>
+		<li><a href="/#">Games</a></li>
+		<li><a href="/#">Library</a></li>
+	      </ul>
+	    </li>
+	    <li {% block activeGovernment %}{% endblock %} class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown" href="government">
+		Government
+		<b class="caret"></b>
+	      </a>
+	      <ul class="dropdown-menu">
+		<li><a href="/#">Proposals</a></li>
+		<li><a href="/#">Meetings</a></li>
+		<li><a href="/#">Finances</a></li>
+		<li><a href="/#">Polls</a></li>
+		<li class="divider"></li>
+		<li><a href="/#">Reimbursement</a></li>
+	      </ul>
+	    </li>
+	    <li {% block activeFacilities %}{% endblock %} class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown" href="#facilities">
+		Facilities
+		<b class="caret"></b>
+	      </a>
+	      <ul class="dropdown-menu">
+		<li><a href="/#">Laundry View</a></li>
+		<li><a href="/#">Rooming</a></li>
+		<li><a href="/#">Floor Plans</a></li>
+		<li><a href="/#">Report a Problem</a></li>
+		<li class="divider"></li>
+		<li><a href="/#">Reservations</a></li>
 	      </ul>
 	    </li>
 	  </ul>
