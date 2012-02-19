@@ -26,7 +26,7 @@ def movieData(movieID):
             'plot': '',
             'plot outline': '',
             'genres': '',
-            'mpaa': '',
+            'mpaa': 'Mpaa not available.',
             'runtimes': '',
             'full-size cover url': ''}
     
