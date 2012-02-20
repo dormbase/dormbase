@@ -46,6 +46,8 @@ def movieData(movieID):
 
             data[key] = movie[key]
 
+            # print data[key]
+
         elif key != 'imdbId':
                 print 'Error! {} not available in {}'.format(key, title)
 
@@ -84,5 +86,8 @@ def loadDb(filename):
             movieData(movieId)
         except:
             print 'ERROR! {} is not an IMDB movie ID'.format(movieId)
+
+    m = models.Movie(**data) #This may be a bug!
+    m.save()
 
     print '- END -'
