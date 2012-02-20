@@ -20,6 +20,7 @@ def initGenre():
         g.save()
 
 def movieData(movieID):
+    movieID = movieID.strip('\n') # Newline character was preventing the movie table from being searchable by ID.
     data = {'title': '',
             'year': None,
             'rating': None,
@@ -28,7 +29,8 @@ def movieData(movieID):
             'genres': '',
             'mpaa': 'Mpaa not available.',
             'runtimes': '',
-            'full-size cover url': ''}
+            'full-size cover url': '',
+            'imdbId': movieID}
     
     movie = IMDb().get_movie(movieID)
 
@@ -44,17 +46,18 @@ def movieData(movieID):
 
             data[key] = movie[key]
 
-        else:
-            print 'Error! {} not available in {}'.format(key, title)
+        elif key != 'imdbId':
+                print 'Error! {} not available in {}'.format(key, title)
 
     m = Movie(title = data['title'],
+              year = data['year'],
+              rating = data['rating'],
               plot = data['plot'],
               plotOutline = data['plot outline'],
               mpaa = data['mpaa'],
               runtimes = data['runtimes'],
               coverUrl = data['full-size cover url'],
-              rating = data['rating'],
-              year = data['year']
+              imdbId = data['imdbId'],
               )
 
     m.save()

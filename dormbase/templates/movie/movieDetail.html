@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row-fluid">
+  <div class="thumbnail">
+    <img src="{{movie.coverUrl}}">
+  </div>
+  <div>
+    <h3>{{movie.title}} ({{movie.year}})</h3>
+    <p>
+      {{movie.plot}}
+    </p>
+    <p>
+      {{movie.mpaa}}
+    </p>
+    <p>
+      {{movie.runtimes}}
+    </p>
+<p>
+ </p>
+  </div>
+</div>
+
+{% endblock%}

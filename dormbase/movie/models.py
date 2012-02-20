@@ -17,7 +17,9 @@ class Movie(models.Model):
     mpaa = models.CharField(max_length=128, blank=True)
     runtimes = models.CharField(max_length=3, blank=True)
     coverUrl = models.URLField(max_length=256, blank=True)
+    imdbId = models.CharField(max_length=32)
     dateAdded = models.DateField(auto_now_add = True) # To track new films. 
+    
 
     available = models.BooleanField(default=True)
     checkedOutBy = models.ForeignKey(AuthUser, null = True, blank = True) # Not totally sure how this plays with AuthUser yet.

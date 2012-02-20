@@ -12,9 +12,18 @@ def listMovies(request):
     print payload
     return render_to_response('movie/movies.html', payload, context_instance=RequestContext(request))
 
+def movieDetail(request, movieId):
+    print movieId
+    payload = {'movie': Movie.objects.filter(imdbId = movieId)[0]}
+    return render_to_response('movie/movieDetail.html', payload, context_instance=RequestContext(request))
+
 def listGenre(request, genreType):
-    payload = {'movies' : Movie.objects.filter(genres = Genre.objects.filter(name = genreType))}
-    print payload
+    selectFilms = [(genreType, Movie.objects.filter(genres = Genre.objects.filter(name = genreType)))]
+
+    #print selectFilms
+
+    payload = {'selectFilms' : selectFilms}
+    #print payload
     return render_to_response('movie/movies.html', payload, context_instance=RequestContext(request))
 
 def randomGenre(request):
@@ -37,5 +46,6 @@ def randomGenre(request):
         selectFilms.append((i, [filmGenre[x] for x in rands]))
 
     payload = {'selectFilms' : selectFilms}
-    print payload
+    #print payload
     return render_to_response('movie/movies.html', payload, context_instance=RequestContext(request))
+
