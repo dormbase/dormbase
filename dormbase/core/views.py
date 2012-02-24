@@ -95,7 +95,7 @@ def directory_json(request):
 def populate_directory(request):
     f = open('core/names.txt')
     import random
-    rooms = []
+    rooms = []    
     MAX_ROOM = 1000
     for i in range(0, MAX_ROOM):
         r = Room(number = str(i), phone = str(random.randint(1111111111, 9999999999)))
