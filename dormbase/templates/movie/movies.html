@@ -11,7 +11,7 @@
 
     {% for movie in films %}
 
-    <li class="span3" >
+    <li class="span2" >
       <a href="detail/{{movie.imdbId}}">
       <div class="thumbnail" rel="popover" data-content="{{movie.plotOutline}} {{movie.mpaa}}" data-original-title="{{movie.title}} ({{movie.year}})">
 	<img src="{{movie.coverUrl}}" alt="">
