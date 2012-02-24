@@ -91,3 +91,31 @@ def directory_json(request):
 
     jsons = json.dumps({'result' : [output[id] for id in s]})
     return HttpResponse(jsons, mimetype='application/json')
+
+def populate_directory(request):
+    f = open('core/names.txt')
+    import random
+    rooms = []
+    MAX_ROOM = 1000
+    for i in range(0, MAX_ROOM):
+        r = Room(number = str(i), phone = str(random.randint(1111111111, 9999999999)))
+        r.save()
+        rooms.extend([r])
+
+    for line in f.readlines():
+        if '(' in line:
+            continue
+        line = line.split(' ')
+        firstname, lastname = line[0], line[-1]
+        if len(firstname) < 3 or len(lastname) < 3:
+            continue
+        print 'adding ' + firstname + ' ' + lastname
+        username = firstname[0:3] + lastname[0:3] + str(random.randint(100, 999))
+        u = User(first_name = firstname, last_name = lastname, username = username)
+        u.save()
+        r = Resident(user = u,
+                     room = random.choice(rooms),
+                     athena = username,
+                     year = random.choice([2012, 2013, 2014, 2015]),
+                     livesInDorm = True)
+        r.save()
