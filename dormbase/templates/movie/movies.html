@@ -12,12 +12,12 @@
     {% for movie in films %}
 
     <li class="span2" >
-      <a href="detail/{{movie.imdbId}}">
+       <!-- <a href="detail/{{movie.imdbId}}"> -->
       <div class="thumbnail" rel="popover" data-content="{{movie.plotOutline}} {{movie.mpaa}}" data-original-title="{{movie.title}} ({{movie.year}})">
 	<img src="{{movie.coverUrl}}" alt="">
 	<h5>{{movie.title}}</h5>
       </div>
-      </a>
+    <!--  </a> -->
     </li>
 
     {% endfor %}
