@@ -110,7 +110,7 @@ def populate_directory(request):
         if len(firstname) < 3 or len(lastname) < 3:
             continue
         print 'adding ' + firstname + ' ' + lastname
-        username = firstname[0:3] + lastname[0:3] + str(random.randint(100, 999))
+        username = firstname[0:3] + lastname[0:3] + str(random.randint(0, 99))
         u = User(first_name = firstname, last_name = lastname, username = username)
         u.save()
         r = Resident(user = u,
