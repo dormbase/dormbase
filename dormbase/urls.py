@@ -16,12 +16,12 @@ urlpatterns = patterns('',
     url(r'^movies/genre/(?P<genreType>.*)/$', 'dormbase.movie.views.listGenre', name='movie_all'),
     url(r'^movies/detail/(?P<movieId>.*)/$', 'dormbase.movie.views.movieDetail', name='movie_detail'),
 
-    url(r'^movies$', 'dormbase.movie.views.list_movies', name='directory_json'),
+    # url(r'^movies$', 'dormbase.movie.views.list_movies', name='directory_json'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
-             'document_root': settings.MEDIA_ROOT,
+             'document_root': settings.MEDIA_ROOT
              }), 
 
-    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve',{
              'document_root': settings.STATIC_ROOT,
              }),
 
