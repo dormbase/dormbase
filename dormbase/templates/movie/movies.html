@@ -4,6 +4,7 @@
 <h1>Movie Database</h1>
 
 {% for genre,films in selectFilms %}
+<section class="movieSection">
 
   <a href="genre/{{genre}}"><h3>{{genre}}</h3></a>
   
@@ -11,19 +12,19 @@
     
     {% for movie in films %}
     
-    <li class="span2" >
-      <!-- <a href="detail/{{movie.imdbId}}"> -->
-      <div class="thumbnail movie" rel="popover" data-content="{{movie.plotOutline}} {{movie.mpaa}}" data-original-title="{{movie.title}} ({{movie.year}})">
+    <li class="span3" >
+      <a href="detail/{{movie.imdbId}}">
+      <div class="thumbnail movie" rel="popover" data-delay="75" data-content="{{movie.plotOutline}} {{movie.mpaa}}" data-original-title="{{movie.title}} ({{movie.year}})">
 	<img src="{{movie.coverUrl}}" alt="">
 <!--	<small>{{movie.title}}</small> -->
       </div>
-      <!--  </a> -->
+      </a>
     </li>
     
     {% endfor %}
     
   </ul>
-
+</section>
 {% endfor %}
 
 

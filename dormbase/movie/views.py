@@ -13,7 +13,8 @@ def movieDetail(request, movieId):
     return render_to_response('movie/movieDetail.html', payload, context_instance=RequestContext(request))
 
 def listGenre(request, genreType):
-    selectFilms = [(genreType, Movie.objects.filter(genres = Genre.objects.filter(name = genreType)))]
+    genresFilter = Genre.objects.filter(name = genreType)
+    selectFilms = [(genreType, Movie.objects.filter(genres = genresFilter).order_by('title'))]
 
     #print selectFilms
 
@@ -36,7 +37,7 @@ def randomGenre(request):
     for i in genreList:
         filmGenre = Movie.objects.filter(genres = Genre.objects.filter(name = i))
         
-        rands = sample(xrange(len(filmGenre)-1), 5)
+        rands = sample(xrange(len(filmGenre)-1), 4)
 
         selectFilms.append((i, [filmGenre[x] for x in rands]))
 

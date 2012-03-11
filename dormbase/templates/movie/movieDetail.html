@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="row-fluid">
-  <div class="thumbnail">
+<section class='row'>
+  <div class="thumbnail span4">
     <img src="{{movie.coverUrl}}">
   </div>
-  <div>
-    <h3>{{movie.title}} ({{movie.year}})</h3>
+  <div class="span6">
+    <div class="row">
+      <button class="btn-danger pull-right">Checkout</button>
+    </div>
+    <a href="http://www.imdb.com/title/tt{{movie.imdbId}}/">
+      <h3>{{movie.title}} ({{movie.year}})</h3>
+    </a>
     <p>
       {{movie.plot}}
     </p>
@@ -16,9 +21,9 @@
     <p>
       {{movie.runtimes}}
     </p>
-<p>
- </p>
+    <p>
+    </p>
   </div>
-</div>
+</section>
 
 {% endblock%}
