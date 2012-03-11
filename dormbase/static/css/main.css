@@ -3364,11 +3364,10 @@ a.thumbnail:hover {
   visibility: hidden;
 }
 
-header {
-    border-bottom: 1px solid #000000;
-    padding-top: 15px;
-}
+.thumbnail > img {
+  height: 200px;
+} 
 
-.nav .nav-pills {
-    postion: right;
+body {
+    padding-top: 90px;
 }

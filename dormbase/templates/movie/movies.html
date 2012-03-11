@@ -5,25 +5,24 @@
 
 {% for genre,films in selectFilms %}
 
-<a href="genre/{{genre}}"><h3>{{genre}}</h3></a>
-
+  <a href="genre/{{genre}}"><h3>{{genre}}</h3></a>
+  
   <ul class="thumbnails">
-
+    
     {% for movie in films %}
-
+    
     <li class="span2" >
-       <!-- <a href="detail/{{movie.imdbId}}"> -->
-      <div class="thumbnail" rel="popover" data-content="{{movie.plotOutline}} {{movie.mpaa}}" data-original-title="{{movie.title}} ({{movie.year}})">
+      <!-- <a href="detail/{{movie.imdbId}}"> -->
+      <div class="thumbnail movie" rel="popover" data-content="{{movie.plotOutline}} {{movie.mpaa}}" data-original-title="{{movie.title}} ({{movie.year}})">
 	<img src="{{movie.coverUrl}}" alt="">
-	<h5>{{movie.title}}</h5>
+<!--	<small>{{movie.title}}</small> -->
       </div>
-    <!--  </a> -->
+      <!--  </a> -->
     </li>
-
+    
     {% endfor %}
-
+    
   </ul>
-
 
 {% endfor %}
 

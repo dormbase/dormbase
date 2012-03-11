@@ -21,74 +21,81 @@
   </head>
 
   <body class="container">
-    <header>
-      <ul class="nav nav-pills">   
-	<li {% block activeHome %}{% endblock %}><a href="/#">Home</a></li>
-	<li {% block activeDirectory %}{% endblock %}><a href="/directory">Directory</a></li>
-	<li {% block activePersonal %}{% endblock %} class="dropdown">
-	  <a class="dropdown-toggle" data-toggle="dropdown" href="personal">
-	    Personal
-	    <b class="caret"></b>
-	  </a>
-	  
-	  <ul class="dropdown-menu">
-	    <li><a href="/#">Packages</a></li>
-	    <li><a href="/#">Guest List</a></li>
-	    <li><a href="/#">Lounges</a></li>
-	    <li><a href="/#">Mailing Lists</a></li>
-	    <li><a href="/#">Reuse</a></li>
-	    <li class="divider"></li>
-	    <li><a href="/#">Profile <i class="icon-user"></i></a></li>
+    <header class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+	<div class="container">
+	  <ul class="nav">   
+	    <li {% block activeHome %}{% endblock %}><a href="/#">Home</a></li>
+	    <li {% block activeDirectory %}{% endblock %}><a href="/directory">Directory</a></li>
+	    <li {% block activePersonal %}{% endblock %} class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown" href="personal">
+		Personal
+		<b class="caret"></b>
+	      </a>
+	      
+	      <ul class="dropdown-menu">
+		<li><a href="/#">Packages</a></li>
+		<li><a href="/#">Guest List</a></li>
+		<li><a href="/#">Lounges</a></li>
+		<li><a href="/#">Mailing Lists</a></li>
+		<li><a href="/#">Reuse</a></li>
+		<li class="divider"></li>
+		<li><a href="/#">Profile <i class="icon-user"></i></a></li>
+	      </ul>
+	    </li>
+	    <li {% block activeMediaContent %}{% endblock %} class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown" href="mediaContent">
+		Media
+		<b class="caret"></b>
+	      </a>
+	      <ul class="dropdown-menu">
+		<li><a href="/movies">Movies</a></li>
+		<li><a href="/#">Games</a></li>
+		<li><a href="/#">Library</a></li>
+	      </ul>
+	    </li>
+	    <li {% block activeGovernment %}{% endblock %} class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown" href="government">
+		Government
+		<b class="caret"></b>
+	      </a>
+	      <ul class="dropdown-menu">
+		<li><a href="/#">Proposals</a></li>
+		<li><a href="/#">Meetings</a></li>
+		<li><a href="/#">Finances</a></li>
+		<li><a href="/#">Polls</a></li>
+		<li class="divider"></li>
+		<li><a href="/#">Reimbursement</a></li>
+	      </ul>
+	    </li>
+	    <li {% block activeFacilities %}{% endblock %} class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown" href="#facilities">
+		Facilities
+		<b class="caret"></b>
+	      </a>
+	      <ul class="dropdown-menu">
+		<li><a href="/#">Laundry View</a></li>
+		<li><a href="/#">Rooming</a></li>
+		<li><a href="/#">Floor Plans</a></li>
+		<li><a href="/#">Report a Problem</a></li>
+		<li class="divider"></li>
+		<li><a href="/#">Reservations</a></li>
+	      </ul>
+	    </li>
+	    <form class="navbar-search pull-right">
+	      <input type="text" class="search-query" placeholder="Search">
+	    </form>
 	  </ul>
-	</li>
-	<li {% block activeMediaContent %}{% endblock %} class="dropdown">
-	  <a class="dropdown-toggle" data-toggle="dropdown" href="mediaContent">
-	    Media
-	    <b class="caret"></b>
-	  </a>
-	  <ul class="dropdown-menu">
-	    <li><a href="/movies">Movies</a></li>
-	    <li><a href="/#">Games</a></li>
-	    <li><a href="/#">Library</a></li>
-	  </ul>
-	</li>
-	<li {% block activeGovernment %}{% endblock %} class="dropdown">
-	  <a class="dropdown-toggle" data-toggle="dropdown" href="government">
-	    Government
-	    <b class="caret"></b>
-	  </a>
-	  <ul class="dropdown-menu">
-	    <li><a href="/#">Proposals</a></li>
-	    <li><a href="/#">Meetings</a></li>
-	    <li><a href="/#">Finances</a></li>
-	    <li><a href="/#">Polls</a></li>
-	    <li class="divider"></li>
-	    <li><a href="/#">Reimbursement</a></li>
-	  </ul>
-	</li>
-	<li {% block activeFacilities %}{% endblock %} class="dropdown">
-	  <a class="dropdown-toggle" data-toggle="dropdown" href="#facilities">
-	     Facilities
-	     <b class="caret"></b>
-	   </a>
-	   <ul class="dropdown-menu">
-	     <li><a href="/#">Laundry View</a></li>
-	     <li><a href="/#">Rooming</a></li>
-	     <li><a href="/#">Floor Plans</a></li>
-	     <li><a href="/#">Report a Problem</a></li>
-	     <li class="divider"></li>
-	     <li><a href="/#">Reservations</a></li>
-	   </ul>
-	 </li>
-       </ul>
-     </header>
-
-     {% block content %}
-     {% endblock %}
-
-     <footer>
-       {% block footer %}
-       {% endblock %}
+	</div>
+      </div>
+    </header>
+    
+    {% block content %}
+    {% endblock %}
+    
+    <footer>
+      <hr>
+      <p>&copy Simmons Hall 2012</p>
     </footer>
     
     
