@@ -6,23 +6,19 @@
     <img src="{{movie.coverUrl}}">
   </div>
   <div class="span6">
-    <div class="row">
-      <button class="btn-danger pull-right">Checkout</button>
-    </div>
     <a href="http://www.imdb.com/title/tt{{movie.imdbId}}/">
-      <h3>{{movie.title}} ({{movie.year}})</h3>
+      <h2>{{movie.title}} ({{movie.year}})</h2>
     </a>
+    <small>{{movie.year}} | {{movie.runtimes}} min</small>
+    <hr>
     <p>
       {{movie.plot}}
     </p>
     <p>
-      {{movie.mpaa}}
+      {{movie.mpaa}}.
     </p>
-    <p>
-      {{movie.runtimes}}
-    </p>
-    <p>
-    </p>
+    <hr>
+    <button class="btn-success pull-right">Reserve Now</i></button>
   </div>
 </section>
 
