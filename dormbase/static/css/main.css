@@ -3363,3 +3363,12 @@ a.thumbnail:hover {
 .invisible {
   visibility: hidden;
 }
+
+header {
+    border-bottom: 1px solid #000000;
+    padding-top: 15px;
+}
+
+.nav .nav-pills {
+    postion: right;
+}

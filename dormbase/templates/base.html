@@ -20,85 +20,77 @@
     <link rel="apple-touch-icon" sizes="114x114" href="{{ STATIC_URL }}ico/apple-114x114.png">
   </head>
 
-  <body>
-    <div class="topDarkPanel">
-      <div class="container" id="header">
-	<img id="simmons-hall" src="{{ STATIC_URL }}img/simmonsHall.png" width="475px" height="44px" alt="Simmons Hall" />
-	<img id="simmons-logo" src="{{ STATIC_URL }}img/colorfulSimmons.png" width="185px" height="268px" alt="Simmons logo" />
-      </div>
-      <div class="container" id="simmons-nav">
-	<div class="subnav">
-	 <ul class="nav nav-pills">   
-	    <li {% block activeHome %}{% endblock %}><a href="/#">Home</a></li>
-	    <li {% block activeDirectory %}{% endblock %}><a href="/directory">Directory</a></li>
-	    <li {% block activePersonal %}{% endblock %} class="dropdown">
-	      <a class="dropdown-toggle" data-toggle="dropdown" href="personal">
-		Personal
-		<b class="caret"></b>
-	      </a>
-	      <ul class="dropdown-menu">
-		<li><a href="/#">Packages</a></li>
-		<li><a href="/#">Guest List</a></li>
-		<li><a href="/#">Lounges</a></li>
-		<li><a href="/#">Mailing Lists</a></li>
-		<li><a href="/#">Reuse</a></li>
-		<li class="divider"></li>
-		<li><a href="/#">Profile <i class="icon-user"></i></a></li>
-	      </ul>
-	    </li>
-	    <li {% block activeMediaContent %}{% endblock %} class="dropdown">
-	      <a class="dropdown-toggle" data-toggle="dropdown" href="mediaContent">
-		Media
-		<b class="caret"></b>
-	      </a>
-	      <ul class="dropdown-menu">
-		<li><a href="/movies">Movies</a></li>
-		<li><a href="/#">Games</a></li>
-		<li><a href="/#">Library</a></li>
-	      </ul>
-	    </li>
-	    <li {% block activeGovernment %}{% endblock %} class="dropdown">
-	      <a class="dropdown-toggle" data-toggle="dropdown" href="government">
-		Government
-		<b class="caret"></b>
-	      </a>
-	      <ul class="dropdown-menu">
-		<li><a href="/#">Proposals</a></li>
-		<li><a href="/#">Meetings</a></li>
-		<li><a href="/#">Finances</a></li>
-		<li><a href="/#">Polls</a></li>
-		<li class="divider"></li>
-		<li><a href="/#">Reimbursement</a></li>
-	      </ul>
-	    </li>
-	    <li {% block activeFacilities %}{% endblock %} class="dropdown">
-	      <a class="dropdown-toggle" data-toggle="dropdown" href="#facilities">
-		Facilities
-		<b class="caret"></b>
-	      </a>
-	      <ul class="dropdown-menu">
-		<li><a href="/#">Laundry View</a></li>
-		<li><a href="/#">Rooming</a></li>
-		<li><a href="/#">Floor Plans</a></li>
-		<li><a href="/#">Report a Problem</a></li>
-		<li class="divider"></li>
-		<li><a href="/#">Reservations</a></li>
-	      </ul>
-	    </li>
+  <body class="container">
+    <header>
+      <ul class="nav nav-pills">   
+	<li {% block activeHome %}{% endblock %}><a href="/#">Home</a></li>
+	<li {% block activeDirectory %}{% endblock %}><a href="/directory">Directory</a></li>
+	<li {% block activePersonal %}{% endblock %} class="dropdown">
+	  <a class="dropdown-toggle" data-toggle="dropdown" href="personal">
+	    Personal
+	    <b class="caret"></b>
+	  </a>
+	  
+	  <ul class="dropdown-menu">
+	    <li><a href="/#">Packages</a></li>
+	    <li><a href="/#">Guest List</a></li>
+	    <li><a href="/#">Lounges</a></li>
+	    <li><a href="/#">Mailing Lists</a></li>
+	    <li><a href="/#">Reuse</a></li>
+	    <li class="divider"></li>
+	    <li><a href="/#">Profile <i class="icon-user"></i></a></li>
 	  </ul>
-	</div>
-      </div>
-      <div class="container" id="content">
-	{% block content %}
-	{% endblock %}
-      </div>
-      <div class="darkPanel" id="bottomPanel">
-	<div class="container" id="simmons-footer">
-	  {% block footer %}
-	  {% endblock %}
-	</div>
-      </div>
-    </div>
+	</li>
+	<li {% block activeMediaContent %}{% endblock %} class="dropdown">
+	  <a class="dropdown-toggle" data-toggle="dropdown" href="mediaContent">
+	    Media
+	    <b class="caret"></b>
+	  </a>
+	  <ul class="dropdown-menu">
+	    <li><a href="/movies">Movies</a></li>
+	    <li><a href="/#">Games</a></li>
+	    <li><a href="/#">Library</a></li>
+	  </ul>
+	</li>
+	<li {% block activeGovernment %}{% endblock %} class="dropdown">
+	  <a class="dropdown-toggle" data-toggle="dropdown" href="government">
+	    Government
+	    <b class="caret"></b>
+	  </a>
+	  <ul class="dropdown-menu">
+	    <li><a href="/#">Proposals</a></li>
+	    <li><a href="/#">Meetings</a></li>
+	    <li><a href="/#">Finances</a></li>
+	    <li><a href="/#">Polls</a></li>
+	    <li class="divider"></li>
+	    <li><a href="/#">Reimbursement</a></li>
+	  </ul>
+	</li>
+	<li {% block activeFacilities %}{% endblock %} class="dropdown">
+	  <a class="dropdown-toggle" data-toggle="dropdown" href="#facilities">
+	     Facilities
+	     <b class="caret"></b>
+	   </a>
+	   <ul class="dropdown-menu">
+	     <li><a href="/#">Laundry View</a></li>
+	     <li><a href="/#">Rooming</a></li>
+	     <li><a href="/#">Floor Plans</a></li>
+	     <li><a href="/#">Report a Problem</a></li>
+	     <li class="divider"></li>
+	     <li><a href="/#">Reservations</a></li>
+	   </ul>
+	 </li>
+       </ul>
+     </header>
+
+     {% block content %}
+     {% endblock %}
+
+     <footer>
+       {% block footer %}
+       {% endblock %}
+    </footer>
+    
     
     <script src="{{ STATIC_URL }}js/jquery.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap-transition.js"></script>
@@ -113,5 +105,6 @@
     <script src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap-carousel.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap-typeahead.js"></script>
+    
   </body>
 </html>
