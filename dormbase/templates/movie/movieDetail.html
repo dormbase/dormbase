@@ -7,7 +7,7 @@
   </div>
   <div class="span6">
     <a href="http://www.imdb.com/title/tt{{movie.imdbId}}/">
-      <h2>{{movie.title}} ({{movie.year}})</h2>
+      <h2>{{movie.title}}</h2>
     </a>
     <small>{{movie.year}} | {{movie.runtimes}} min</small>
     <hr>
@@ -15,10 +15,16 @@
       {{movie.plot}}
     </p>
     <p>
-      {{movie.mpaa}}.
+      {{movie.mpaa}}
     </p>
+    <details>
+      <summary><b>Cast</b></summary>
+      <p>
+	{{movie.cast}}
+      </p>
+    </details>
     <hr>
-    <button class="btn-success pull-right">Reserve Now</i></button>
+    <button class="btn-success pull-right">Reserve Now</button>
   </div>
 </section>
 

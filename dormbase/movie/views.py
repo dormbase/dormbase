@@ -37,7 +37,8 @@ def randomGenre(request):
     for i in genreList:
         filmGenre = Movie.objects.filter(genres = Genre.objects.filter(name = i))
         
-        rands = sample(xrange(len(filmGenre)-1), 4)
+
+        rands = sample(xrange(len(filmGenre)-1), min(4, len(filmGenre)))
 
         selectFilms.append((i, [filmGenre[x] for x in rands]))
 

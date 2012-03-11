@@ -6,8 +6,8 @@ from dormbase.movie.models import Genre
 from dormbase.movie.models import Movie
 
 
-def initGenre():
-    genreList = ['Action', 'Adventure', 'Animation', 'Biography',
+def import_all_genres():
+    genre_list = ['Action', 'Adventure', 'Animation', 'Biography',
                  'Comedy', 'Crime', 'Documentary', 'Drama',
                  'Family', 'Fantasy', 'Film-Noir', 'Game-Show',
                  'History', 'Horror', 'Music', 'Musical',
@@ -15,30 +15,37 @@ def initGenre():
                  'Sci-Fi', 'Sport', 'Talk-Show', 'Thriller',
                  'War', 'Western', 'New'] # List was taken from IMDB genre page. 
 
-    for i in genreList:
+    for i in genre_list:
         g = Genre(name = i)
         g.save()
 
-def movieData(movieID):
-    movieID = movieID.strip('\n') # Newline character was preventing the movie table from being searchable by ID.
+def import_movie(movie_id):
+    movie_id = movie_id.strip('\n') # Newline character was preventing the movie table from being searchable by ID.
     data = {'title': '',
+            'canonical title': '',
             'year': None,
             'rating': None,
-            'plot': '',
+            'plot': '', # IMDB provides list of plots from different contributors. 
             'plot outline': '',
-            'genres': '',
+            'genres': '', #IMDB provides list of genres.
             'mpaa': 'Mpaa not available.',
             'runtimes': '',
             'full-size cover url': '',
-            'imdbId': movieID}
+            'imdbId': movie_id,
+            'director': '',
+            'cast': '',}
     
-    movie = IMDb().get_movie(movieID)
+    movie = IMDb().get_movie(movie_id)
 
     title = unicodedata.normalize('NFKD', movie['title']).encode('ascii','ignore')
 
     for key in data:
         if movie.has_key(key):
-            if type(movie[key]) == type([]) and key != 'genres':
+            if key == 'director' or key == 'cast':
+                plist = [person['name'] for person in movie[key]]
+                movie[key] = ', '.join(plist)
+
+            elif type(movie[key]) == type([]) and key != 'genres':
                 movie[key] = movie[key][0]
         
             if type(movie[key]) == type(''):
@@ -46,12 +53,11 @@ def movieData(movieID):
 
             data[key] = movie[key]
 
-            # print data[key]
-
         elif key != 'imdbId':
                 print 'Error! {} not available in {}'.format(key, title)
 
     m = Movie(title = data['title'],
+              canonicalTitle = data['canonical title'],
               year = data['year'],
               rating = data['rating'],
               plot = data['plot'],
@@ -60,34 +66,25 @@ def movieData(movieID):
               runtimes = data['runtimes'],
               coverUrl = data['full-size cover url'],
               imdbId = data['imdbId'],
+              director = data['director'],
+              cast = data['cast']
               )
 
     m.save()
-
-    gs = [Genre.objects.filter(name = g) for g in data['genres']]
-    gs.append(Genre.objects.filter(name = 'New'))
-
-    fg = []
-    for g in gs: 
-        if len(g) > 0: fg.append(g[0])
-    m.genres = fg
+    gs = [Genre.objects.filter(name = g)[0] for g in data['genres']]
+    gs.append(Genre.objects.filter(name = 'New')[0])
+    m.genres = gs
     m.save()
 
-def loadDb(filename):
-    try:
-        initGenre() # Genre's must be intialized before loading movie data!
-        print 'Genres successfully intialized.'
-    except:
-        print 'ERROR! Unable to intialize genres!'
+def import_all_movies(filename):
+    f = open(filename, 'r') #Placing this before genre import prevents
+                            #genres being intialized multiple times if
+                            #user enters a bad file name.
 
-    f = open(filename, 'r')
-    for movieId in f:
-        try:
-            movieData(movieId)
-        except:
-            print 'ERROR! {} is not an IMDB movie ID'.format(movieId)
+    import_all_genres() # Genre's must be intialized before loading movie data!
+    print '- Genres successfully intialized -'
 
-    m = models.Movie(**data) #This may be a bug!
-    m.save()
+    for movie_id in f:
+        import_movie(movie_id)
 
-    print '- END -'
+    print '- END '-
