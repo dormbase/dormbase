@@ -87,4 +87,4 @@ def import_all_movies(filename):
     for movie_id in f:
         import_movie(movie_id)
 
-    print '- END '-
+    print '- END -'
