@@ -1,73 +1,67 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form class="form-inline">
-  <input type="text" class="input" id="input01" placeholder="username">
-  <label>Bin: 
-    <select id="bin">
-      <option>A</option>
-      <option>B</option>
-      <option>C</option>
-      <option>D</option>
-      <option>Floor</option>
-    </select>
-  </label>
-  <label class="checkbox">
-    Perishable<input type="checkbox">
-  </label>
-  <button class="btn btn-success">Scan Package</button>
-  <button class="btn btn-danger">Submit</button>
-</form>
+<h1>Desk Dashboard</h1>
 
-<hr>
+<div >
+<ul class="nav nav-tabs">
+  <li><a href="#home" data-toggle="tab">Home</a></li>
+  <li><a href="#packages" data-toggle="tab">Packages</a></li>
+  <li><a href="#guest_list" data-toggle="tab">Guest List</a></li>
+  <li><a href="#checkout" data-toggle="tab">Checkout</a></li>
+</ul>
 
-  <table class="table table-striped table-condensed" data-toggle="collapse" data-target=".package_detail">
-    <thead>
-      <tr> 
-	<th>Resident</th>
-	<th>Bin(s)</th>
-	<th>Perishable</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for r in packages %}
-      <tr>
-	<td>{{r.username}}</td>
-	<td>{{r.location}}</td>
-	<td>{{r.perish}}</td>
-	<td>
-	  <button class="btn btn-small">Release</button>
-	</td>
-      </tr>
-      {% endfor  %}
-    </tbody>
-  </table>
-
-  <div class="package_detail">
-    <table class="table table-striped table-condensed">
-      <thead>
-	<tr>
-	  <th>Pkg ID:</th>
-	  <th>Bin:</th>
-	  <th>Perishable?</th>
-	</tr>
-      </thead>
-      <tbody>
-	<tr>
-	  <td>aadf767dsf6</td>
-	  <td>A</td>
-	  <td>YES</td>
-	</tr>
-      </tbody>
-    </table>    
+<div class="tab-content">
+  <div class="tab-pane active" id="home">...</div>
+  <div class="tab-pane" id="packages">
+    <form class="form-inline pull-right">
+      <input type="text" class="input" placeholder="username">
+      <select>
+	<option>Bin</option>
+	<option>A</option>
+	<option>B</option>
+	<option>C</option>
+	<option>D</option>
+	<option>Floor</option>
+      </select>
+      <label class="checkbox">
+	Perishable<input type="checkbox">
+      </label>
+      <button class="btn btn-success">Scan Package</button>
+      <button class="btn btn-danger">Submit</button>
+    </form>
+    
+      <table class="table table-striped table-condensed">
+	<thead>
+	  <tr> 
+	    <th>Resident</th><th>Bins</th><th>Perishable</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  {% for r in packages %}
+	  <tr>
+	    <td>{{r.username}}</td>
+	    <td>{{r.location}}</td>
+	    <td>{{r.perish}}</td>
+	    <td>
+	      <button class="btn btn-small pull-right">Release</button>
+	    </td>
+	  </tr>
+	  {% endfor  %}
+	</tbody>
+      </table>
+    
   </div>
+  <div class="tab-pane" id="guest_list">...</div>
+  <div class="tab-pane" id="checkout">...</div>
+</div>
 
 </div>
 <script type="text/javascript">
-$(function() {
-    $(".collapse").collapse();
+  $(function() {
+  $(".collapse").collapse();
+  $("#myTab").tab('show');
 });
 </script>
-
 
 {% endblock %}
