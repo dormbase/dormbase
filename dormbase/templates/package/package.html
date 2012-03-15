@@ -1,6 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div>
+  <button class="btn span12" data-toggle="collapse" data-target=".package_detail">
+    simple collapsible
+  </button>
+
+  <div class="package_detail">
+    <table>
+      <thead>
+	<tr>
+	  <th>Pkg ID:</th>
+	  <th>Bin:</th>
+	  <th>Perishable?</th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr>
+	  <td>aadf767dsf6</td>
+	  <td>A</td>
+	  <td>YES</td>
+	</tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script type="text/javascript">
+$(function() {
+    $(".collapse").collapse();
+});
+</script>
 
 
 {% endblock %}
