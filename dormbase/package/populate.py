@@ -5,8 +5,6 @@ from dormbase.package.models import Package
 import random
 
 def import_test_packages():
-    bins = ['A', 'B', 'C', 'D', 'Floor']
-    
     residents = Resident.objects.all()[0:random.randint(5, 15)]
 
     for r in residents:
@@ -15,9 +13,11 @@ def import_test_packages():
         else:
             o = False
         
-        l = bins[random.randint(0, (len(bins) - 1))]
+        l = random.choice(['A', 'B', 'C', 'D', 'Floor'])
     
         p = Package(recipient = r,
                     perishable = o,
                     location = l)
         p.save()
+
+    print 'Packages COMPLETE'

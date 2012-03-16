@@ -10,8 +10,6 @@ David Letterman
 Elizabeth Taylor
 Elvis Presley
 Ernest Hemingway
-George Bush
-George Washington
 Harrison Ford
 Helen Keller
 Henri Mancini
@@ -22,7 +20,6 @@ Lucille Ball
 Magic Johnson
 Margaret Thatcher
 Michael Fox
-Michael Jackson
 Mr. Rogers
 Neil Armstrong
 Oprah Winfrey

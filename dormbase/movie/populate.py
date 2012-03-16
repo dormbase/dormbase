@@ -76,8 +76,8 @@ def import_movie(movie_id):
     m.genres = gs
     m.save()
 
-def import_all_movies(filename):
-    f = open(filename, 'r') #Placing this before genre import prevents
+def import_test_movies(filename):
+    f = open('movie/test_movies.txt') #Placing this before genre import prevents
                             #genres being intialized multiple times if
                             #user enters a bad file name.
 
@@ -87,4 +87,4 @@ def import_all_movies(filename):
     for movie_id in f:
         import_movie(movie_id)
 
-    print '- END -'
+    print 'Movies COMPLETE'
