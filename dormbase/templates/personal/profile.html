@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block classPersonal %}class="dropdown active"{% endblock %}
+{% block content %}
+
+<h1>Profile</h1>
+
+<div >
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#about" data-toggle="tab">About</a></li>
+  <li><a href="#packages" data-toggle="tab">Packages</a></li>
+  <li><a href="#guest_list" data-toggle="tab">Guest List</a></li>
+  <li><a href="#lounges" data-toggle="tab">Lounges</a></li>
+  <li><a href="#mailing_lists" data-toggle="tab">Mailing Lists</a></li>
+  <li><a href="#reuse" data-toggle="tab">Reuse</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="about">
+  </div><!-- END About -->
+  
+  <div class="tab-pane" id="packages">
+  </div><!-- END Packages -->
+
+  <div class="tab-pane" id="guest_list">
+  </div><!-- END Guest List -->
+  
+  <div class="tab-pane" id="lounges">
+  </div><!-- END Packages -->
+
+  <div class="tab-pane" id="reuse">
+  </div><!-- END Reuse -->
+
+  
+</div>
+
+</div>
+<script type="text/javascript">
+  $(function() {
+  $(".collapse").collapse();
+  $("#myTab").tab('show');
+});
+</script>
+
+{% endblock %}

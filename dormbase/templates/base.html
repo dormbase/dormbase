@@ -28,25 +28,10 @@
 	  <a class="brand" href="/#">dormbase</a>
 
 	    <ul class="nav">   
-	      <li {% block activeHome %}{% endblock %}><a href="/#">Home</a></li>
-	      <li {% block activeDirectory %}{% endblock %}><a href="/directory">Directory</a></li>
-	      <li {% block activePersonal %}{% endblock %} class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="personal">
-		  Personal
-		  <b class="caret"></b>
-		</a>
-		
-		<ul class="dropdown-menu">
-		  <li><a href="/packages">Packages</a></li>
-		  <li><a href="/#">Guest List</a></li>
-		  <li><a href="/#">Lounges</a></li>
-		  <li><a href="/#">Mailing Lists</a></li>
-		  <li><a href="/#">Reuse</a></li>
-		  <li class="divider"></li>
-		  <li><a href="/#">Profile <i class="icon-user"></i></a></li>
-		</ul>
-	      </li>
-	      <li {% block activeMediaContent %}{% endblock %} class="dropdown">
+	      <li {% block classHome %}{% endblock %}><a href="/#">Home</a></li>
+	      <li {% block classDirectory %}{% endblock %}><a href="/directory">Directory</a></li>
+	      <li {% block classPersonal %}{% endblock %}"><a href="/personal">Personal</a></li>
+	      <li {% block classMediaContent %}{% endblock %} class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="mediaContent">
 		  Media
 		  <b class="caret"></b>
@@ -57,7 +42,7 @@
 		  <li><a href="/#">Library</a></li>
 		</ul>
 	      </li>
-	      <li {% block activeGovernment %}{% endblock %} class="dropdown">
+	      <li {% block classGovernment %}{% endblock %} class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="government">
 		  Government
 		  <b class="caret"></b>
@@ -71,7 +56,7 @@
 		  <li><a href="/#">Reimbursement</a></li>
 		</ul>
 	      </li>
-	      <li {% block activeFacilities %}{% endblock %} class="dropdown">
+	      <li {% block classFacilities %}{% endblock %} class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#facilities">
 		  Facilities
 		  <b class="caret"></b>

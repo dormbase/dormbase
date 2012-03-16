@@ -15,7 +15,9 @@ urlpatterns = patterns('',
     url(r'^movies/$', 'dormbase.movie.views.randomGenre', name='directory_json'),
     url(r'^movies/genre/(?P<genreType>.*)/$', 'dormbase.movie.views.listGenre', name='movie_all'),
     url(r'^movies/detail/(?P<movieId>.*)/$', 'dormbase.movie.views.movieDetail', name='movie_detail'),
-    url(r'^packages/$', 'dormbase.package.views.desk_worker', name='desk_package'),
+    url(r'^packages$', 'dormbase.package.views.desk_worker', name='desk_package'),
+    url(r'^personal$', 'dormbase.personal.views.profile', name='personal'),
+    url(r'^desk$', 'dormbase.desk.views.dashboard', name='desk'),
 
     # url(r'^movies$', 'dormbase.movie.views.list_movies', name='directory_json'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
