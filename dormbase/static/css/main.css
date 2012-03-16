@@ -3365,7 +3365,7 @@ a.thumbnail:hover {
 }
 
 .movieSection .thumbnail > img {
-  max-height: 350px;
+  max-height: 175px;
   background:black;
 }
 
