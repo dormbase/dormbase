@@ -8,17 +8,18 @@ class TestUser():
     def __init__(self):
         self.username = 'userEx'
         self.location = ''
-        self.perish = 'No'
+        self.perish = False
 
 def desk_worker(request):
     packages = []
     bins = ['A', 'B', 'C', 'D', 'Floor']
 
-    for i in xrange(1, random.randint(30,100)):
+    for i in xrange(0, random.randint(5,10)):
         u = TestUser()
         u.username += str(i)
-        print u.username
         u.location = bins[random.randint(0, (len(bins) - 1))]
+        if random.randint(0,5) == 5:
+            u.perish = True
         packages.append(u)
 
     payload = {'packages': packages}
