@@ -33,7 +33,7 @@
 	    <input type="text" class="input span4" placeholder="Title">
 	    <label>and</label>
 	    <input type="text" class="input span4" placeholder="Resident">
-	    <button type="submit" class="btn btn-primary btn-small">Sign-in</button>
+	    <button type="submit" class="btn btn-primary btn-small">Checkout</button>
 	  </form>
 	</div>
       </div>
@@ -69,8 +69,8 @@
 	  <tbody>
 	    {% for r in packages %}
 	    <tr>
-	      <td>{% if r.perish %}<icon class="icon-leaf"></icon>{% endif %} </td>
-	      <td>{{r.username}}</td>
+	      <td>{% if r.perishable %}<icon class="icon-leaf"></icon>{% endif %} </td>
+	      <td>{{r.recipient}}</td>
 	      <td>{{r.location}}</td>
 	      <td>
 		<button class="btn btn-small pull-right">Release</button>

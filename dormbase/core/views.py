@@ -92,11 +92,11 @@ def directory_json(request):
     jsons = json.dumps({'result' : [output[id] for id in s]})
     return HttpResponse(jsons, mimetype='application/json')
 
-def populate_directory(request):
-    f = open('core/names.txt')
+def populate_directory():
+    f = open('core/famous.txt')
     import random
     rooms = []    
-    MAX_ROOM = 1000
+    MAX_ROOM = 350
     for i in range(0, MAX_ROOM):
         r = Room(number = str(i), phone = str(random.randint(1111111111, 9999999999)))
         r.save()
@@ -110,7 +110,7 @@ def populate_directory(request):
         if len(firstname) < 3 or len(lastname) < 3:
             continue
         print 'adding ' + firstname + ' ' + lastname
-        username = firstname[0:3] + lastname[0:3] + str(random.randint(0, 99))
+        username = lastname[0:8]
         u = User(first_name = firstname, last_name = lastname, username = username)
         u.save()
         r = Resident(user = u,

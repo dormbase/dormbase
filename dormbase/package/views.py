@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
+from dormbase.package.models import Package
 import random
 
 class TestUser():
@@ -24,4 +25,8 @@ def desk_worker(request):
 
     payload = {'packages': packages}
 
+    return render_to_response('package/package.html', payload, context_instance = RequestContext(request))
+
+def get_packages(request):
+    payload = {'packages': Package.objects.all()}
     return render_to_response('package/package.html', payload, context_instance = RequestContext(request))
