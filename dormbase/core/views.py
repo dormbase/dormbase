@@ -110,7 +110,7 @@ def populate_directory():
         if len(firstname) < 3 or len(lastname) < 3:
             continue
         print 'adding ' + firstname + ' ' + lastname
-        username = lastname[0:8]
+        username = lastname[0:8].lower()
         u = User(first_name = firstname, last_name = lastname, username = username)
         u.save()
         r = Resident(user = u,

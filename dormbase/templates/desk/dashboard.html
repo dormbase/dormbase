@@ -63,7 +63,7 @@
 	<table class="table table-striped table-condensed">
 	  <thead>
 	    <tr> 
-	      <th></th><th>Resident</th><th>Bins</th>
+	      <th></th><th>Username</th><th>Bins</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -79,13 +79,14 @@
 	    {% endfor  %}
 	  </tbody>
 	</table>
+	<p><icon class="icon-leaf"></icon> = Perishable</p>
       </div>      
     </div>
   </div>
   
   <div class="tab-pane" id="packages">
     <form class="form-inline pull-right">
-      <input type="text" class="input" placeholder="username">
+      <input type="text" class="input span7" placeholder="Search...">
       <select>
 	<option>Bin</option>
 	<option>A</option>
@@ -100,6 +101,27 @@
       <button class="btn btn-success">Scan Package</button>
       <button class="btn btn-danger">Submit</button>
     </form>    
+    <table class="table table-striped table-condensed">
+      <thead>
+	<tr> 
+	  <th></th><th>Name</th><th>Username</th><th>Room</th><th>Bin</th>
+	</tr>
+      </thead>
+      <tbody>
+	{% for r in packages %}
+	<tr>
+	  <td>{% if r.perishable %}<icon class="icon-leaf"></icon>{% endif %} </td>
+	  <td>{{r.recipient.user.first_name}} {{r.recipient.user.last_name}}</td>
+	  <td>{{r.recipient}}</td>
+	  <td>{{r.recipient.room}}</td>
+	  <td>{{r.location}}</td>
+	  <td>
+	    <button class="btn btn-small pull-right">Release</button>
+	  </td>
+	</tr>
+	{% endfor  %}
+      </tbody>
+    </table>
   </div>
 
   <div class="tab-pane" id="guest_list">...</div>
