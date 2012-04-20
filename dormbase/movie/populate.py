@@ -76,7 +76,7 @@ def import_movie(movie_id):
     m.genres = gs
     m.save()
 
-def import_test_movies(filename):
+def import_test_movies():
     f = open('movie/test_movies.txt') #Placing this before genre import prevents
                             #genres being intialized multiple times if
                             #user enters a bad file name.

@@ -6,4 +6,4 @@
 	url = https://github.com/twitter/bootstrap.git
 [submodule "dormbase/contrib/IMDBpy"]
 	path = dormbase/contrib/IMDBpy
-	url = git@github.com:dormbase/IMDBpy.git
+	url = https://github.com/dormbase/IMDBpy.git
