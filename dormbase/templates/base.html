@@ -32,19 +32,19 @@
             <span class="icon-bar"></span>
 	  </a>
 
-	  <a class="brand" href="/#">dormbase</a>
+	  <a class="brand" href="{% url dormbase.views.home %}">dormbase</a>
 
 	    <ul class="nav">   
-	      <li {% block classHome %}{% endblock %}><a href="/#">Home</a></li>
-	      <li {% block classDirectory %}{% endblock %}><a href="/directory">Directory</a></li>
-	      <li {% block classPersonal %}{% endblock %}"><a href="/personal">Personal</a></li>
+	      <li {% block classHome %}{% endblock %}><a href="{% url dormbase.views.home %}">Home</a></li>
+	      <li {% block classDirectory %}{% endblock %}><a href="{% url dormbase.core.views.directory %}">Directory</a></li>
+	      <li {% block classPersonal %}{% endblock %}"><a href="{% url dormbase.personal.views.profile %}">Personal</a></li>
 	      <li {% block classMediaContent %}{% endblock %} class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="mediaContent">
 		  Media
 		  <b class="caret"></b>
 		</a>
 		<ul class="dropdown-menu">
-		  <li><a href="/movies">Movies</a></li>
+		  <li><a href="{% url dormbase.movie.views.randomGenre %}">Movies</a></li>
 		  <li><a href="/#">Games</a></li>
 		  <li><a href="/#">Library</a></li>
 		</ul>
