@@ -20,11 +20,15 @@
             {% for result in page.object_list %}
                 {% if result.content_type == "core.resident" %}
 	        {% include "search/includes/core/resident.html" %}
+                {% else %}
+	        {% if result.content_type == "movie.movie" %}
+	        {% include "search/includes/movie/movie.html" %}
 	        {% else %}
                 <p>
                     <a href="{{ result.object.get_absolute_url }}">{{ result.object }}</a>
                 </p>
                 {% endif %}
+		{% endif %}
             {% empty %}
                 <p>No results found.</p>
             {% endfor %}
