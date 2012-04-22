@@ -24,8 +24,10 @@
     </details>
 
     <hr>
-
-    <button class="btn-success pull-right">Reserve Now</button>
+    <form action="{% url dormbase.movie.views.reserve_movie %}" method="post">
+      <input type="hidden" value="reserve">
+      <button class="btn-success pull-right">Reserve Now</button>
+    </form>
   </div>
 </section>
 

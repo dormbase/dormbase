@@ -13,7 +13,7 @@
     {% for movie in films %}
     
     <li class="span2" >
-      <a href="{% url dormbase.movie.views.movieDetail movie.imdbId %}">
+      <a href="{% url dormbase.movie.views.movie_detail movie.imdbId %}">
       <div class="thumbnail movie" rel="popover" data-delay="75" data-content="{{movie.plotOutline}} {{movie.mpaa}}" data-original-title="{{movie.title}} ({{movie.year}})">
 	<img src="{{movie.cover.get_thumbnail_url}}" alt="">
 <!--	<small>{{movie.title}}</small> -->

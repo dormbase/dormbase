@@ -7,10 +7,13 @@ from random import sample
 
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 
-def movieDetail(request, movieId):
+def movie_detail(request, movieId):
     print movieId
     payload = {'movie': Movie.objects.filter(imdbId = movieId)[0]}
-    return render_to_response('movie/movieDetail.html', payload, context_instance=RequestContext(request))
+    return render_to_response('movie/movie_detail.html', payload, context_instance=RequestContext(request))
+
+def reserve_movie(request):
+    
 
 def listGenre(request, genreType):
     genresFilter = Genre.objects.filter(name = genreType)

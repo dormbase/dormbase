@@ -41,6 +41,6 @@ class Movie(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('dormbase.movie.views.movieDetail', (), {
+        return ('dormbase.movie.views.movie_detail', (), {
                 'movieId': self.imdbId })
     
