@@ -4,6 +4,25 @@ import unicodedata
 from imdb import IMDb
 from dormbase.movie.models import Genre
 from dormbase.movie.models import Movie
+from photologue.models import Photo
+import urllib2
+from cStringIO import StringIO
+from django.core.files.base import ContentFile
+from django.template.defaultfilters import slugify
+
+try:
+    import Image
+    import ImageFile
+    import ImageFilter
+    import ImageEnhance
+except ImportError:
+    try:
+        from PIL import Image
+        from PIL import ImageFile
+        from PIL import ImageFilter
+        from PIL import ImageEnhance
+    except ImportError:
+        raise ImportError('Unable to import the Python Imaging Library. Please confirm it`s installed and available on your current Python path.')
 
 
 def import_all_genres():
@@ -55,7 +74,16 @@ def import_movie(movie_id):
 
         elif key != 'imdbId':
                 print 'Error! {} not available in {}'.format(key, title)
-
+    cover = None
+    try:
+        imagedata = urllib2.urlopen(data['full-size cover url']).read()
+        cover = Photo(title=data['title'], title_slug = slugify(data['title']))
+        cover.image.save(data['imdbId'] + '.jpg', ContentFile(imagedata))
+        print "saved an image: " + data['title']
+    except Exception as e:
+        print "Oh noes, an error"
+        print e
+        pass
     m = Movie(title = data['title'],
               canonicalTitle = data['canonical title'],
               year = data['year'],
@@ -64,7 +92,7 @@ def import_movie(movie_id):
               plotOutline = data['plot outline'],
               mpaa = data['mpaa'],
               runtimes = data['runtimes'],
-              coverUrl = data['full-size cover url'],
+              cover = cover,
               imdbId = data['imdbId'],
               director = data['director'],
               cast = data['cast']

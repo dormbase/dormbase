@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User as AuthUser
+from photologue.models import Photo
 
 class Genre(models.Model):
     name = models.CharField(max_length=64)
@@ -17,7 +18,7 @@ class Movie(models.Model):
     genres = models.ManyToManyField(Genre) # Can link to multiple genres
     mpaa = models.CharField(max_length=128, blank=True)
     runtimes = models.CharField(max_length=3, blank=True)
-    coverUrl = models.URLField(max_length=256, blank=True)
+    cover = models.ForeignKey(Photo, null = True)
     imdbId = models.CharField(max_length=2) # Mandatory
     director = models.TextField(blank=True)
     cast = models.TextField(blank=True)
