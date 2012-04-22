@@ -8,22 +8,17 @@ from random import sample
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 
 def movie_detail(request, movieId):
-    print movieId
-    payload = {'movie': Movie.objects.filter(imdbId = movieId)[0]}
+    payload = {'movie': Movie.objects.get(imdbId = movieId)}
     return render_to_response('movie/movieDetail.html', payload, context_instance=RequestContext(request))
 
 def movie_reserve(request):
     if request.method == 'POST':
         id = request.POST['imdbId']
-        print id
         m = Movie.objects.get(imdbId = id)
-        print m
         m.available = False
         m.save()
-        return HttpResponseRedirect('/')
-
+        return movie_detail(request, id)
     raise Http404
-
 
 def genre_list(request, genreType):
     genresFilter = Genre.objects.filter(name = genreType)
