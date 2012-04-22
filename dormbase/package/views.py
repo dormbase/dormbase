@@ -3,7 +3,7 @@ from dormbase.package.models import *
 from django.http import HttpResponseRedirect, Http404
 import random
 
-def add_package(request):
+def package_add(request):
     if request.method == 'POST':
         form = PackageForm(request.POST)
         if form.is_valid():
@@ -17,7 +17,7 @@ def add_package(request):
         
     raise Http404
             
-def remove_package(request):
+def package_remove(request):
     if request.method == 'POST':
         p_id = request.POST['package_id']
         p = Package.objects.get(id = p_id)

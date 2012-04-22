@@ -7,21 +7,30 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
+    # Directory
     url(r'^$', 'dormbase.views.home', name='home'),
     url(r'^directory$', 'dormbase.core.views.directory', name='directory'),
     url(r'^directory_json$', 'dormbase.core.views.directory_json', name='directory_json'),
-#    url(r'^directory_populate$', 'dormbase.core.views.populate_directory', name='populate'),
-    url(r'^movies/$', 'dormbase.movie.views.randomGenre', name='directory_json'),
-    url(r'^reserve_movie/$', 'dormbase.movie.views.reserve_movie'),
-    url(r'^movies/genre/(?P<genreType>.*)/$', 'dormbase.movie.views.listGenre', name='movie_all'),
-    url(r'^movies/detail/(?P<movieId>.*)/$', 'dormbase.movie.views.movie_detail', name='movie_detail'),
-    url(r'^personal$', 'dormbase.personal.views.profile', name='personal'),
-    url(r'^desk$', 'dormbase.desk.views.dashboard', name='desk'),
-    url(r'^add_package/$', 'dormbase.package.views.add_package'),
-    url(r'^remove_package/$', 'dormbase.package.views.remove_package'),
 
-    # url(r'^movies$', 'dormbase.movie.views.list_movies', name='directory_json'),
+    # Movie
+    url(r'^movies/$', 'dormbase.movie.views.genre_random', name='directory_json'),
+    url(r'^movie_reserve/$', 'dormbase.movie.views.movie_reserve'),
+    url(r'^movies/genre/(?P<genreType>.*)/$', 'dormbase.movie.views.genre_list', name='movie_all'),
+    url(r'^movies/detail/(?P<movieId>.*)/$', 'dormbase.movie.views.movie_detail', name='movie_detail'),
+
+    # Profile
+    url(r'^personal$', 'dormbase.personal.views.profile', name='personal'),
+
+    # Desk
+    url(r'^desk$', 'dormbase.desk.views.dashboard', name='desk'),
+    url(r'^package_add/$', 'dormbase.package.views.package_add'),
+    url(r'^package_remove/$', 'dormbase.package.views.package_remove'),
+
+    # Haystack
+    (r'^search/', include('haystack.urls')),
+    (r'^photologue/', include('photologue.urls')),
+
+    # Resources
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
              'document_root': settings.MEDIA_ROOT
              }), 
@@ -30,18 +39,9 @@ urlpatterns = patterns('',
              'document_root': settings.STATIC_ROOT,
              }),
 
-    # url(r'^$', 'dormbase.views.home', name='home'),
-    # url(r'^dormbase/', include('dormbase.foo.urls')),
-    url(r'^directory$', 'dormbase.core.views.directory', name='directory'),
-    url(r'^directory_json$', 'dormbase.core.views.directory_json', name='directory_json'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Haystack search
-    (r'^search/', include('haystack.urls')),
-    (r'^photologue/', include('photologue.urls')),
-
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
                        

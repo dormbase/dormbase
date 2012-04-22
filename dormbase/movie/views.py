@@ -12,7 +12,7 @@ def movie_detail(request, movieId):
     payload = {'movie': Movie.objects.filter(imdbId = movieId)[0]}
     return render_to_response('movie/movieDetail.html', payload, context_instance=RequestContext(request))
 
-def reserve_movie(request):
+def movie_reserve(request):
     if request.method == 'POST':
         id = request.POST['imdbId']
         print id
@@ -25,7 +25,7 @@ def reserve_movie(request):
     raise Http404
 
 
-def listGenre(request, genreType):
+def genre_list(request, genreType):
     genresFilter = Genre.objects.filter(name = genreType)
     selectFilms = [(genreType, Movie.objects.filter(genres = genresFilter).order_by('title'))]
 
@@ -35,7 +35,7 @@ def listGenre(request, genreType):
     #print payload
     return render_to_response('movie/movies.html', payload, context_instance=RequestContext(request))
 
-def randomGenre(request):
+def genre_random(request):
     genreList = ['Action',
                  'Adventure',
                  'Comedy',
@@ -49,10 +49,7 @@ def randomGenre(request):
 
     for i in genreList:
         filmGenre = Movie.objects.filter(genres = Genre.objects.filter(name = i))
-        
-
         rands = sample(xrange(len(filmGenre)-1), min(5, len(filmGenre)))
-
         selectFilms.append((i, [filmGenre[x] for x in rands]))
 
     payload = {'selectFilms' : selectFilms}

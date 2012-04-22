@@ -6,7 +6,7 @@
 {% for genre,films in selectFilms %}
 <section class="movieSection">
 
-  <a href="{% url dormbase.movie.views.listGenre genre %}"><h3>{{genre}}</h3></a>
+  <a href="{% url dormbase.movie.views.genre_list genre %}"><h3>{{genre}}</h3></a>
   
   <ul class="thumbnails">
     

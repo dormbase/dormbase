@@ -41,7 +41,7 @@
       <div class="span6">
 	<h3>Package Management</h3>
 	<hr>
-	<form id="packageForm" class="form-inline" action="{% url dormbase.package.views.add_package  %}" method="post">
+	<form id="packageForm" class="form-inline" action="{% url dormbase.package.views.package_add  %}" method="post">
 	  {% csrf_token %}
 	  
 	  {{ form }}
@@ -65,7 +65,7 @@
 	      <td>{{r.recipient.user.first_name}} {{r.recipient.user.last_name}}</td>
 	      <td>{{r.location}}</td>
 	      <td>
-		<form action="{% url dormbase.package.views.remove_package %}" method="post">
+		<form action="{% url dormbase.package.views.package_remove %}" method="post">
 		  {% csrf_token %}
 		  <input type="hidden" name="package_id" value="{{ r.id }}">
 		  <button class="btn btn-small pull-right release">Release</button>
