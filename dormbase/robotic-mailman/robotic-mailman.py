@@ -2,7 +2,6 @@
 # independent python interface to mailman using subprocess
 # Isaac Evans (c) 2012
 
-#import envoy
 import subprocess
 import tempfile
 
@@ -15,23 +14,28 @@ def getMailmanPath():
 def genericMailmanCall(args):
     '''Returns None if the call failed, else returns the output'''
     if len(args) < 2:
-        raise Exception('Exception: attempted to make mailman call without arguments')
+        raise Exception('attempted to make mailman call without arguments')
     try:
         # remove empty arguments
-        args = filter(lambda x: len(x) != 0, args)
-        cmd = ' '.join([getMailmanPath() + args[0]] + map(sanitize, args[1:]))
-        print cmd
-#        return envoy.run(cmd, data = None, timeout=10).std_out
-        return subprocess.check_output([getMailmanPath() + args[0]] + map(sanitize, args[1:]))
+        args = map(sanitize, [x for x in args if len(x) != 0])
+        #cmd = ' '.join([getMailmanPath() + args[0]] + map(sanitize, args[1:]))
+        #print cmd
+        return subprocess.check_output([getMailmanPath() + args[0]] + args[1:])
     except subprocess.CalledProcessError as c:
         print 'Exception while calling mailman with arguments: ' + str(args)
         print 'return code: ' + str(c.returncode)
         print 'output: ' + c.output
         return None
 
+def validate(listname, usernames):
+    if len(listname) == 0:
+        raise Exception('listname must not be empty!')
+    if not type(usernames) == type(list()):
+        raise Exception('usernames must be array!')
+
 # note: listnames are forced to be lowercase!
 def newList(listname, adminEmail, adminPassword):
-    if sum(int(x.isupper()) for x in listName) != 0:
+    if sum(int(x.isupper()) for x in listname) != 0:
         raise Exception('list names must be lowercase')
     return genericMailmanCall(['newlist', '--quiet', listname, adminEmail, adminPassword])
 
@@ -41,6 +45,7 @@ def deleteList(listname, deleteArchivesToo = False):
     return genericMailmanCall(['rmlist', listname])
 
 def addMembers(listname, usernames, digest = False):
+    validate(listname, usernames)
     tf = tempfile.NamedTemporaryFile('w')
     for u in usernames:
         tf.write(u + '\n')
@@ -60,11 +65,10 @@ def listMembers(listname, onlyRegular = False, onlyDigest = False, onlyNomail = 
     return members.rstrip() # remove trailing \n
 
 def removeMembers(listname, usernames, notifyUsers = True, notifyAdmin = True):
-    if len(listname) == 0:
-        raise Exception('listname must not be empty!')
-    flags = ''
+    validate(listname, usernames)
+    flags = []
     if not notifyUsers:
-        flags += '--nouserack'
+        flags += ['--nouserack']
     if not notifyAdmin:
-        flags += '--noadminack'
-    return genericMailmanCall(['remove_members', listname, flags, ''.join(usernames)])
+        flags += ['--noadminack']
+    return genericMailmanCall(['remove_members', listname] + flags + usernames)
