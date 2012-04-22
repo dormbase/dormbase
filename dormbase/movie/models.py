@@ -37,7 +37,7 @@ class Movie(models.Model):
     checkedOutSince = models.DateField(null = True, blank = True) # Can this be left unintialized?
    
     def __unicode__(self):
-        return self.title
+        return unicode(self.title)
 
     @models.permalink
     def get_absolute_url(self):

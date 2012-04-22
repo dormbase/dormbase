@@ -24,10 +24,16 @@
     </details>
 
     <hr>
+    {% if movie.available %}
     <form action="{% url dormbase.movie.views.reserve_movie %}" method="post">
-      <input type="hidden" value="reserve">
+      {% csrf_token %}
+      <input type="hidden" name="imdbId" value="{{ movie.imdbId }}">
       <button class="btn-success pull-right">Reserve Now</button>
     </form>
+
+    {% else %}
+    <h1>MOVIE IS RESERVED!</h1>
+    {% endif %}
   </div>
 </section>
 

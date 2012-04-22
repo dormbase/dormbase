@@ -10,10 +10,20 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 def movie_detail(request, movieId):
     print movieId
     payload = {'movie': Movie.objects.filter(imdbId = movieId)[0]}
-    return render_to_response('movie/movie_detail.html', payload, context_instance=RequestContext(request))
+    return render_to_response('movie/movieDetail.html', payload, context_instance=RequestContext(request))
 
 def reserve_movie(request):
-    
+    if request.method == 'POST':
+        id = request.POST['imdbId']
+        print id
+        m = Movie.objects.get(imdbId = id)
+        print m
+        m.available = False
+        m.save()
+        return HttpResponseRedirect('/')
+
+    raise Http404
+
 
 def listGenre(request, genreType):
     genresFilter = Genre.objects.filter(name = genreType)
