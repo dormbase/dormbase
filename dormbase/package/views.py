@@ -1,32 +1,28 @@
 from django.shortcuts import render_to_response
-from django.contrib import auth
-from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
-from dormbase.package.models import Package
+from dormbase.package.models import *
+from django.http import HttpResponseRedirect, Http404
 import random
 
-class TestUser():
-    def __init__(self):
-        self.username = 'userEx'
-        self.location = ''
-        self.perish = False
+def add_package(request):
+    if request.method == 'POST':
+        form = PackageForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            p = Package(recipient = cd['recipient'], 
+                        location = cd['location'], 
+                        perishable = cd['perishable'],)
+            p.save()
+            return HttpResponseRedirect('/desk')
 
-def desk_worker(request):
-    packages = []
-    bins = ['A', 'B', 'C', 'D', 'Floor']
+        
+    raise Http404
+            
+def remove_package(request):
+    if request.method == 'POST':
+        p_id = request.POST['package_id']
+        p = Package.objects.get(id = p_id)
+        p.hidden = True
+        p.save()
+        return HttpResponseRedirect('/desk')
 
-    for i in xrange(0, random.randint(5,10)):
-        u = TestUser()
-        u.username += str(i)
-        u.location = bins[random.randint(0, (len(bins) - 1))]
-        if random.randint(0,5) == 5:
-            u.perish = True
-        packages.append(u)
-
-    payload = {'packages': packages}
-
-    return render_to_response('package/package.html', payload, context_instance = RequestContext(request))
-
-def get_packages(request):
-    payload = {'packages': Package.objects.all()}
-    return render_to_response('desk/dashboard.html', payload, context_instance = RequestContext(request))
+    raise Http404

@@ -17,6 +17,8 @@ urlpatterns = patterns('',
     url(r'^movies/detail/(?P<movieId>.*)/$', 'dormbase.movie.views.movieDetail', name='movie_detail'),
     url(r'^personal$', 'dormbase.personal.views.profile', name='personal'),
     url(r'^desk$', 'dormbase.desk.views.dashboard', name='desk'),
+    url(r'^add_package/$', 'dormbase.package.views.add_package'),
+    url(r'^remove_package/$', 'dormbase.package.views.remove_package'),
 
     # url(r'^movies$', 'dormbase.movie.views.list_movies', name='directory_json'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
