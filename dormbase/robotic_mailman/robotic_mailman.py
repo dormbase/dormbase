@@ -1,7 +1,7 @@
 # robotic-mailman
 # independent python interface to mailman using subprocess
 # Isaac Evans (c) 2012
-
+import os
 import subprocess
 import tempfile
 
@@ -18,8 +18,8 @@ def genericMailmanCall(args):
     try:
         # remove empty arguments
         args = map(sanitize, [x for x in args if len(x) != 0])
-        #cmd = ' '.join([getMailmanPath() + args[0]] + map(sanitize, args[1:]))
-        #print cmd
+        cmd = ' '.join([getMailmanPath() + args[0]] + map(sanitize, args[1:]))
+        print cmd
         return subprocess.check_output([getMailmanPath() + args[0]] + args[1:])
     except subprocess.CalledProcessError as c:
         print 'Exception while calling mailman with arguments: ' + str(args)
@@ -72,3 +72,13 @@ def removeMembers(listname, usernames, notifyUsers = True, notifyAdmin = True):
     if not notifyAdmin:
         flags += ['--noadminack']
     return genericMailmanCall(['remove_members', listname] + flags + usernames)
+
+def resetModerators(listname, newmoderators):
+    if not 'PYTHONPATH' in os.environ:
+        os.environ['PYTHONPATH'] = ''
+    old = os.environ['PYTHONPATH']
+    os.environ['PYTHONPATH'] += ':' + os.getcwd() + '/add_moderators.py'
+    print os.environ['PYTHONPATH']
+    import add_moderators
+    genericMailmanCall(['withlist', '-l', '-r', 'add_moderators', listname, ','.join(newmoderators)])
+    os.environ['PYTHONPATH'] = old
