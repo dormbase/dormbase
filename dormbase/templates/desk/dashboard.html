@@ -51,29 +51,13 @@
 	  </div>
 	</form>
 	
-	<table class="table table-striped table-condensed">
+	<table class="table table-striped table-condensed" id="package-list">
 	  <thead>
 	    <tr> 
 	      <th></th><th>Name</th><th>Bins</th>
 	    </tr>
 	  </thead>
 	  <tbody>
-	    {% for r in packages %}
-	    {% if not r.hidden %}
-	    <tr>
-	      <td>{% if r.perishable %}<icon class="icon-leaf"></icon>{% endif %} </td>
-	      <td>{{r.recipient.user.first_name}} {{r.recipient.user.last_name}}</td>
-	      <td>{{r.location}}</td>
-	      <td>
-		<form action="{% url dormbase.package.views.package_remove %}" method="post">
-		  {% csrf_token %}
-		  <input type="hidden" name="package_id" value="{{ r.id }}">
-		  <button class="btn btn-small pull-right release">Release</button>
-		</form>
-	      </td>
-	    </tr>
-	    {% endif  %}
-	    {% endfor  %}
 	  </tbody>
 	</table>
 
@@ -104,10 +88,46 @@
 
 </div>
 
+<div id="ajax-helper" style="display:none">
+  {% csrf_token %}
+  <div style='display:none'><input type='hidden' name='post-url' value="{% url dormbase.package.views.package_remove %}" /></div>
+</div>
+
 <script type="text/javascript">
+function makePackageRow(row) {
+    function showIconIfNeeded(perishable) {
+        if (perishable) {
+           return '<icon class="icon-leaf"></icon>';
+        }
+        return '';
+    }
+    return "" + 
+        "<tr>" +
+        " <td>" + showIconIfNeeded(row.perishable) + "</td>" +
+        " <td>" + row.name + "</td>" +
+        " <td>" + row.bin + "</td>" + 
+        " <td>" +
+        "  <form action='" + $("#ajax-helper input[name='post-url']").val() + "' method='post'>" +
+        "   <input type='hidden' name='package_id' value='" + row.id + "'>" +
+        "   <input type='hidden' name='csrfmiddlewaretoken' value='" + $("#ajax-helper input[name='csrfmiddlewaretoken']").val() + "'>" +
+        "   <button class='btn btn-small pull-right release'>Release</button>" +
+        "  </form>" +
+        " </td>" + 
+        "</tr>";
+}
+
 $(function() {
-     $("#myTab").tab('show');
-     $("#scanPackage").modal('hidden');
+    $.getJSON("{% url dormbase.package.views.package_get %}", 
+    function(packages) {
+        $("#package-list tbody").html("");
+        for (var i in packages) {
+            var temp = makePackageRow(packages[i]);
+            $("#package-list > tbody:last").append(temp);
+        }
+    });
+    $("#myTab").tab('show');
+    $("#scanPackage").modal('hidden');
+
 });
 
 </script>

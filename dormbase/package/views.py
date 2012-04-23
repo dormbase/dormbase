@@ -1,7 +1,23 @@
 from django.shortcuts import render_to_response
 from dormbase.package.models import *
-from django.http import HttpResponseRedirect, Http404
-import random
+from django.http import HttpResponseRedirect, Http404, HttpResponse
+
+import json
+
+def package_get(request):
+    if request.method != 'GET':
+        raise Http404
+
+    packages = []
+    for p in Package.objects.filter(hidden=False):
+        packages.append({
+                'name': p.recipient.getFullName(),
+                'bin': p.location,
+                'perishable': p.perishable,
+                'id': p.id,
+                })
+
+    return HttpResponse(json.dumps(packages), mimetype='application/json')
 
 def package_add(request):
     if request.method == 'POST':

@@ -39,6 +39,9 @@ class AbstractResident(models.Model):
     def __unicode__(self):
         return self.athena
     
+    def getFullName(self):
+        return self.user.first_name + ' ' + self.user.last_name
+
     class Meta:
         abstract = True
 
