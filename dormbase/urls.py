@@ -13,22 +13,23 @@ urlpatterns = patterns('',
     url(r'^directory_json$', 'dormbase.core.views.directory_json', name='directory_json'),
 
     # Movie
-    url(r'^movies/$', 'dormbase.movie.views.genre_random', name='directory_json'),
-    url(r'^movie_reserve/$', 'dormbase.movie.views.movie_reserve'),
-    url(r'^movies/genre/(?P<genreType>.*)/$', 'dormbase.movie.views.genre_list', name='movie_all'),
-    url(r'^movies/detail/(?P<movieId>.*)/$', 'dormbase.movie.views.movie_detail', name='movie_detail'),
+    url(r'^movies$', 'dormbase.movie.views.genre_random', name='directory_json'),
+    url(r'^movie_reserve$', 'dormbase.movie.views.movie_reserve'),
+    url(r'^movies/genre/(?P<genreType>.*)$', 'dormbase.movie.views.genre_list', name='movie_all'),
+    url(r'^movies/detail/(?P<movieId>.*)$', 'dormbase.movie.views.movie_detail', name='movie_detail'),
 
     # Profile
     url(r'^personal$', 'dormbase.personal.views.profile', name='personal'),
+    url(r'^personal/(?P<username>.*)$', 'dormbase.personal.views.profile_username', name='personal'),
 
     # Desk
     url(r'^desk$', 'dormbase.desk.views.dashboard', name='desk'),
-    url(r'^package_add/$', 'dormbase.package.views.package_add'),
-    url(r'^package_remove/$', 'dormbase.package.views.package_remove'),
+    url(r'^package_add$', 'dormbase.package.views.package_add'),
+    url(r'^package_remove$', 'dormbase.package.views.package_remove'),
 
     # Haystack
-    (r'^search/', include('haystack.urls')),
-    (r'^photologue/', include('photologue.urls')),
+    (r'^search', include('haystack.urls')),
+    (r'^photologue', include('photologue.urls')),
 
     # Resources
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
