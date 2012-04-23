@@ -89,7 +89,7 @@ function userToHTML(user) {
 function search() {
     $.ajax({
 	type: "GET",
-	url: "directory_json",
+	url: "{% url dormbase.core.views.directory_json %}",
 	data: $("#searchform").serialize(),
     }).done(function(search_json) {
 	$("#results").html("");

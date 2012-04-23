@@ -50,6 +50,11 @@ class Resident(AbstractResident):
     cell = models.CharField(max_length = 20, blank = True)
     hometown = models.CharField(max_length = 200, blank = True)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('dormbase.personal.views.profile_username', (),
+                {'username': self.athena})
+
 class Group(models.Model):
     name = models.CharField(max_length = 200)
     mailingListName = models.CharField(max_length = 200, validators = [validate_slug])
