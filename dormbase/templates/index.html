@@ -16,8 +16,12 @@
       <div class="row">
         <div class="span4">
           <h2>Dining</h2>
-           <p>Every dorm with a dining hall will have it's daily menu integrated right on the homepage. It's easy and convenient, like it should be.</p>
-          <p><a class="btn" href="http://www.cafebonappetit.com/menu/your-cafe/mit/cafes/details/402/simmons">View details &raquo;</a></p>
+           <p>Every dorm with a dining hall will have it's daily menu
+      integrated right on the homepage. It's easy and convenient, like
+      it should be.</p>
+	  <h3>Today's Menu</h3>
+	  {{ menu|safe }} 
+          
         </div>
         <div class="span4">
           <h2>NextBus</h2>
