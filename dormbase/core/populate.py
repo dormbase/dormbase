@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from dormbase.core.models import Resident
 from dormbase.core.models import Room
+from dormbase.core.models import Group
+from dormbase.core.models import GroupMember
 import random
 
 def import_test_directory():
@@ -35,3 +37,27 @@ def import_test_directory():
         r.save()
 
     print 'Residents COMPLETE'
+
+def make_fake_groups():
+    nerds = Resident.objects.all()[0:5]
+    topnerd = Resident.objects.all()[0]
+    g = Group(name = 'tech-chair',
+              mailingListName = 'tech-chair',
+              autoSync = True,
+              owner = None,
+              memacl = None)
+    g.save()
+    nn = GroupMember(member = topnerd, group = g, position = "Tech Chair", autoMembership = True)
+    nn.save()
+
+    g2 = Group(name = 'simmons-tech',
+              mailingListName = 'simmons-tech',
+              autoSync = True,
+              owner = g,
+              memacl = None)
+    g2.save()
+    for n in nerds:
+        gm = GroupMember(member = n, group = g2, position = "Tech Committee Member", autoMembership = True)        
+        gm.save()
+
+    print 'two groups created'
