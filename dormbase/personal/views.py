@@ -14,6 +14,9 @@ def profile_username(request, username):
         resident = Resident.objects.get(athena=username)  #need to query DB and get fullname
     except:
         raise Http404
-    payload = {'fullname': resident.user.first_name + " " + resident.user.last_name, 'room': resident.room, 'email': resident.athena + '@mit.edu', 'phone': resident.cell }
+    payload = {'fullname': resident.user.first_name + " " + resident.user.last_name,
+               'room': resident.room, 'email': resident.athena + '@mit.edu',
+               'phone': resident.cell, 'web': resident.url, 'about': resident.about,
+               'year': resident.year }
 
     return render_to_response('personal/user.html', payload, context_instance = RequestContext(request))

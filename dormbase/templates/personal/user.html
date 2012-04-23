@@ -3,10 +3,12 @@
 {% block content %}
 
 <h1>{{ fullname }}</h1>
+<p>Year: {{year}}</p>
 <p>Room: {{ room }}</p>
-<p>Email: {{ email }}</p>
+<p>Email: <a href="mailto:{{ email }}">{{ email }}</a></p>
 <p>Phone: {{ phone }}</p>
-
+<p>About:</p>
+<p>{{ about }}</p>
 
 <div>
 
