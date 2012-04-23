@@ -7,28 +7,28 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Directory
+    # Home page
     url(r'^$', 'dormbase.views.home', name='home'),
-    url(r'^directory/$', 'dormbase.core.views.directory', name='directory'),
-    url(r'^directory/json/$', 'dormbase.core.views.directory_json', name='directory_json'),
+
+    # Directory
+    (r'^directory/', include('core.urls')),
 
     # Movie
-    url(r'^movies/$', 'dormbase.movie.views.genre_random', name='directory_json'),
-    url(r'^movies/reserve/$', 'dormbase.movie.views.movie_reserve'),
-    url(r'^movies/genre/(?P<genreType>.*)/$', 'dormbase.movie.views.genre_list', name='movie_all'),
-    url(r'^movies/detail/(?P<movieId>.*)/$', 'dormbase.movie.views.movie_detail', name='movie_detail'),
+    (r'^movies/', include('movie.urls')),
 
-    # Profile
-    url(r'^personal/$', 'dormbase.personal.views.profile', name='personal'),
-    url(r'^personal/(?P<username>.*)/$', 'dormbase.personal.views.profile_username', name='personal'),
+    # Profile/Personal
+    (r'^personal/', include('personal.urls')),
 
     # Desk
-    url(r'^desk/$', 'dormbase.desk.views.dashboard', name='desk'),
-    url(r'^package/add/$', 'dormbase.package.views.package_add'),
-    url(r'^package/remove/$', 'dormbase.package.views.package_remove'),
+    (r'^desk/', include('desk.urls')),
+
+    # Packages
+    (r'package/', include('package.urls')),
 
     # Haystack
     (r'^search/', include('haystack.urls')),
+
+    # Photologue
     (r'^photologue/', include('photologue.urls')),
 
     # Resources
