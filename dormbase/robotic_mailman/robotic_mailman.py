@@ -77,8 +77,8 @@ def resetModerators(listname, newmoderators):
     if not 'PYTHONPATH' in os.environ:
         os.environ['PYTHONPATH'] = ''
     old = os.environ['PYTHONPATH']
-    os.environ['PYTHONPATH'] += ':' + os.getcwd() + '/add_moderators.py'
+    os.environ['PYTHONPATH'] += os.getcwd() + '/add_moderators.py'
     print os.environ['PYTHONPATH']
     import add_moderators
     genericMailmanCall(['withlist', '-l', '-r', 'add_moderators', listname, ','.join(newmoderators)])
-    os.environ['PYTHONPATH'] = old
+#    os.environ['PYTHONPATH'] = old

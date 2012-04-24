@@ -22,3 +22,27 @@ def mailsync(group):
     if set(result.split('\n')) != set(emails):
         return False
     return True
+
+def all_email_sync():
+    for g in Group.objects.all():
+        robotic_mailman.deleteList(g.mailingListName)
+        robotic_mailman.newList(g.mailingListName, 'root@simmons.mit.edu', 'password')
+        print [m.athena + domainSuffix for m in g.members.all()]
+        robotic_mailman.addMembers(g.mailingListName, [m.athena + domainSuffix for m in g.members.all()])
+        ownerSet = list(recursive_get_group_owners(g, []))
+        print 'set list owner ' + g.mailingListName + ' -> ' + str(list(ownerSet))
+        robotic_mailman.resetModerators(g.mailingListName, list(ownerSet))
+        print 'finished adding list ' + g.mailingListName
+
+def recursive_get_group_owners(g, L):
+    if g == None or g.owner == None:
+        return L
+    print str(g) + ' is owned by ' + str(g.owner)
+    owners = [m.athena + domainSuffix for m in g.owner.members.all()]
+    print 'owners: ' + str(owners)
+    L += owners
+    print 'L now ' + str(L)
+    return L
+    # TODO: not currently recursive
+    #for owner in g.owner:
+    #    recursive_get_group_owners(owner, L)

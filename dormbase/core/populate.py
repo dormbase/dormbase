@@ -62,21 +62,3 @@ def make_fake_groups():
         gm.save()
 
     print 'two groups created'
-
-def all_email_sync:
-    for g in Group.objects.all():
-        robotic_mailman.deleteList(g.mailingListName)
-        robotic_mailman.newList(g.mailingListName)
-        robotic_mailman.addMembers(g.mailingListName, g.members)
-        recursive_set_group_owners(g)
-        print 'finished adding list ' + g.mailingListName
-
-def recursive_set_group_owners(g):
-    if g.owner == None:
-        return
-    print 'set list owner ' + g.mailingListName + ' -> ' + str(g.owner.members)
-    robotic_mailman.resetModerators(g.mailingListName, g.owner.members)
-    recursive_set_group_owners(g.owener)
-
-    
-    
