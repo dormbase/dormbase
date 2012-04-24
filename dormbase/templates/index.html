@@ -1,38 +1,88 @@
 {% extends "base.html" %}
 {% block classHome %}class="active"{% endblock %}
 {% block content %}
-      <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
-        <h1>Hello MIT!</h1>
-	<p>Something big is happening. The folks over at Simmons Tech
-          are working hard to get dorms at MIT into the 21st
-          century. We are punting psets to get it to you fast ... we swear.</p>
-	<p>You mean there are awesome technologies like HTML5, CSS3,
-          and jQuery? Yes, yes there are.</p>
-        <p><a href="http://icampusprize.mit.edu/2012/03/dormbase-2012-first-round-winner/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-      </div>
+<div id="main" class="clearfix">
+  <div class="page-half">
+    <div id="personal" class="personal half block one">
+      <h1>PERSONAL</h1>
+    </div>
+    <div id="profile" class="quarter block six">
+      <h2>PROFILE</h2>
+    </div>
+    <div id="packages" class="personal-right quarter block one">
+      <p>you have <strong>2</strong> packages at desk</p>
+    </div>
+    <div id="guest-list" class="personal-right quarter block three">
+      <h4>GUEST LIST</h4>
+      <p>There are 6 people on your guest list</p>
+    </div>
+    <div id="lounge" class="personal-right quarter block two">
+      <h4>LOUNGE MEMBERSHIP</h4>
+      <p>You are a member of <strong>DevTeam6</strong></p>
+    </div>
+  </div>
+  
+  <div class="page-half right">
+    <div id="search" class="search half block two">
+      <h1>SEARCH</h1>
+      <form class="search-bar" action="{% url dormbase.views.home %}search/" method="get">
+	<input id="search-bar" type="text" class="search-query"
+	       placeholder="Search" name="q" />
+      </form>
+    </div>
+    <div id="gov" class="gov half block one">
+      <h1>GOVERNMENT</h1>
+    </div>
+    <div id="proposal" class="gov-right third block six right">
+      <h3>SUBMIT A PROPOSAL</h3>
+    </div>
+    <div id="cal" class="gov-left sixth block three">
+      <h2>CALENDAR</h2>
+    </div>
+    <div id="officers" class="gov-left sixth block one">
+      <h4>CURRENT OFFICERS</h4>
+    </div>
+    <div id="info" class="gov-left sixth block one">
+      <h4>INFORMATION</h4>
+    </div>
+    <div id="elections" class="gov-left sixth block one">
+      <h4>ELECTIONS</h4>
+    </div> 
+  </div>
 
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="span4">
-          <h2>Dining</h2>
-           <p>Every dorm with a dining hall will have it's daily menu
-      integrated right on the homepage. It's easy and convenient, like
-      it should be.</p>
-	  <h3>Today's Menu</h3>
-	  {{ menu|safe }} 
-          
-        </div>
-        <div class="span4">
-          <h2>NextBus</h2>
-           <p>All of the information you need in one place. Never miss the shuttle again.</p>
-          <p><a class="btn" href="http://www.nextbus.com/predictor/prediction.shtml?a=mit&r=tech&d=kendsq&s=simmhl&ts=vassmass">View details &raquo;</a></p>
-       </div>
-        <div class="span4">
-          <h2>Desk</h2>
-          <p>Desk workers use our web systems the most. They deserve more attention, and that is just what we are doing.</p>
-          <p><a class="btn" href="{% url dormbase.desk.views.dashboard %}">View details &raquo;</a></p>
-        </div>
-      </div>
+  <div class="page-half">
+    <div id="media" class="media half block one">
+      <h1>MEDIA</h1>
+    </div>
+    <div id="movies" class="half block four">
+      <h2>MOVIES</h2>
+    </div>
+    <div id="games" class="quarter block four">
+      <h2>GAMES</h2>
+    </div>
+    <div id="books" class="quarter block four">
+      <h2>BOOKS</h2>
+    </div>
+  </div>
+    
 
+  <div class="page-half right">
+    <div id="facilities" class="facilities half block one">
+      <h1>FACILITIES</h1>
+    </div>
+    <div id="cal" class="facilities-left sixth block two">
+      <h2>LAUNDRY</h2>
+    </div>
+    <div id="map" class="facilities-right third block three right">
+    </div>
+    <div id="officers" class="facilities-left sixth block four">
+      <h2>RESERVATIONS</h2>
+    </div>
+    <div id="times" class="facilities-right third block two right">
+      <h2>SHUTTLE TIMES</h2>
+    </div>
+    <div id="fixit" class="facilities-right third block one right">
+      <h3>request maintenance</h3>
+    </div>
+</div>
 {% endblock %}
