@@ -41,14 +41,14 @@
       <div class="span6">
 	<h3>Package Management</h3>
 	<hr>
-	<form id="packageForm" class="form-inline" action="{% url dormbase.package.views.package_add  %}" method="post">
+	<form id="package-form" class="form-inline">
 	  {% csrf_token %}
-	  
 	  {{ form }}
 	  <div class="pull-right">
 	    <button class="btn btn-success btn-small" data-toggle="modal" href="#scanPackage">Scan Package</button>
 	    <button class="btn btn-danger btn-small">Submit</button>
 	  </div>
+
 	</form>
 	
 	<table class="table table-striped table-condensed" id="package-list">
@@ -102,18 +102,33 @@ function makePackageRow(row) {
         return '';
     }
     return "" + 
-        "<tr>" +
+        "<tr" + " id='p" + row.id + "'>" +
         " <td>" + showIconIfNeeded(row.perishable) + "</td>" +
-        " <td>" + row.name + "</td>" +
-        " <td>" + row.bin + "</td>" + 
+        " <td>" + row.recipient + "</td>" +
+        " <td>" + row.location + "</td>" + 
         " <td>" +
-        "  <form action='" + $("#ajax-helper input[name='post-url']").val() + "' method='post'>" +
+        "  <form class='release-form' action=''>" +
         "   <input type='hidden' name='package_id' value='" + row.id + "'>" +
         "   <input type='hidden' name='csrfmiddlewaretoken' value='" + $("#ajax-helper input[name='csrfmiddlewaretoken']").val() + "'>" +
-        "   <button class='btn btn-small pull-right release'>Release</button>" +
+        "   <button class='btn btn-small pull-right'>Release</button>" +
         "  </form>" +
         " </td>" + 
         "</tr>";
+}
+
+function addPackageRow(package){
+    $("#package-list > tbody:last").append(makePackageRow(package));
+    function packageRelease() {
+        var package = $(this).serialize();
+        $.post("{% url dormbase.package.views.package_remove %}", package, function(data){
+            var id = "#" + data.id;
+            $(id).remove();
+        }, "json");
+
+       return false;
+    }
+
+    $("#package-list .release-form:last").submit(packageRelease);
 }
 
 $(function() {
@@ -121,12 +136,16 @@ $(function() {
     function(packages) {
         $("#package-list tbody").html("");
         for (var i in packages) {
-            var temp = makePackageRow(packages[i]);
-            $("#package-list > tbody:last").append(temp);
+            addPackageRow(packages[i]);
         }
     });
     $("#myTab").tab('show');
-    $("#scanPackage").modal('hidden');
+
+    $("#package-form").submit(function(){
+        var package = $(this).serialize();
+        $.post("{% url dormbase.package.views.package_add %}", package, function(data){addPackageRow(data);}, "json");
+        return false;
+    });
 
 });
 

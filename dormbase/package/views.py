@@ -11,8 +11,8 @@ def package_get(request):
     packages = []
     for p in Package.objects.filter(hidden=False):
         packages.append({
-                'name': p.recipient.getFullName(),
-                'bin': p.location,
+                'recipient': p.recipient.getFullName(),
+                'location': p.location,
                 'perishable': p.perishable,
                 'id': p.id,
                 })
@@ -28,9 +28,14 @@ def package_add(request):
                         location = cd['location'], 
                         perishable = cd['perishable'],)
             p.save()
-            return HttpResponseRedirect('/desk')
 
-        
+            jsonPackage = json.dumps({'recipient': p.recipient.getFullName(),
+                                      'location': p.location,
+                                      'perishable': p.perishable,
+                                      'id': p.id})
+
+            return HttpResponse(jsonPackage, mimetype="application/json")
+
     raise Http404
             
 def package_remove(request):
@@ -39,6 +44,8 @@ def package_remove(request):
         p = Package.objects.get(id = p_id)
         p.hidden = True
         p.save()
-        return HttpResponseRedirect('/desk')
+        pid = 'p' + str(p.id)
+        jsonResponse = json.dumps({'id': pid})
+        return HttpResponse(jsonResponse, mimetype="application/json")
 
     raise Http404
