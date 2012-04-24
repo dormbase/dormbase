@@ -460,6 +460,8 @@ body {
 }
 footer {
   width: 970px;
+  position: relative;
+  color: #ffffff;
 }
 .personal {
   background-color: #2170ff;
@@ -608,6 +610,9 @@ footer {
 }
 .right {
   float: right;
+}
+.left {
+  float: left;
 }
 .half {
   width: 460px;
