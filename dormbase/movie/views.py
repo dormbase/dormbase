@@ -42,7 +42,13 @@ def movie_reserve(request):
         # who is making request.
         m.checkedOutBy = Resident.objects.order_by('?')[0]
         m.save()
-        return HttpResponse('OK')
+        
+        movie = json.dumps({
+                    'title': m.canonicalTitle,
+                    'checkedOutBy': m.checkedOutBy.getFullName(),
+                    })
+        print movie
+        return HttpResponse(movie, mimetype='application/json')
 
     raise Http404
 

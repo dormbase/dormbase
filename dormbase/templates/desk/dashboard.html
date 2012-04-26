@@ -29,12 +29,12 @@
 	<div>
 	  <h3>Movie & Game Checkout</h3>
 	  <hr>
-	  <form class="form-inline">
-	    <input type="text" class="input span4" placeholder="Title">
-	    <label>and</label>
-	    <input type="text" class="input span4" placeholder="Resident">
+	  <form id="movie-form" class="form-inline">
+	    {% csrf_token %}
+	    {{ movieForm }}
 	    <button type="submit" class="btn btn-primary btn-small">Checkout</button>
 	  </form>
+
 	  <table class="table table-striped table-condensed" id="movie-list">
 	    <thead>
 	      <tr> 
@@ -52,7 +52,7 @@
 	<hr>
 	<form id="package-form" class="form-inline">
 	  {% csrf_token %}
-	  {{ form }}
+	  {{ packageForm }}
 	  <div class="pull-right">
 	    <button class="btn btn-success btn-small" data-toggle="modal" href="#scanPackage">Scan Package</button>
 	    <button class="btn btn-danger btn-small">Submit</button>
@@ -169,6 +169,13 @@ $(function() {
     $("#package-form").submit(function(){
         var package = $(this).serialize();
         $.post("{% url dormbase.package.views.package_add %}", package, function(data){addPackageRow(data);}, "json");
+        return false;
+    });
+    $("#movie-form").submit(function(){
+        var movie = $(this).serialize();
+        $.post("{% url dormbase.movie.views.movie_reserve %}", movie, function(data){
+            $("#movie-list > tbody:last").append(makeMovieRow(data));
+        }, "json");
         return false;
     });
 

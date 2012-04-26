@@ -21,11 +21,14 @@ from django.shortcuts import render_to_response
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from dormbase.package.models import *
-from dormbase.package.models import Package
+from dormbase.package.models import PackageForm
+from dormbase.movie.models import MovieForm
+from dormbase.core.models import Resident
 
 def dashboard(request):
-    f = PackageForm()
-    payload = {'packages': Package.objects.filter(hidden=False), 'form': f}
+    pf = PackageForm()
+    mf = MovieForm()
+    payload = {'packageForm': pf, 
+               'movieForm': mf,}
 
     return render_to_response('desk/dashboard.html', payload, context_instance = RequestContext(request))

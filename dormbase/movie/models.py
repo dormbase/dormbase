@@ -20,6 +20,7 @@
 from django.db import models
 from dormbase.core.models import Resident
 from photologue.models import Photo
+from django import forms
 
 class Genre(models.Model):
     name = models.CharField(max_length=64)
@@ -60,3 +61,14 @@ class Movie(models.Model):
         return ('dormbase.movie.views.movie_detail', (), {
                 'movieId': self.imdbId })
     
+
+class MovieForm(forms.ModelForm):
+    MOVIES = []
+    for m in Movie.objects.all():
+        MOVIES.append((m.imdbId,m.title))
+
+    imdbId = forms.ChoiceField(choices=MOVIES)
+
+    class Meta:
+        model = Movie
+        fields = ('imdbId', 'checkedOutBy')
