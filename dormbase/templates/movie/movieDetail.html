@@ -2,10 +2,12 @@
 {% block content %}
 
 <section class='row'>
+
   <div class="thumbnail span4">
     <img src="{{movie.cover.get_display_url}}">
   </div>
   <div class="span6">
+
     <a href="http://www.imdb.com/title/tt{{movie.imdbId}}/">
       <h2>{{movie.title}}</h2>
     </a>
@@ -24,17 +26,38 @@
     </details>
 
     <hr>
+    <div id="reserve-alert" class="alert-success fade in">
+      <p><strong>Reserved!</strong> You have 15 minutes to pick up the movie. Get going!</p>
+    </div>
+
     {% if movie.available %}
-    <form action="{% url dormbase.movie.views.movie_reserve %}" method="post">
+    <form id="movie-form" action="">
       {% csrf_token %}
       <input type="hidden" name="imdbId" value="{{ movie.imdbId }}">
-      <button class="btn-success pull-right">Reserve Now</button>
+      <button id="reserve-btn" class="btn btn-success pull-right">Reserve Now</button>
     </form>
 
-    {% else %}
-    <h1>MOVIE IS RESERVED!</h1>
-    {% endif %}
+    {% else  %}
+
+    <button id="reserve-btn" class="btn btn-info pull-right">Unavailable</button>
+    
+    {% endif  %}
+
   </div>
 </section>
+
+<script type="text/javascript">
+    $(function() {
+        $("#reserve-alert").hide();
+        $("#movie-form").submit(function(){
+            var movie = $(this).serialize();
+            $.post("{% url dormbase.movie.views.movie_reserve %}", movie).success(function(){
+                $("#reserve-btn").hide();
+                $("#reserve-alert").show();
+                })
+            return false;
+        });
+    });
+</script>
 
 {% endblock%}

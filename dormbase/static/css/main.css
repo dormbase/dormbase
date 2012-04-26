@@ -3384,3 +3384,7 @@ body {
 [class^="icon-"] {
     opacity: .5;
 }
+
+#reserve-alert {
+    text-align: center;
+}

@@ -36,7 +36,8 @@ def movie_reserve(request):
         m = Movie.objects.get(imdbId = id)
         m.available = False
         m.save()
-        return movie_detail(request, id)
+        return HttpResponse('OK')
+
     raise Http404
 
 def genre_list(request, genreType):
