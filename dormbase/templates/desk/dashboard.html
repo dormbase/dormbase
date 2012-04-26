@@ -35,6 +35,15 @@
 	    <input type="text" class="input span4" placeholder="Resident">
 	    <button type="submit" class="btn btn-primary btn-small">Checkout</button>
 	  </form>
+	  <table class="table table-striped table-condensed" id="movie-list">
+	    <thead>
+	      <tr> 
+		<th>Resident</th><th>Title</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	    </tbody>
+	  </table>
 	</div>
       </div>
 
@@ -94,6 +103,14 @@
 </div>
 
 <script type="text/javascript">
+function makeMovieRow(row) {
+    return "" + 
+        "<tr>" +
+        " <td>" + row.checkedOutBy + "</td>" +
+        " <td>" + row.title + "</td>" + 
+        "</tr>";
+}
+
 function makePackageRow(row) {
     function showIconIfNeeded(perishable) {
         if (perishable) {
@@ -136,7 +153,15 @@ $(function() {
     function(packages) {
         $("#package-list tbody").html("");
         for (var i in packages) {
-            addPackageRow(packages[i]);
+            makePackageRow(packages[i]);
+        }
+    });
+    $.getJSON("{% url dormbase.movie.views.movie_get %}", 
+    function(movies) {
+        $("#movie-list tbody").html("");
+        for (var i in movies) {
+            $("#movie-list > tbody:last").append(makeMovieRow(movies[i]));
+;
         }
     });
     $("#myTab").tab('show');

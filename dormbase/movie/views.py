@@ -22,9 +22,12 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 
 from dormbase.movie.models import Movie, Genre
+from dormbase.core.models import Resident
 from random import sample
 
 from django.http import HttpResponse, HttpResponseRedirect, Http404
+
+import json
 
 def movie_detail(request, movieId):
     payload = {'movie': Movie.objects.get(imdbId = movieId)}
@@ -35,10 +38,24 @@ def movie_reserve(request):
         id = request.POST['imdbId']
         m = Movie.objects.get(imdbId = id)
         m.available = False
+        # This is to test desk worker dashboard. Replace with resident
+        # who is making request.
+        m.checkedOutBy = Resident.objects.order_by('?')[0]
         m.save()
         return HttpResponse('OK')
 
     raise Http404
+
+def movie_get(request):
+    if request.method == 'GET':
+        movies = []
+        for m in Movie.objects.filter(available = False):
+            movies.append({
+                    'title': m.canonicalTitle,
+                    'checkedOutBy': m.checkedOutBy.getFullName() if m.checkedOutBy != None else None
+                    })
+
+        return HttpResponse(json.dumps(movies), mimetype='application/json')
 
 def genre_list(request, genreType):
     genresFilter = Genre.objects.filter(name = genreType)

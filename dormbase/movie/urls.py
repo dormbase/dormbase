@@ -23,5 +23,6 @@ urlpatterns = patterns('dormbase.movie.views',
     url(r'^$', 'genre_random'),
     url(r'^reserve/$', 'movie_reserve'),
     url(r'^genre/(?P<genreType>.*)/$', 'genre_list'),
-    url(r'^detail/(?P<movieId>.*)/$', 'movie_detail')
+    url(r'^detail/(?P<movieId>.*)/$', 'movie_detail'),
+    url(r'^list/reserved/$', 'movie_get'),
 )

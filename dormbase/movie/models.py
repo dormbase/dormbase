@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.db import models
-from django.contrib.auth.models import User as AuthUser
+from dormbase.core.models import Resident
 from photologue.models import Photo
 
 class Genre(models.Model):
@@ -28,32 +28,29 @@ class Genre(models.Model):
         return self.name    
 
 class Movie(models.Model):
-    title = models.CharField(max_length=128) # Title is the one field I consider mandatory.
+    # Title is the one field I consider mandatory.
+    title = models.CharField(max_length=128)
     canonicalTitle = models.CharField(max_length=128)
     year = models.IntegerField(null = True, blank=True)
     rating = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     plot = models.TextField(blank=True) 
     plotOutline = models.TextField(blank=True)
-    genres = models.ManyToManyField(Genre) # Can link to multiple genres
+    # Can link to multiple genres
+    genres = models.ManyToManyField(Genre)
     mpaa = models.CharField(max_length=128, blank=True)
     runtimes = models.CharField(max_length=3, blank=True)
     cover = models.ForeignKey(Photo, null = True)
-    imdbId = models.CharField(max_length=2) # Mandatory
+    # Mandatory
+    imdbId = models.CharField(max_length=2)
     director = models.TextField(blank=True)
     cast = models.TextField(blank=True)
 
     dateAdded = models.DateField(auto_now_add = True) # To track new films. 
     available = models.BooleanField(default=True)
-    checkedOutBy = models.ForeignKey(AuthUser, null = True, blank = True) # Not
-                                                                          # totally
-                                                                          # sure
-                                                                          # how
-                                                                          # this
-                                                                          # plays
-                                                                          # with
-                                                                          # AuthUser
-                                                                          # yet.
-    checkedOutSince = models.DateField(null = True, blank = True) # Can this be left unintialized?
+    # Not totally sure how this plays with AuthUser yet.
+    checkedOutBy = models.ForeignKey(Resident, null = True, blank = True)
+    # Can this be left unintialized?
+    checkedOutSince = models.DateField(null = True, blank = True)
    
     def __unicode__(self):
         return unicode(self.title)
