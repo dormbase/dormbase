@@ -13,6 +13,7 @@
 
     <link href="{{ STATIC_URL }}css/main.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/responsive.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/token-input-facebook.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.png">
     <link rel="apple-touch-icon" href="{{ STATIC_URL }}ico/apple-57x57.png">
@@ -37,7 +38,7 @@
 	    <ul class="nav">   
 	      <li {% block classHome %}{% endblock %}><a href="{% url dormbase.views.home %}">Home</a></li>
 	      <li {% block classDirectory %}{% endblock %}><a href="{% url dormbase.core.views.directory %}">Directory</a></li>
-	      <li {% block classPersonal %}{% endblock %}"><a href="{% url dormbase.personal.views.profile %}">Personal</a></li>
+	      <li {% block classPersonal %}{% endblock %}><a href="{% url dormbase.personal.views.profile %}">Personal</a></li>
 	      <li {% block classMediaContent %}{% endblock %} class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="mediaContent">
 		  Media
@@ -117,5 +118,6 @@
     <script src="{{ STATIC_URL }}js/bootstrap-carousel.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap-typeahead.js"></script>
     
+
   </body>
 </html>
