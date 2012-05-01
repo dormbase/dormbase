@@ -63,17 +63,19 @@ def movie_get(request):
 
         return HttpResponse(json.dumps(movies), mimetype='application/json')
 
-def genre_list(request, genreType):
-    genresFilter = Genre.objects.filter(name = genreType)
-    selectFilms = [(genreType, Movie.objects.filter(genres = genresFilter).order_by('title'))]
+def genre_get(request, genreType, viewType):
+    genresFilter = Genre.objects.get(name = genreType)
+    movies = Movie.objects.filter(genres = genresFilter).order_by('title')
 
-    #print selectFilms
+    if viewType == 'gallery':
+        viewType = True
+    else:
+        viewType = False
 
-    payload = {'selectFilms' : selectFilms}
-    #print payload
-    return render_to_response('movie/movies.html', payload, context_instance=RequestContext(request))
+    payload = {'genre' : genreType, 'viewType': viewType, 'movies': movies}
+    return render_to_response('movie/genre.html', payload, context_instance=RequestContext(request))
 
-def genre_random(request):
+def genre_list(request):
     genreList = ['Action',
                  'Adventure',
                  'Comedy',
@@ -83,14 +85,6 @@ def genre_random(request):
                  'Romance',
                  'Thriller']
 
-    selectFilms = []
-
-    for i in genreList:
-        filmGenre = Movie.objects.filter(genres = Genre.objects.filter(name = i))
-        rands = sample(xrange(len(filmGenre)-1), min(5, len(filmGenre)))
-        selectFilms.append((i, [filmGenre[x] for x in rands]))
-
-    payload = {'selectFilms' : selectFilms}
-    #print payload
-    return render_to_response('movie/movies.html', payload, context_instance=RequestContext(request))
+    payload = {'genres' : genreList}
+    return render_to_response('movie/movieHome.html', payload, context_instance=RequestContext(request))
 

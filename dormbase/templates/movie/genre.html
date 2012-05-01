@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Movie Database</h1>
+
+<div class="btn-group" data-toggle="buttons-radio">
+  <button class="{% if viewType %}active{% endif  %} btn btn-primary">
+    <a href="{% url dormbase.movie.views.genre_get genreType=genre viewType="gallery" %}">
+      <i class="icon-th-large icon-white"></i> Gallery
+    </a>
+  </button>
+  <button class="{% if not viewType %}active{% endif  %} btn btn-primary">
+    <a href="{% url dormbase.movie.views.genre_get genreType=genre viewType="list" %}">
+      <i class="icon-th-list icon-white"></i> List
+    </a>
+  </button>
+</div>
+
+{% if viewType %}
+<ul class="thumbnails">
+  {% for movie in movies %}
+  <li class="span2" >
+    <a href="{% url dormbase.movie.views.movie_detail movie.imdbId %}">
+      <div class="thumbnail movie" rel="popover" data-delay="75" data-content="{{movie.plotOutline}} {{movie.mpaa}}" data-original-title="{{movie.title}} ({{movie.year}})">
+	<img src="{{movie.cover.get_thumbnail_url}}" alt="">
+      </div>
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+
+{% else %}
+<ul>
+  {% for movie in movies %} 
+  <li>
+    <a href="{% url dormbase.movie.views.movie_detail movie.imdbId %}">{{movie.title}}</a>
+  </li>     
+  {% endfor %}
+</ul>
+{% endif %}    
+
+<script type="text/javascript">
+$(function() {
+    $('div[rel="popover"]').popover();
+});
+</script>
+
+{% endblock %}

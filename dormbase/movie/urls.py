@@ -20,9 +20,9 @@
 from django.conf.urls.defaults import patterns, url
 
 urlpatterns = patterns('dormbase.movie.views',
-    url(r'^$', 'genre_random'),
+    url(r'^$', 'genre_list'),
     url(r'^reserve/$', 'movie_reserve'),
-    url(r'^genre/(?P<genreType>.*)/$', 'genre_list'),
+    url(r'^genre/(?P<genreType>.*)/(?P<viewType>.*)/$', 'genre_get'),
     url(r'^detail/(?P<movieId>.*)/$', 'movie_detail'),
     url(r'^list/reserved/$', 'movie_get'),
 )
