@@ -56,6 +56,9 @@ urlpatterns = patterns('',
     # Menu
     (r'^menus/', include('menus.urls')),
 
+    # Laundry
+    (r'^laundry/', include('laundry.urls')),
+
     # Resources
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
              'document_root': settings.MEDIA_ROOT

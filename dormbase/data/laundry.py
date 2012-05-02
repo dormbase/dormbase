@@ -9,7 +9,7 @@ def get_machines():
         rooms.append(str(a.text).strip().title())
     for span in div.findall('.//span'):
         status.append(str(span.text).strip())
-    return zip(rooms, status)
+    return dict(zip(rooms, status))
 
 print get_machines()
 

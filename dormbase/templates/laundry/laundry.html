@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block classHome %}class="active"{% endblock %}
+{% block content %}
+
+
+{% for dorm,status in laundry.items %}
+
+<p>{{dorm}}: {{status}}</p>
+
+{% endfor %}
+
+{% endblock %}

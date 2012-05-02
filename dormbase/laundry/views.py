@@ -21,10 +21,19 @@ from django.shortcuts import render_to_response
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-import feedparser
+import lxml.html
 
-def home(request):
-    # should get cached and refreshed with a cron job
-    d = feedparser.parse('http://www.cafebonappetit.com/rss/menu/402')
-    payload = {'menu': d.entries[0].description}
-    return render_to_response('index.html', payload, context_instance = RequestContext(request))
+def laundry(request):
+    lvs = lxml.html.parse('http://laundryview.com/lvs.php')
+    div = lvs.find(".//div[@id='campus1']")
+    rooms = []
+    status = []
+    for a in div.findall('.//a'):
+        rooms.append(str(a.text).strip().title())
+    for span in div.findall('.//span'):
+        status.append(str(span.text).strip())
+
+    payload = {'laundry': dict(zip(rooms, status))}
+
+    print payload
+    return render_to_response('laundry/laundry.html', payload, context_instance=RequestContext(request))

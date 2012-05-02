@@ -17,14 +17,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from django.shortcuts import render_to_response
-from django.contrib import auth
-from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
-import feedparser
+from django.conf.urls.defaults import patterns, url
 
-def home(request):
-    # should get cached and refreshed with a cron job
-    d = feedparser.parse('http://www.cafebonappetit.com/rss/menu/402')
-    payload = {'menu': d.entries[0].description}
-    return render_to_response('index.html', payload, context_instance = RequestContext(request))
+urlpatterns = patterns('dormbase.laundry.views',
+    url(r'^$', 'laundry'),
+)
