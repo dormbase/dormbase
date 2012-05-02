@@ -3544,12 +3544,25 @@ a.thumbnail:hover {
 body {
   margin-top: 60px;
 }
+#main {
+  *zoom: 1;
+}
+#main:before,
+#main:after {
+  display: table;
+  content: "";
+}
+#main:after {
+  clear: both;
+}
 .info-box {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  padding: 10px;
+  padding: 20px;
   margin-bottom: 20px;
+  float: right;
+  width: 600px;
 }
 h1 {
   line-height: 2.0em;
@@ -3558,12 +3571,21 @@ p {
   font-weight: 200;
   font-size: 1.4em;
   line-height: 1.2em;
+  text-indent: 30px;
+  text-align: justify;
+  text-justify: distribute;
 }
 #welcome {
   background: #EEE;
 }
+#welcome h1 {
+  color: #038c3f;
+}
 #team {
   background: #eee;
+}
+#team h1 {
+  color: #038c3f;
 }
 #team img {
   margin-right: 8px;
@@ -3582,4 +3604,125 @@ p {
   padding: 7px;
   float: left;
   text-align: center;
+}
+#movie-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1010px;
+  height: 215px;
+}
+#left {
+  float: left;
+  width: 300px;
+  position: relative;
+  left: -10px;
+}
+.feature {
+  display: inline-block;
+  position: relative;
+  text-indent: -9999px;
+  width: 300px;
+  height: 100px;
+  margin-bottom: 5px;
+}
+.feature span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  -webkit-transition: opacity 0.7s;
+  -moz-transition: opacity 0.7s;
+  -o-transition: opacity 0.7s;
+  transition: opacity 0.7s;
+}
+.feature:hover span {
+  opacity: 1;
+}
+#search {
+  background: url(/static/img/search.jpg) no-repeat;
+}
+#search span {
+  background: url(/static/img/search.jpg) no-repeat;
+  background-position: -300px 0;
+}
+#menus {
+  background: url(/static/img/menus.jpg) no-repeat;
+}
+#menus span {
+  background: url(/static/img/menus.jpg) no-repeat;
+  background-position: -300px 0;
+}
+#guestlist {
+  background: url(/static/img/guestlist.jpg) no-repeat;
+}
+#guestlist span {
+  background: url(/static/img/guestlist.jpg) no-repeat;
+  background-position: -300px 0;
+}
+#shuttles {
+  background: url(/static/img/shuttles.jpg) no-repeat;
+}
+#shuttles span {
+  background: url(/static/img/shuttles.jpg) no-repeat;
+  background-position: -300px 0;
+}
+#media {
+  background: url(/static/img/media.jpg) no-repeat;
+}
+#media span {
+  background: url(/static/img/media.jpg) no-repeat;
+  background-position: -300px 0;
+}
+#packages {
+  background: url(/static/img/packages.jpg) no-repeat;
+}
+#packages span {
+  background: url(/static/img/packages.jpg) no-repeat;
+  background-position: -300px 0;
+}
+#frontdesk {
+  background: url(/static/img/frontdesk.jpg) no-repeat;
+}
+#frontdesk span {
+  background: url(/static/img/frontdesk.jpg) no-repeat;
+  background-position: -300px 0;
+}
+#laundry {
+  background: url(/static/img/laundry.jpg) no-repeat;
+}
+#laundry span {
+  background: url(/static/img/laundry.jpg) no-repeat;
+  background-position: -300px 0;
+}
+.navbar .brand {
+  color: #038c3f;
+}
+.navbar .nav .active > a,
+.navbar .nav .active > a:hover {
+  background-color: #047a36;
+  background-image: -moz-linear-gradient(top, #079242, #005724);
+  background-image: -ms-linear-gradient(top, #079242, #005724);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#079242), to(#005724));
+  background-image: -webkit-linear-gradient(top, #079242, #005724);
+  background-image: -o-linear-gradient(top, #079242, #005724);
+  background-image: linear-gradient(top, #079242, #005724);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#079242', endColorstr='#005724', GradientType=0);
+}
+#footer-icon {
+  margin-left: 10px;
+}
+footer p {
+  margin-top: 8px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
 }

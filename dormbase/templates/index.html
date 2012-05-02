@@ -1,57 +1,73 @@
 {% extends "base.html" %}
 {% block classHome %}class="active"{% endblock %}
 {% block content %}
-      <div id="welcome" class="span8 offset4 info-box">
-	<h1>Welcome</h1>
 
-	<p><em>Dormbase</em> is a web-based system that provides MIT
-	dormitories with the tools and services they need for daily
-	operation. It is an open source software project that was
-	started by <a href="http://simmons.mit.edu" target="blank">Simmons Tech</a> in response to their
-	and the resident’s need for reliable, modern, and usable
-	online services. <em>Dormbase</em> means a consistent user experience
-	across all of MIT’s dorms, accessible to residents, desk
-	workers, and administration. It is a community project that
-	solves a community problem.</p>
+<div id="main">
+  <div class="clearfix" id="left">
+    <img id="features" src="/static/img/features.jpg" />
+    <a href="{% url dormbase.core.views.directory %}" id="search" class="feature">Search<span></span></a>
+    <a href="{% url dormbase.menus.views.menus %}" id="menus" class="feature">Menus<span></span></a>
+    <a href="{% url dormbase.desk.views.dashboard %}" id="guestlist" class="feature">Guestlist<span></span></a>
+    <a href="{% url dormbase.nextbus.views.nextbus %}" id="shuttles" class="feature">Shuttles<span></span></a>
+    <a href="{% url dormbase.movie.views.genre_list %}" id="media" class="feature">Media<span></span></a>
+    <a href="{% url dormbase.desk.views.dashboard %}" id="packages" class="feature">Packages<span></span></a>
+    <a href="{% url dormbase.laundry.views.laundry %}" id="laundry" class="feature">Laundry<span></span></a>
+  </div>
 
-	<p>MIT’s current dormitory systems are not representative of the
-	Institute. They lack oversight and are highly fragmented,
-	making updates and maintenance difficult. These systems are
-	also unfriendly. Information is obscured by poorly designed
-	interfaces and fundamental use cases are time
-	consuming. Inadequate attention was paid to the user’s needs,
-	dissuading residents from taking advantage of online
-	resources.</p>
+  <div id="welcome" class="info-box">
+    <h1>Welcome</h1>
 
-	<p><em>Dormbase</em> offers what no other system on campus can: It just works.</p>
+    <p><em>Dormbase</em> is a web-based system that provides MIT
+    dormitories with the tools and services they need for daily
+    operation. It is an open source software project that was
+    started by <a href="http://simmons.mit.edu" target="blank">Simmons Tech</a> in response to their
+    and the resident’s need for reliable, modern, and usable
+    online services. <em>Dormbase</em> means a consistent user experience
+    across all of MIT’s dorms, accessible to residents, desk
+    workers, and administration. It is a community project that
+    solves a community problem.</p>
+
+    <p>MIT’s current dormitory systems are not representative of the
+    Institute. They lack oversight and are highly fragmented,
+    making updates and maintenance difficult. These systems are
+    also unfriendly. Information is obscured by poorly designed
+    interfaces and fundamental use cases are time
+    consuming. Inadequate attention was paid to the user’s needs,
+    dissuading residents from taking advantage of online
+    resources.</p>
+
+    <p><em>Dormbase</em> offers what no other system on campus can: It just works.</p>
+  </div>
+  <div id="team" class="info-box">
+    <h1>The Team</h1>
+    <div id="team-photos">
+      <div class="photo">
+	<img src="/static/img/alex-large.jpg" alt="Alex Chernyakhovsky" width="100" height="125" />
+	Alex '14
       </div>
-      <div id="team" class="span8 offset4 info-box">
-	<h1>The Team</h1>
-	<div id="team-photos">
-	  <div class="photo">
-	    <img src="/static/img/alex-large.jpg" alt="Alex Chernyakhovsky" width="100" height="125" />
-	    Alex '14
-	  </div>
-	  <div class="photo">
-	    <img src="/static/img/drew-large.jpg" alt="Drew Dennison" width="100" height="125" />
-	    Drew '13
-	  </div>
-	  <div class="photo">
-	    <img src="/static/img/luke-large.jpg" alt="Luke O'Malley" width="100" height="125" />
-	    Luke '14
-	  </div>
-	  <div class="photo">
-	    <img src="/static/img/cosmos-large.jpg" alt="Cosmos Darwin" width="100" height="125" />
-	    Cosmos '15
-	  </div>
-	  <div class="photo">
-	    <img src="/static/img/isaac-large.jpg" alt="Isaac Evans" width="100" height="125" />
-	    Isaac '13
-	  </div>
-	</div>
-	  <p>The core <em>Dormbase</em> team consists of four
-	  dedicated developers and a designer. The project, however,
-	  has recieved support from numerous other contributors.</p>
+      <div class="photo">
+	<img src="/static/img/drew-large.jpg" alt="Drew Dennison" width="100" height="125" />
+	Drew '13
       </div>
-      
+      <div class="photo">
+	<img src="/static/img/luke-large.jpg" alt="Luke O'Malley" width="100" height="125" />
+	Luke '14
+      </div>
+      <div class="photo">
+	<img src="/static/img/cosmos-large.jpg" alt="Cosmos Darwin" width="100" height="125" />
+	Cosmos '15
+      </div>
+      <div class="photo">
+	<img src="/static/img/isaac-large.jpg" alt="Isaac Evans" width="100" height="125" />
+	Isaac '13
+      </div>
+    </div>
+    <p>The core <em>Dormbase</em> team consists of four
+    dedicated developers and a designer. The project, however,
+    has recieved support from numerous other contributors.</p>
+  </div>
+</div>
+
+
+
 {% endblock %}
