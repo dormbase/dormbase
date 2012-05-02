@@ -31,14 +31,17 @@ def nextbus(request):
 
     now = datetime.datetime.now()
     tech_start = now.replace(hour=6,  minute=15, second=0) 
-    tech_end = now.replace(hour=7,  minute=10, second=0) 
+    tech_end = now.replace(hour=19,  minute=10, second=0) 
 
     if  now > tech_start and now < tech_end:
         route = 'tech'
     else:
         route = 'saferidecambwest'
 
-    data = lxml.etree.parse(baseNextBusURL + 'a=' + agency + '&r=' + route + '&s=' + stop)
+    url = baseNextBusURL + 'a=' + agency + '&r=' + route + '&s=' + stop
+    print url
+
+    data = lxml.etree.parse(url)
     next_times = [prediction.get('minutes') for prediction in data.findall('.//predictions/direction/prediction')]
 
     payload = {'times': next_times}
