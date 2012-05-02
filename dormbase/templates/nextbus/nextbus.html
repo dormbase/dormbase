@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block classHome %}class="active"{% endblock %}
+{% block content %}
+
+{% for time in times  %}
+
+<h1>{{time}}</h1>
+
+{% endfor %}
+
+{% endblock %}
