@@ -50,6 +50,9 @@ urlpatterns = patterns('',
     # Photologue
     (r'^photologue/', include('photologue.urls')),
 
+    # Nextbus
+    (r'^nextbus/', include('nextbus.urls')),
+
     # Resources
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
              'document_root': settings.MEDIA_ROOT
