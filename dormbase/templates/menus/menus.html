@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block classHome %}class="active"{% endblock %}
+{% block content %}
+
+{% for menu in menus %}
+
+<h2>{{menu.day}}</h2>
+
+<ul>
+{% for dish in menu.dishes%}
+<li>
+{{dish}}
+</li>
+{% endfor  %}
+</ul>
+{% endfor %}
+
+{% endblock %}

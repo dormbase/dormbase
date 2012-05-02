@@ -53,6 +53,9 @@ urlpatterns = patterns('',
     # Nextbus
     (r'^nextbus/', include('nextbus.urls')),
 
+    # Menu
+    (r'^menus/', include('menus.urls')),
+
     # Resources
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
              'document_root': settings.MEDIA_ROOT
