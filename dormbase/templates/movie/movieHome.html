@@ -10,7 +10,7 @@
       <h1>Movies</h1>
 
       <p>Watch something new, or browse by genre.</p>
-      <h2><a href="{% url dormbase.movie.views.genre_get genreType="New" viewType="gallery" %}">[new]</a></h2>
+      <h2><a class="heading" href="{% url dormbase.movie.views.genre_get genreType="New" viewType="gallery" %}">[new]</a></h2>
       <div id="new-movies">
 	{% for movie in newAdditions %}
 	<div class="movie">
@@ -20,7 +20,7 @@
 	</div>
 	{% endfor %}
       </div>
-      <h2>[genres]</h2>
+      <h2><a class="heading" href="{% url dormbase.movie.views.genre_get genreType="All" viewType="gallery" %}">[genres]</a></h2>
       <ul id="genres">
 	{% for genre in genres %}
 	<li><a href="{% url dormbase.movie.views.genre_get genreType=genre viewType="gallery" %}" >{{ genre }}</a></li>

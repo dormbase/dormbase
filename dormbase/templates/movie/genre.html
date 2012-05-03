@@ -7,7 +7,7 @@
 
 
 
-<div class="btn-group" data-toggle="buttons-radio">
+<div id="movie-list-button" class="btn-group" data-toggle="buttons-radio">
   <button class="{% if viewType %}active{% endif  %} btn btn-primary">
     <a href="{% url dormbase.movie.views.genre_get genreType=genre viewType="gallery" %}">
       <i class="icon-th-large icon-white"></i> Gallery
