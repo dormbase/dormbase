@@ -65,7 +65,7 @@ def movie_get(request):
 
 def genre_get(request, genreType, viewType):
     genresFilter = Genre.objects.get(name = genreType)
-    movies = Movie.objects.filter(genres = genresFilter).order_by('title')
+    movies = Movie.objects.filter(genres = genresFilter).order_by('canonicalTitle')
 
     if viewType == 'gallery':
         viewType = True

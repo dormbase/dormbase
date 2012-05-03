@@ -37,7 +37,7 @@
 <ul>
   {% for movie in movies %} 
   <li>
-    <a href="{% url dormbase.movie.views.movie_detail movie.imdbId %}">{{movie.title}}</a>
+    <a href="{% url dormbase.movie.views.movie_detail movie.imdbId %}">{{movie.canonicalTitle}}</a>
   </li>     
   {% endfor %}
 </ul>
