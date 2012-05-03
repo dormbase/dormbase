@@ -1,4 +1,6 @@
 {{ object.user.first_name }} {{ object.user.last_name }}
+{{ object.room }}
 {{ object.athena }}
+{{ object.altemail }}
 {{ object.year }}
 

@@ -43,6 +43,8 @@ def directory_json(request):
             search_args[field] = request.GET[field]
 
     search_results = None
+    if 'term' in request.GET and len(request.GET['term']) > 1: # special case, general keyword search
+        search_results = SearchQuerySet().filter(content = request.GET['term']).models(Resident)
     if len(search_args) > 0:
         search_results = SearchQuerySet().filter(**search_args).models(Resident)
     if search_results == None:

@@ -2,11 +2,33 @@
 {% block classDirectory %}class="active"{% endblock %}
 {% block content %}
 
-<div class="row">     
-<div class="span4">
-<form id="searchform" class="form-horizontal">
+<div class="row">
+<div class="span12">
+<h1>Directory Search</h1>
+<ul class="nav nav-tabs">
+    <li class="active">
+        <a href="#normal" data-toggle="tab">Search</a>
+    </li>
+    <li>
+        <a href="#normal" data-toggle="tab">Advanced Search</a>
+    </li>
+</ul>
+<form id="searchform" class="form-inline">
 <fieldset>
-<legend>Search the Directory</legend>
+<!--<legend>Search the Directory</legend>-->
+enter any term; names, emails, room numbers, etc.<br/><br/>
+<div class="control-group">
+    <div class="controls">
+        <input id="term" name="term" type="text" class="input-medium">
+        <button type="submit" class="btn btn-primary">Search Directory</button>
+    </div>
+</div>
+
+<!--<div class="form-actions">
+    <button type="reset" class="btn">Clear</button>
+</div>-->
+
+<!--
 <div class="control-group">
     <label for="firstname">First name</label>
     <div class="controls">
@@ -56,14 +78,11 @@
     </div>
 </div>
 
-<div class="form-actions">
-    <button type="submit" class="btn btn-primary">Search Directory</button>
-    <button type="reset" class="btn">Clear</button>
-</div>
+-->
 </fieldset>
 </form>
 </div>
-
+<br/>
 <div class="span8">
 <legend style="margin-bottom: 15px">Results</legend>
 <table class="table table-bordered table-striped">
@@ -95,9 +114,13 @@ function search() {
 	$("#results").html("");
 	for (var index in search_json.result) {
             $("#results").append(userToHTML(search_json.result[index]));
-	}
+	};
+	return false;
     });
 }
+
+// prevent enter key from doing a POST
+$("#searchform").submit(function() { search(); return false; });
 
 $("#firstname").keyup(function() { search(); });
 $("#lastname").keyup(function() { search(); });
@@ -105,6 +128,7 @@ $("#title").keyup(function() { search(); });
 $("#username").keyup(function() { search(); });
 $("#room").keyup(function() { search(); });
 $("#year").keyup(function() { search(); });
+$("#term").keyup(function() { search(); });
 </script>
 
 {% endblock %}
