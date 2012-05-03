@@ -3578,6 +3578,11 @@ body {
   text-align: justify;
   text-justify: distribute;
 }
+.info-box a {
+  font-weight: 200;
+  font-size: 1.3em;
+  line-height: 1.2em;
+}
 #team {
   min-height: 333px;
 }

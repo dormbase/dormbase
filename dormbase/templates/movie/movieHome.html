@@ -16,16 +16,18 @@
 	<div class="movie">
 	  <a href="{% url dormbase.movie.views.movie_detail movie.imdbId %}">
 	    <img src="{{movie.cover.get_thumbnail_url}}" alt="" />
-	    </a>
+	  </a>
 	</div>
 	{% endfor %}
       </div>
-	<h2>[genres]</h2>
-	<ul id="genres">
-	  {% for genre in genres %}
-	  <li><a href="{% url dormbase.movie.views.genre_get genreType=genre viewType="gallery" %}" >{{ genre }}</a></li>
-	  {% endfor %}
-	</ul>
+      <h2>[genres]</h2>
+      <ul id="genres">
+	{% for genre in genres %}
+	<li><a href="{% url dormbase.movie.views.genre_get genreType=genre viewType="gallery" %}" >{{ genre }}</a></li>
+	{% endfor %}
+      </ul>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
