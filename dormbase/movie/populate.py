@@ -81,7 +81,7 @@ def import_movie(movie_id):
         if movie.has_key(key):
             if key == 'director' or key == 'cast':
                 plist = [person['name'] for person in movie[key]]
-                movie[key] = ', '.join(plist[0:min(3, len(plist))])
+                movie[key] = ', '.join(plist[0:3])
 
             elif type(movie[key]) == type([]) and key != 'genres':
                 movie[key] = movie[key][0]
