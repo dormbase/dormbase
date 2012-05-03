@@ -3692,6 +3692,13 @@ body {
   background: url(/static/img/shuttles.jpg) no-repeat;
   background-position: -300px 0;
 }
+#shuttles-old {
+  background: url(/static/img/shuttles-old.jpg) no-repeat;
+}
+#shuttles-old span {
+  background: url(/static/img/shuttles-old.jpg) no-repeat;
+  background-position: -300px 0;
+}
 #media {
   background: url(/static/img/media.jpg) no-repeat;
 }

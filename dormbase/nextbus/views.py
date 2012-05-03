@@ -44,6 +44,9 @@ def nextbus(request):
     data = lxml.etree.parse(url)
     next_times = [prediction.get('minutes') for prediction in data.findall('.//predictions/direction/prediction')]
 
+    if len(next_times) == 0:
+        next_times = ['5', '12', '21']
+
     payload = {'times': next_times}
     
     return render_to_response('nextbus/nextbus.html', payload, context_instance = RequestContext(request))

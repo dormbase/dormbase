@@ -1,11 +1,19 @@
 {% extends "base.html" %}
-{% block classHome %}class="active"{% endblock %}
+{% block classFacilities %}class="active"{% endblock %}
 {% block content %}
-
-{% for time in times  %}
-
-<h1>{{time}}</h1>
-
-{% endfor %}
+<div id="main">
+  <div id="left">
+    <a href="{% url dormbase.nextbus.views.nextbus %}" id="shuttles-old" class="feature">Tech Shuttle</a>
+  </div>
+  <div id="right">
+    <div id="menu" class="info-box">
+      <h1>Tech Shuttle</h1>
+      <p>For when you're feeling lazy</p>
+      {% for time in times  %}
+      <h1>{{time}} mins</h1>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 
 {% endblock %}
