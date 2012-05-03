@@ -85,6 +85,9 @@ def genre_list(request):
                  'Romance',
                  'Thriller']
 
-    payload = {'genres' : genreList}
+    new = Movie.objects.filter(genres = Genre.objects.get(name = 'New')).order_by('?')
+    newAdditions = new[0:min(5, len(new))]
+
+    payload = {'genres' : genreList, 'newAdditions': newAdditions}
     return render_to_response('movie/movieHome.html', payload, context_instance=RequestContext(request))
 
