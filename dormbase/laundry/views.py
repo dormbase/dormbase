@@ -33,7 +33,16 @@ def laundry(request):
     for span in div.findall('.//span'):
         status.append(str(span.text).strip())
 
-    payload = {'laundry': dict(zip(rooms, status))}
+    pairs = dict(zip(rooms, status))
+
+    allRooms = [x for x in pairs.keys() if x.startswith('Simmons')]
+
+    simmons = {}
+
+    for r in allRooms:
+        simmons[r] = pairs[r]
+
+    payload = {'laundry': simmons}
 
     print payload
     return render_to_response('laundry/laundry.html', payload, context_instance=RequestContext(request))
