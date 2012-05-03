@@ -66,7 +66,7 @@ class MovieForm(forms.ModelForm):
     MOVIES = []
     for m in Movie.objects.all():
         MOVIES.append((m.imdbId,m.title))
-
+        
     imdbId = forms.ChoiceField(choices=MOVIES)
 
     class Meta:
