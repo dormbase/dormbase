@@ -28,3 +28,7 @@ def home(request):
     d = feedparser.parse('http://www.cafebonappetit.com/rss/menu/402')
     payload = {'menu': d.entries[0].description}
     return render_to_response('index.html', payload, context_instance = RequestContext(request))
+
+def coming_soon(request, title):
+    payload = {'title': title}
+    return render_to_response('comingSoon.html', payload, context_instance = RequestContext(request))

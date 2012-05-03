@@ -28,6 +28,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Home page
     url(r'^$', 'dormbase.views.home', name='home'),
+    url(r'^(?P<title>.*)/comingsoon/$', 'dormbase.views.coming_soon', name='coming'),
 
     # Directory
     (r'^directory/', include('core.urls')),
