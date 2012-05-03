@@ -3774,16 +3774,20 @@ h6 {
   width: 80px;
 }
 .dorms #simmons {
-  width: 160px;
+  width: 100px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 .dorms #baker {
   width: 80px;
 }
 .dorms #mccormick {
-  width: 160px;
+  width: 110px;
+  margin-left: 28px;
+  margin-right: 20px;
 }
 .dorms #maseeh {
-  width: 80px;
+  width: 88px;
 }
 .movie {
   width: 100px;
