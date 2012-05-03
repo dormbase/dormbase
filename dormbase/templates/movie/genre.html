@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% block classMediaContent %}class="active"{% endblock %}
 {% block content %}
+<div id="genre-top">
+ <img id="movie-header" src="/static/img/{{ genre }}.jpg" width="970px" alt="{{ genre }}"/>
+</div>
 
-<img id="movie-header" src="/static/img/{{ genre }}.jpg" width="1010"
-height="215" alt="{{ genre }}"/>
+
 
 <div class="btn-group" data-toggle="buttons-radio">
   <button class="{% if viewType %}active{% endif  %} btn btn-primary">

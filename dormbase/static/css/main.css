@@ -3615,9 +3615,8 @@ body {
   text-decoration: underline;
 }
 #movie-header {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
+  left: -25px;
   width: 1010px;
   height: 215px;
 }
@@ -3815,4 +3814,12 @@ h6 {
   margin-top: 100px;
   width: 700px;
   height: 269px;
+}
+#genre-top {
+  width: 970px;
+}
+#genre-top img {
+  position: relative;
+  left: -60px;
+  margin-bottom: 20px;
 }
