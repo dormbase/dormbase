@@ -28,7 +28,7 @@ def nextbus(request):
     baseNextBusURL = 'http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&'
     agency = 'mit'
     stop = 'simmhl'
-
+    
     now = datetime.datetime.now()
     tech_start = now.replace(hour=6,  minute=15, second=0) 
     tech_end = now.replace(hour=19,  minute=10, second=0) 
@@ -39,13 +39,15 @@ def nextbus(request):
         route = 'saferidecambwest'
 
     url = baseNextBusURL + 'a=' + agency + '&r=' + route + '&s=' + stop
-    print url
 
     data = lxml.etree.parse(url)
     next_times = [prediction.get('minutes') for prediction in data.findall('.//predictions/direction/prediction')]
 
     if len(next_times) == 0:
         next_times = ['5', '12', '21']
+        
+    # Only the next 3 shuttles are relevant 
+    next_times = next_times[0:3]
 
     payload = {'times': next_times}
     
