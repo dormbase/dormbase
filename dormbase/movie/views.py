@@ -76,7 +76,9 @@ def genre_get(request, genreType, viewType):
     return render_to_response('movie/genre.html', payload, context_instance=RequestContext(request))
 
 def genre_list(request):
-    genreList = ['Action',
+    genreList = ['All',
+                 'New',
+                 'Action',
                  'Adventure',
                  'Comedy',
                  'Drama',

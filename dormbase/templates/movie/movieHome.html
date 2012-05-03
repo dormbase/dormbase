@@ -10,7 +10,7 @@
       <h1>Movies</h1>
 
       <p>Watch something new, or browse by genre.</p>
-      <h2>[new]</h2>
+      <h2><a href="{% url dormbase.movie.views.genre_get genreType="New" viewType="gallery" %}">[new]</a></h2>
       <div id="new-movies">
 	{% for movie in newAdditions %}
 	<div class="movie">
