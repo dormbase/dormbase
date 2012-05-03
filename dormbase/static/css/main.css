@@ -3580,6 +3580,10 @@ body {
 }
 .info-box a {
   font-weight: 200;
+  font-size: 1em;
+}
+.info-box ul li a {
+  font-weight: 200;
   font-size: 1.3em;
   line-height: 1.2em;
 }
@@ -3790,4 +3794,18 @@ h6 {
   height: 150px;
   padding: 7px;
   float: left;
+}
+#laundry-view {
+  min-height: 500px;
+}
+#coming-soon {
+  height: 600px;
+  width: 920px;
+  margin-bottom: 30px;
+}
+#missing-puzzle {
+  margin-left: 70px;
+  margin-top: 100px;
+  width: 700px;
+  height: 269px;
 }
