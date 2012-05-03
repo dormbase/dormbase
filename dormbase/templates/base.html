@@ -55,26 +55,26 @@
 		  <b class="caret"></b>
 		</a>
 		<ul class="dropdown-menu">
-		  <li><a href="/#">Proposals</a></li>
-		  <li><a href="/#">Meetings</a></li>
-		  <li><a href="/#">Finances</a></li>
-		  <li><a href="/#">Polls</a></li>
+		  <li><a href="{% url dormbase.views.coming_soon title='Proposals' %}">Proposals</a></li>
+		  <li><a href="{% url dormbase.views.coming_soon title='Meetings' %}">Meetings</a></li>
+		  <li><a href="{% url dormbase.views.coming_soon title='Finances' %}">Finances</a></li>
+		  <li><a href="{% url dormbase.views.coming_soon title='Polls' %}">Polls</a></li>
 		  <li class="divider"></li>
-		  <li><a href="/#">Reimbursement</a></li>
+		  <li><a href="{% url dormbase.views.coming_soon title='Reimbursement' %}">Reimbursement</a></li>
 		</ul>
 	      </li>
 	      <li {% block classFacilities %}{% endblock %} class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#facilities">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="facilities">
 		  Facilities
 		  <b class="caret"></b>
 		</a>
 		<ul class="dropdown-menu">
 		  <li><a href="{% url dormbase.laundry.views.laundry %}">Laundry View</a></li>
-		  <li><a href="/#">Rooming</a></li>
-		  <li><a href="/#">Floor Plans</a></li>
-		  <li><a href="/#">Report a Problem</a></li>
+		  <li><a href="{% url dormbase.views.coming_soon title='Rooming' %}">Rooming</a></li>
+		  <li><a href="{% url dormbase.views.coming_soon title='Plans' %}">Floor Plans</a></li>
+		  <li><a href="{% url dormbase.views.coming_soon title='Report' %}">Report a Problem</a></li>
 		  <li class="divider"></li>
-		  <li><a href="/#">Reservations</a></li>
+		  <li><a href="{% url dormbase.views.coming_soon title='Reservations' %}">Reservations</a></li>
 		</ul>
 	      </li>
 	      <li {% block classDesk %}{% endblock %}><a href="{% url dormbase.desk.views.dashboard %}">Desk</a></li>
