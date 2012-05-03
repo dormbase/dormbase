@@ -38,7 +38,7 @@
 	      <li {% block classHome %}{% endblock %}><a href="{% url dormbase.views.home %}">Home</a></li>
 	      <li {% block classDirectory %}{% endblock %}><a href="{% url dormbase.core.views.directory %}">Directory</a></li>
 	      <li {% block classPersonal %}{% endblock %}><a href="{% url dormbase.personal.views.profile %}">Personal</a></li>
-	      <li {% block classMediaContent %}{% endblock %} class="dropdown">
+	      <li class="dropdown {% block classMediaContent %}{% endblock %}">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="mediaContent">
 		  Media
 		  <b class="caret"></b>
@@ -49,7 +49,7 @@
 		  <li><a href="{% url dormbase.views.coming_soon title='Library' %}">Library</a></li>
 		</ul>
 	      </li>
-	      <li {% block classGovernment %}{% endblock %} class="dropdown">
+	      <li class="dropdown {% block classGovernment %}{% endblock %}">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="government">
 		  Government
 		  <b class="caret"></b>
@@ -63,7 +63,7 @@
 		  <li><a href="{% url dormbase.views.coming_soon title='Reimbursement' %}">Reimbursement</a></li>
 		</ul>
 	      </li>
-	      <li {% block classFacilities %}{% endblock %} class="dropdown">
+	      <li class="dropdown {% block classFacilities %}{% endblock %}">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="facilities">
 		  Facilities
 		  <b class="caret"></b>
