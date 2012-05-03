@@ -2,17 +2,15 @@
 {% block classHome %}class="active"{% endblock %}
 {% block content %}
 
-{% for menu in menus %}
+{% for name,dorm in dorms.items %}
 
-<h2>{{menu.day}}</h2>
+<h2>{{name}} - {{dorm.day}}</h2>
 
-<ul>
-{% for dish in menu.dishes%}
-<li>
-{{dish}}
-</li>
-{% endfor  %}
-</ul>
+{% for meal in dorm.meals %}
+<h3>{{ meal.name }}</h3>
+{{ meal.description }}
+
+{% endfor %}
 {% endfor %}
 
 {% endblock %}

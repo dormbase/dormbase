@@ -22,31 +22,65 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 import feedparser
+import datetime
+import lxml.html as html
 
-def menus(request):
-    # should get cached and refreshed with a cron job
-    menus = feedparser.parse('http://www.cafebonappetit.com/rss/menu/402').entries
-
-    items = []
-    for i in menus:
-        day = i.title_detail.value
+def fix_bonapetit(thestr):
+    """
+    Horrible state-machine to parse the unhtmlified RSS feed and get
+    the title and description.
+    """
+    food = {}
+    last = ''
+    build = ''
+    for char in thestr:
+        if char == '[':
+            continue
+        if char == ']':
+            last = build
+            build = ''
+            continue
+        if char == '\n':
+            if build is not '':
+                food[last.strip()] = build.strip()
+                build = ''
+            continue
+        build += char
+    return food
         
-        # Im sure there is a better way to do this, but feedparser is
-        # giving a string to work with
-        dishes = i.summary_detail.value
-        dishes = dishes.replace('</h4>', '')
-        dishes = dishes.replace('\n', '')
-        dishes = dishes.replace('<p>', '')
-        dishes = dishes.replace('</p>', '')
-        dishes = dishes.replace(';', ': ')
-        dishes = dishes.replace('&nbsp', '')
+def menus(request):
+    halls = [('Baker', '399'),
+             ('Maseeh', '398'),
+             ('McCormick', '400'),
+             ('Next', '401'),
+             ('Simmons', '402'),
+             ]
+    
+    dorms_menus = {}
+    day = datetime.datetime.now().weekday()
 
-        # The first element is ignored becase it is empty
-        dishes = dishes.split('<h4>')[1:]
+    for (dorm, i) in halls:
+        # Make the URL and the Feed
+        make_url = 'http://www.cafebonappetit.com/rss/menu/' + i
+        raw_feed = feedparser.parse(make_url).entries[day]
+        # Here we need to use lxml to parse the summary
+        parser = html.fromstring(raw_feed.summary)
+        # Now convert the summary into a text-version
+        textversion = html.tostring(parser, method='text', encoding=unicode)
+        # Fix the terrible RSS using a state-,achine based parser,
+        # removing weird UTF-8 characters on the way
+        parsed_text = fix_bonapetit(textversion.replace(u'\xa0', ''))
+        # Convery the resulting dictionary into a form that we can
+        # send off to the template engine
+        reformatted = []
+        for (name, desc) in parsed_text.iteritems():
+            reformatted.append({'name': name, 'description': desc})
+        
+        # Add this dorm food
+        dorms_menus[dorm] = {'day': raw_feed.title_detail.value, 
+                             'meals': reformatted}
 
-        items.append({'day': day, 'dishes': dishes})
+    payload = {'dorms': dorms_menus}
 
-    payload = {'menus': items}
-    print payload
-
-    return render_to_response('menus/menus.html', payload, context_instance = RequestContext(request))
+    return render_to_response('menus/menus.html', payload, 
+                              context_instance = RequestContext(request))
