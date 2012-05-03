@@ -14,26 +14,32 @@
       <div class="navbar">
 	<div class="navbar-inner dorms">
 	  <div class="container">
-	    <ul class="nav">   
-	      <li id="next"><a href="#">Next</a></li>
-	      <li id="simmons"><a href="#">Simmons</a></li>
-	      <li id="baker"><a href="#">Baker</a></li>
-	      <li id="mccormick"><a href="#">McCormick</a></li>
-	      <li id="maseeh"><a href="#">Maseeh</a></li>
+	    <ul class="nav">
+	      <li id="next" class="active"><a data-toggle="tab" href="#tab-Next">Next</a></li>
+	      <li id="simmons"><a data-toggle="tab" href="#tab-Simmons">Simmons</a></li>
+	      <li id="baker"><a data-toggle="tab" href="#tab-Baker">Baker</a></li>
+	      <li id="mccormick"><a data-toggle="tab" href="#tab-McCormick">McCormick</a></li>
+	      <li id="maseeh"><a data-toggle="tab" href="#tab-Maseeh">Maseeh</a></li>
 	    </ul>
 	  </div>
 	</div>
-	<h2>{{menu.day}}</h2>
       </div>
-      {% for name,dorm in dorms.items %}
 
+      <h2>{{menu.day}}</h2>
+
+      <div class="tab-content">
+      {% for name,dorm in dorms.items %}
+      <div class="tab-pane {% if name == "Next" %}active{% endif %}" id="tab-{{name}}">
       <h2>{{name}} - {{dorm.day}}</h2>
       {% for meal in dorm.meals %}
       <h3>{{ meal.name }}</h3>
       {{ meal.description }}
 
       {% endfor %}
+      </div>
       {% endfor %}
+      </div>
+
     </div>
   </div>
 </div>
