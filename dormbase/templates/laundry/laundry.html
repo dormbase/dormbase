@@ -1,12 +1,25 @@
 {% extends "base.html" %}
-{% block classHome %}class="active"{% endblock %}
+{% block classFacilities %}class="active"{% endblock %}
 {% block content %}
 
+<div id="main">
+  <div id="left">
+    <a href="{% url dormbase.laundry.views.laundry %}" id="laundry" class="feature">Laundry</a>
+  </div>
+  <div id="right">
+    <div id="menu" class="info-box">
+      <h1>Laundry</h1>
 
-{% for dorm,status in laundry.items %}
+      <p>Because it's good to have clean clothes.</p>
+      <h2>[Simmons] <a id="laundry-viewall" href="#">(display all)</a></h2>
+      {% for dorm,status in laundry.items %}
+      
+      <p>{{dorm}}: {{status}}</p>
+      
+      {% endfor %}
 
-<p>{{dorm}}: {{status}}</p>
-
-{% endfor %}
+    </div>
+  </div>
+</div>
 
 {% endblock %}

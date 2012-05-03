@@ -1,61 +1,31 @@
 {% extends "base.html" %}
 {% block classHome %}class="active"{% endblock %}
 {% block content %}
-<div class="container">
-  <div id="welcome" class="span8 offset4 info-box">
-    <h1>Welcome</h1>
-    <p><em>Dormbase</em> is an open-source dormitory database system that
-    is flexible and expandable. The Dormbase project provides a
-    dorm management system that can evolve overtime to suit the
-    changing needs of the various dorms and their residents.</p>
-
-    <p>This is some text that needs to be replaced with more </p>
-
-
-    <p><em>Dormbase</em> is an open-source dormitory database system that
-    is flexible and expandable. The Dormbase project provides a
-    dorm management system that can evolve overtime to suit the
-    changing needs of the various dorms and their residents.</p>
-
-    <p>This is some text that needs to be replaced with more </p>
-    
-    <p><em>Dormbase</em> is an open-source dormitory database system that
-    is flexible and expandable. The Dormbase project provides a
-    dorm management system that can evolve overtime to suit the
-    changing needs of the various dorms and their residents.</p>
-
-    <p>This is some text that needs to be replaced with more </p>
+<div id="main">
+  <div id="left">
+    <a href="{% url dormbase.movie.views.genre_list %}" id="media" class="feature">Media</a>
   </div>
-  <div id="team" class="span8 offset4 info-box">
-    <h1>The Team</h1>
-    <div id="team-photos">
-      <div class="photo">
-	<img src="/static/img/alex-large.jpg" alt="Alex Chernyakhovsky" width="100" height="125" />
-	Alex '14
-      </div>
-      <div class="photo">
-	<img src="/static/img/drew-large.jpg" alt="Drew Dennison" width="100" height="125" />
-	Drew '13
-      </div>
-      <div class="photo">
-	<img src="/static/img/luke-large.jpg" alt="Luke O'Malley" width="100" height="125" />
-	Luke '14
-      </div>
-      <div class="photo">
-	<img src="/static/img/cosmos-large.jpg" alt="Cosmos Darwin" width="100" height="125" />
-	Cosmos '15
-      </div>
-      <div class="photo">
-	<img src="/static/img/isaac-large.jpg" alt="Isaac Evans" width="100" height="125" />
-	Isaac '13
-      </div>
-    </div>
+  <div id="right">
+    <div id="movies" class="info-box">
+      <h1>Movies</h1>
 
-    <p><em>Dormbase</em> is an open-source dormitory database system that
-    is flexible and expandable. The Dormbase project provides a
-    dorm management system that can evolve overtime to suit the
-    changing needs of the various dorms and their residents.</p>
-  </div>
+      <p>Watch something new, or browse by genre.</p>
+      <h2>[new]</h2>
+      <div id="new-movies">
+	{% for movie in newAdditions %}
+	<div class="movie">
+	  <a href="{% url dormbase.movie.views.movie_detail movie.imdbId %}">
+	    <img src="{{movie.cover.get_thumbnail_url}}" alt="" />
+	    </a>
+	</div>
+	{% endfor %}
+      </div>
+	<h2>[genres]</h2>
+	<ul id="genres">
+	  {% for genre in genres %}
+	  <li><a href="{% url dormbase.movie.views.genre_get genreType=genre viewType="gallery" %}" >{{ genre }}</a></li>
+	  {% endfor %}
+	</ul>
 </div>
 
 {% endblock %}

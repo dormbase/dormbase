@@ -1,16 +1,41 @@
 {% extends "base.html" %}
 {% block classHome %}class="active"{% endblock %}
 {% block content %}
+<div id="main">
+  <div id="left">
+    <a href="{% url dormbase.menus.views.menus %}" id="menus" class="feature">Menus</a>
+  </div>
+  <div id="right">
+    <div id="menu" class="info-box">
+      <h1>Dining Menus</h1>
+      <p>Where would you like to eat?</p>
+      <img id="dorm-skyline" src="{{ STATIC_URL }}img/dorms-skyline.jpg" alt=""
+	   width="594px" height="45px" />
+      <div class="navbar">
+	<div class="navbar-inner dorms">
+	  <div class="container">
+	    <ul class="nav">   
+	      <li id="next"><a href="#">Next</a></li>
+	      <li id="simmons"><a href="#">Simmons</a></li>
+	      <li id="baker"><a href="#">Baker</a></li>
+	      <li id="mccormick"><a href="#">McCormick</a></li>
+	      <li id="maseeh"><a href="#">Maseeh</a></li>
+	    </ul>
+	  </div>
+	</div>
+	<h2>{{menu.day}}</h2>
+      </div>
+      {% for name,dorm in dorms.items %}
 
-{% for name,dorm in dorms.items %}
+      <h2>{{name}} - {{dorm.day}}</h2>
+      {% for meal in dorm.meals %}
+      <h3>{{ meal.name }}</h3>
+      {{ meal.description }}
 
-<h2>{{name}} - {{dorm.day}}</h2>
+      {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
 
-{% for meal in dorm.meals %}
-<h3>{{ meal.name }}</h3>
-{{ meal.description }}
-
-{% endfor %}
-{% endfor %}
-
-{% endblock %}
+    {% endblock %}
