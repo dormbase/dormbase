@@ -39,10 +39,10 @@ class Movie(models.Model):
     # Can link to multiple genres
     genres = models.ManyToManyField(Genre)
     mpaa = models.CharField(max_length=128, blank=True)
-    runtimes = models.CharField(max_length=3, blank=True)
+    runtimes = models.CharField(max_length=8, blank=True)
     cover = models.ForeignKey(Photo, null = True)
     # Mandatory
-    imdbId = models.CharField(max_length=2)
+    imdbId = models.CharField(max_length=24)
     director = models.TextField(blank=True)
     cast = models.TextField(blank=True)
 
@@ -66,7 +66,7 @@ class MovieForm(forms.ModelForm):
     MOVIES = []
     for m in Movie.objects.all():
         MOVIES.append((m.imdbId,m.title))
-        
+
     imdbId = forms.ChoiceField(choices=MOVIES)
 
     class Meta:

@@ -30,7 +30,7 @@ class Package(models.Model):
             ('F', 'Floor'))
 
     recipient = models.ForeignKey(Resident, null = True)
-    location = models.CharField(max_length=1, choices=BINS)
+    location = models.CharField(max_length=8, choices=BINS)
     perishable = models.BooleanField()
     date_recieved = models.DateField(auto_now_add = True)
     hidden = models.BooleanField(default = False)
