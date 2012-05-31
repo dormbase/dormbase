@@ -62,23 +62,28 @@ def menus(request):
     for (dorm, i) in halls:
         # Make the URL and the Feed
         make_url = 'http://www.cafebonappetit.com/rss/menu/' + i
-        raw_feed = feedparser.parse(make_url).entries[day]
-        # Here we need to use lxml to parse the summary
-        parser = html.fromstring(raw_feed.summary)
-        # Now convert the summary into a text-version
-        textversion = html.tostring(parser, method='text', encoding=unicode)
-        # Fix the terrible RSS using a state-,achine based parser,
-        # removing weird UTF-8 characters on the way
-        parsed_text = fix_bonapetit(textversion.replace(u'\xa0', ''))
-        # Convery the resulting dictionary into a form that we can
-        # send off to the template engine
-        reformatted = []
-        for (name, desc) in parsed_text.iteritems():
-            reformatted.append({'name': name, 'description': desc})
+
+        try:
+            raw_feed = feedparser.parse(make_url).entries[day]
+            # Here we need to use lxml to parse the summary
+            parser = html.fromstring(raw_feed.summary)
+            # Now convert the summary into a text-version
+            textversion = html.tostring(parser, method='text', encoding=unicode)
+            # Fix the terrible RSS using a state-machine based parser,
+            # removing weird UTF-8 characters on the way
+            parsed_text = fix_bonapetit(textversion.replace(u'\xa0', ''))
+            # Convery the resulting dictionary into a form that we can
+            # send off to the template engine
+            reformatted = []
+            for (name, desc) in parsed_text.iteritems():
+                reformatted.append({'name': name, 'description': desc})
         
-        # Add this dorm food
-        dorms_menus[dorm] = {'day': raw_feed.title_detail.value, 
-                             'meals': reformatted}
+            # Add this dorm food
+                dorms_menus[dorm] = {'day': raw_feed.title_detail.value, 
+                                     'meals': reformatted}
+        except:
+            dorms_menus[dorm] = {'day': 'This dining hall is closed today.',
+                                 'meals': [],}
 
     payload = {'dorms': dorms_menus}
 

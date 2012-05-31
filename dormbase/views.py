@@ -24,10 +24,7 @@ from django.template import RequestContext
 import feedparser
 
 def home(request):
-    # should get cached and refreshed with a cron job
-    d = feedparser.parse('http://www.cafebonappetit.com/rss/menu/402')
-    payload = {'menu': d.entries[0].description}
-    return render_to_response('index.html', payload, context_instance = RequestContext(request))
+    return render_to_response('index.html', context_instance = RequestContext(request))
 
 def coming_soon(request, title):
     payload = {'title': title}
