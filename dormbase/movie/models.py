@@ -63,12 +63,14 @@ class Movie(models.Model):
     
 
 class MovieForm(forms.ModelForm):
-    MOVIES = []
-    for m in Movie.objects.all():
-        MOVIES.append((m.imdbId,m.title))
-
-    imdbId = forms.ChoiceField(choices=MOVIES)
-
     class Meta:
         model = Movie
         fields = ('imdbId', 'checkedOutBy')
+
+    def __init__(self, *args, **kwargs):
+        super(MovieForm, self).__init__(*args, **kwargs)
+        MOVIES = []
+        for m in Movie.objects.all():
+            MOVIES.append((m.imdbId,m.title))
+        
+        imdbId = forms.ChoiceField(choices=MOVIES)
