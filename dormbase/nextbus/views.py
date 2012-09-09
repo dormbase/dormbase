@@ -25,30 +25,37 @@ import datetime
 # http://www.nextbus.com/xmlFeedDocs/NextBusXMLFeed.pdf
 
 def nextbus(request):
-    baseNextBusURL = 'http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&'
-    agency = 'mit'
-    stop = 'simmhl'
-    
-    now = datetime.datetime.now()
-    tech_start = now.replace(hour=6,  minute=15, second=0) 
-    tech_end = now.replace(hour=19,  minute=10, second=0) 
+    try:
+        # Nextbus api: http://www.nextbus.com/xmlFeedDocs/NextBusXMLFeed.pdf
+        baseURL = 'http://webservices.nextbus.com/service/publicXMLFeed?command=predictions'
+        agency = 'mit'
+        stop = 'simmhl'
 
-    if  now > tech_start and now < tech_end:
-        route = 'tech'
-    else:
-        route = 'saferidecambwest'
+        techURL = '{}&a={}&r={}&s={}'.format(baseURL, agency, 'tech', stop)
+        saferideURL = '{}&a={}&r={}&s={}'.format(baseURL, agency, 'saferidecambwest', stop)
 
-    url = baseNextBusURL + 'a=' + agency + '&r=' + route + '&s=' + stop
+        techTimes = etree.parse(techURL).findall('predictions/direction/prediction')
+        saferideTimes = etree.parse(saferideURL).findall('predictions/direction/prediction')
 
-    data = lxml.etree.parse(url)
-    next_times = [prediction.get('minutes') for prediction in data.findall('.//predictions/direction/prediction')]
+        # If techTimes is empty, then it isn't running, so check Saferide
+        if techTimes:
+            times = [i.get('minutes') for i in techTimes]
+            title = 'Tech Shuttle'
+        elif saferideTimes:
+            times =  [i.get('minutes') for i in saferideTimes]
+            title = 'Saferide Cambridge West'
+        else:
+            # Fake times for testing
+            times = ['NA', 'NA', 'NA']
+            title = 'Unavailable'
 
-    if len(next_times) == 0:
-        next_times = ['5', '12', '21']
+    except:
+        times = ['NA', 'NA', 'NA']
+        title = 'Unavailable'
         
-    # Only the next 3 shuttles are relevant 
-    next_times = next_times[0:3]
-
-    payload = {'times': next_times}
+    out = {'title': title,
+           'next': times[0],
+           'second': times[1],
+           'third': times[2]}
     
-    return render_to_response('nextbus/nextbus.html', payload, context_instance = RequestContext(request))
+    return HttpResponse(json.dumps(out), mimetype="application/json")
