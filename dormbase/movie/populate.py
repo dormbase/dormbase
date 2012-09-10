@@ -51,7 +51,7 @@ def import_all_genres():
                  'History', 'Horror', 'Music', 'Musical',
                  'Mystery', 'News', 'Reality-TV', 'Romance',
                  'Sci-Fi', 'Sport', 'Talk-Show', 'Thriller',
-                 'War', 'Western', 'New', 'All'] # List was taken from IMDB genre page. 
+                 'War', 'Western', 'Short', 'New', 'All'] # List was taken from IMDB genre page. 
 
     for i in genre_list:
         g = Genre(name = i)
