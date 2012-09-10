@@ -118,7 +118,11 @@ def import_movie(movie_id):
               )
 
     m.save()
-    gs = [Genre.objects.get(name = g) for g in data['genres']]
+    try:
+        gs = [Genre.objects.get(name = g) for g in data['genres']]
+    except Exception as e:
+        gs = []
+        print "No genre found for " + g
     gs.append(Genre.objects.get(name = 'New'))
     gs.append(Genre.objects.get(name = 'All'))
     m.genres = gs
