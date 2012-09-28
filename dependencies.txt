@@ -1,0 +1,22 @@
+dependencies of the dormbase system
+
+--------------------------------------------------------------------------------
+south                  http://south.aeracode.org/
+django-photologue      https://github.com/jdriscoll/django-photologue
+django-haystack        http://haystacksearch.org/
+pysolr                 https://github.com/toastdriven/pysolr
+feedparser             http://code.google.com/p/feedparser/
+lxml                   http://lxml.de/
+
+    Special Instructions
+    > easy_install --allow-hosts=lxml.de,*.python.org lxml
+
+    If this doens't work:
+    > easy_install --allow-hosts=lxml.de,*.python.org lxml==2.3
+        (replace "2.3" with the latest version that works)
+        (also, try running as administrator; see lxml.de for more help)
+
+
+    Additional Hint for PIL (a requirement of django-photologue):
+      If you are running 32-bit Python on 64-bit Windows, the PIL binary
+      must be 32-bit!

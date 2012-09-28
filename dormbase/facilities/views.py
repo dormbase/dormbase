@@ -17,17 +17,17 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys, os
-sys.path.append('../')
-os.environ["DJANGO_SETTINGS_MODULE"] = 'dormbase.settings'
-
-from dormbase.core.populate import *
-from dormbase.package.populate import *
-from dormbase.movie.populate import *
-
-def import_test_database():
-    import_test_directory()
-    import_test_packages()
-    import_test_movies()
-
-import_test_database()
+from django.conf import settings
+from django.shortcuts import redirect
+        
+def report(request):
+    # Base URL
+    url = 'https://insidemit-apps.mit.edu/apps/building_services/CreateResidRepairOrder.action?sapSystemId=PS1'
+    
+    # Auto-Fill Building Number
+    if hasattr(settings, 'BUILDING'):
+        url += '&pageInfo.bldg1=' + settings.BUILDING + '&pageInfo.contactInfo.bldg=' + settings.BUILDING
+    
+    # TODO: fill in user's room, phone number, check if they actually live here
+    
+    return redirect(url)

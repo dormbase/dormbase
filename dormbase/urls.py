@@ -59,6 +59,9 @@ urlpatterns = patterns('',
 
     # Laundry
     (r'^laundry/', include('laundry.urls')),
+    
+    # Facilities
+    (r'^facilities/', include('facilities.urls')),
 
     # Resources
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
