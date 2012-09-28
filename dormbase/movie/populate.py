@@ -51,7 +51,7 @@ def import_all_genres():
                  'History', 'Horror', 'Music', 'Musical',
                  'Mystery', 'News', 'Reality-TV', 'Romance',
                  'Sci-Fi', 'Sport', 'Talk-Show', 'Thriller',
-                 'War', 'Western', 'New', 'All'] # List was taken from IMDB genre page. 
+                 'War', 'Western', 'Short', 'New', 'All'] # List was taken from IMDB genre page. 
 
     for i in genre_list:
         g = Genre(name = i)
@@ -118,7 +118,11 @@ def import_movie(movie_id):
               )
 
     m.save()
-    gs = [Genre.objects.get(name = g) for g in data['genres']]
+    try:
+        gs = [Genre.objects.get(name = g) for g in data['genres']]
+    except Exception as e:
+        gs = []
+        print "No genre found for " + g
     gs.append(Genre.objects.get(name = 'New'))
     gs.append(Genre.objects.get(name = 'All'))
     m.genres = gs
