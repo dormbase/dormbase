@@ -9,6 +9,10 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+DORM_SHORTNAME = 'Simmons'
+DORM_LONGNAME = 'Simmons Hall'
+BUILDING = 'W79'
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -165,4 +169,3 @@ HAYSTACK_SEARCH_ENGINE = 'solr'
 HAYSTACK_SOLR_URL = 'http://127.0.0.1:8088/solr'
 
 PHOTOLOGUE_MAXBLOCK = 1024 * 1024
-

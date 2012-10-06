@@ -74,7 +74,7 @@
 		  <li><a href="{% url dormbase.laundry.views.laundry %}">Laundry View</a></li>
 		  <li><a href="{% url dormbase.views.coming_soon title='Rooming' %}">Rooming</a></li>
 		  <li><a href="{% url dormbase.views.coming_soon title='Plans' %}">Floor Plans</a></li>
-		  <li><a href="{% url dormbase.views.coming_soon title='Report' %}">Report a Problem</a></li>
+		  <li><a href="{% url dormbase.facilities.views.report %}">Report a Problem</a></li>
 		  <li class="divider"></li>
 		  <li><a href="{% url dormbase.views.coming_soon title='Reservations' %}">Reservations</a></li>
 		</ul>
@@ -94,7 +94,7 @@
     
     <footer>
       <hr>
-      <p class="pull-left">Want to help out? Email us at dormbase@mit.edu.</p>
+      <p class="pull-left">Want to help out? Email us at <a href="mailto:dormbase@mit.edu">dormbase@mit.edu</a>.</p>
       <img class="pull-right" id="footer-icon"
       src="{{STATIC_URL }}img/puzzleicon.png" alt="dormbase icon"
       width="40" height="40" />

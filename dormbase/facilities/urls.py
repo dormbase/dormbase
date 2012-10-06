@@ -17,17 +17,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys, os
-sys.path.append('../')
-os.environ["DJANGO_SETTINGS_MODULE"] = 'dormbase.settings'
+from django.conf.urls.defaults import patterns, url
 
-from dormbase.core.populate import *
-from dormbase.package.populate import *
-from dormbase.movie.populate import *
-
-def import_test_database():
-    import_test_directory()
-    import_test_packages()
-    import_test_movies()
-
-import_test_database()
+urlpatterns = patterns('dormbase.facilities.views',
+    url(r'^report$', 'report'),
+)
