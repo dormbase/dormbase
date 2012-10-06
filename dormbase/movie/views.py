@@ -67,10 +67,7 @@ def genre_get(request, genreType, viewType):
     genresFilter = Genre.objects.get(name = genreType)
     movies = Movie.objects.filter(genres = genresFilter).order_by('canonicalTitle')
 
-    if viewType == 'gallery':
-        viewType = True
-    else:
-        viewType = False
+    viewType = viewType == 'gallery'
 
     payload = {'genre' : genreType, 'viewType': viewType, 'movies': movies}
     return render_to_response('movie/genre.html', payload, context_instance=RequestContext(request))
