@@ -129,7 +129,17 @@ def import_movie(movie_id):
     m.save()
 
 def import_test_movies():
-    f = open('movie/test_movies.txt') #Placing this before genre import prevents
+    choice = raw_input('\nChoose (f)ull or (s)hort movie database: ').lower()
+    filext = 'short'
+    
+    if choice == 'f' or choice == 'full':
+        filext = 'full'
+    elif choice == 's' or choice == 'short':
+        filext = 'short'
+    else:
+        print 'Invalid input. Downloading SHORT.'
+        
+    f = open('movie/test_movies_' + filext + '.txt') #Placing this before genre import prevents
                             #genres being intialized multiple times if
                             #user enters a bad file name.
 
