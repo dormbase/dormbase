@@ -1,0 +1,9 @@
+yolk
+django==1.4.2
+django-photologue
+django-haystack
+South==0.7.6
+pysolr
+feedparser
+lxml
+

@@ -1,0 +1,5 @@
+#!/bin/bash
+source dormbase-env/bin/activate
+cd dormbase/
+python manage.py runserver
+deactivate
