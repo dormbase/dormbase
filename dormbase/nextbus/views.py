@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.shortcuts import render_to_response, RequestContext
-import lxml.etree
+from lxml import etree
 import datetime
 
 # Info on Nextbus api:
@@ -29,7 +29,7 @@ def nextbus(request):
         # Nextbus api: http://www.nextbus.com/xmlFeedDocs/NextBusXMLFeed.pdf
         baseURL = 'http://webservices.nextbus.com/service/publicXMLFeed?command=predictions'
         agency = 'mit'
-        stop = 'simmhl'
+        stop = 'simmhl'	#This should be a variable with proper dorm
 
         techURL = '{}&a={}&r={}&s={}'.format(baseURL, agency, 'tech', stop)
         saferideURL = '{}&a={}&r={}&s={}'.format(baseURL, agency, 'saferidecambwest', stop)
@@ -39,23 +39,27 @@ def nextbus(request):
 
         # If techTimes is empty, then it isn't running, so check Saferide
         if techTimes:
-            times = [i.get('minutes') for i in techTimes]
+            times = [i.get('minutes')+" "+getSuffix(i.get('minutes')) for i in techTimes]
             title = 'Tech Shuttle'
+            stop_name = etree.parse(techURL).Element("predictions").get("stopTitle")
         elif saferideTimes:
-            times =  [i.get('minutes') for i in saferideTimes]
+            times =  [i.get('minutes')+" "+getSuffix(i.get('minutes')) for i in saferideTimes]
             title = 'Saferide Cambridge West'
         else:
-            # Fake times for testing
-            times = ['NA', 'NA', 'NA']
-            title = 'Unavailable'
+            times = None
+            title = 'Shuttle Unavailable'
 
-    except:
-        times = ['NA', 'NA', 'NA']
-        title = 'Unavailable'
-        
-    out = {'title': title,
-           'next': times[0],
-           'second': times[1],
-           'third': times[2]}
-    
-    return HttpResponse(json.dumps(out), mimetype="application/json")
+    except Exception,e:
+        times = [e,'','']   #Shouldn't happen but an error output is nice
+        title = 'Shuttle Tracker Unavailable'
+
+    nextbus_content = {'title':title,'times':[times[0],times[1],times[2]]}
+
+
+    return render_to_response('nextbus/nextbus.html',nextbus_content,context_instance = RequestContext(request))
+
+def getSuffix(time): #Because 1 mins just isn't going to cut it
+    if(time == 1):
+        return "min"
+    else:
+        return "mins"

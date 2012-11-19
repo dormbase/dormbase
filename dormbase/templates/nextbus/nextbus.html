@@ -3,17 +3,20 @@
 {% block content %}
 <div id="main">
   <div id="left">
-    <a href="{% url dormbase.nextbus.views.nextbus %}" id="shuttles-old" class="feature">Tech Shuttle</a>
+    <a href="{% url dormbase.nextbus.views.nextbus %}" id="shuttles" class="feature">Tech Shuttle</a>
   </div>
   <div id="right">
     <div id="menu" class="info-box">
-      <h1>Tech Shuttle</h1>
-      <p>For when you're feeling lazy</p>
+      <h1>{{title}}</h1>
+      <p>For when you need a set of wheels</p>
       {% for time in times  %}
-      <h1>{{time}} mins</h1>
+      <h1>{{time}}</h1>
       {% endfor %}
     </div>
   </div>
 </div>
+<script type="application/javascript">
+  setTimeout("window.location = window.location",60000);    //Update page
+</script>
 
 {% endblock %}
