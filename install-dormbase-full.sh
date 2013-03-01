@@ -1,12 +1,23 @@
 #!/bin/bash
+
+set -ef -o pipefail
+
 git clone https://github.com/tboning/dormbase.git
-cd /dormbase
+cd dormbase
 git submodule init
 git submodule update
+#
+## Initialize the vEnv
+sudo pip install virtualenv
+virtualenv  --prompt='(Dormbase) ' --python=python2.7 dormbase-env
+source dormbase-env/bin/activate
+# Needs requirement.txt in the dormbase github.
+pip install -r requirement.txt
+
 # Initialize the database. This should be cleaned up.
-cd dormbase
-manage.py syncdb --migrate
-manage.py plinit
+pushd dormbase
+./manage.py syncdb --migrate
+./manage.py plinit <<EOF
 100
 100
 yes
@@ -25,11 +36,7 @@ no
 yes
 yes
 no
-cd ..
-# Initialize the vEnv
-sudo pip virtualenv
-virtualenv  --prompt='(Dormbase) ' --python=python2.7 dormbase-env
-source dormbase-env/bin/activate
-# Needs requirement.txt in the dormbase github.
-pip install -r requirement.txt
+EOF
+popd
+
 deactivate
