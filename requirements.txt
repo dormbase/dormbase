@@ -1,5 +1,5 @@
 yolk
-django==1.4.2
+django>=1.4,<1.5
 django-photologue
 django-haystack
 South==0.7.6
