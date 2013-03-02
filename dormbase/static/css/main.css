@@ -3862,3 +3862,8 @@ h6 {
 #movies a.heading {
   color: #038c3f;
 }
+.user {
+    padding-left: 10px;
+    color: #999999;
+    line-height: 35px;
+}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="content-main">
+    <form method="post" action="{% url django.contrib.auth.views.login %}">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+
+        <input type="submit" value="login" />
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+</div>
+
+{% endblock %}

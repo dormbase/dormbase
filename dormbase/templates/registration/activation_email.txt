@@ -1,0 +1,12 @@
+Hi there,
+
+Thanks for signing up with Dormbase for {{ site.domain }}.
+
+To activate your account, visit:
+    <https://{{ site.domain }}{% url registration_activate activation_key %}>
+
+If this wasn't you, just ignore this mail.
+
+Cheers,
+
+Dormbase Email Robot
