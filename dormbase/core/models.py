@@ -27,7 +27,6 @@ class AbstractRoom(models.Model):
     """
     number = models.CharField(max_length = 100)
     metaInformationForLocating = models.CharField(max_length = 1000, blank = True)
-    phone = models.CharField(max_length = 20)
 
     def __unicode__(self):
         return self.number
