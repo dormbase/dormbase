@@ -61,6 +61,11 @@
 	      </li>
 	      <li {% block classDesk %}{% endblock %}><a href="{% url dormbase.desk.views.dashboard %}">Desk</a></li>
 	    </ul>
+            {% if user.email %}
+                <span class="user pull-right">
+                    <span class="username">{{ user.email }}</span> | <a href="{% url django.contrib.auth.views.logout %}">Log out</a>
+                </span>
+            {% endif %}
 	    <form class="navbar-search pull-right" action="{% url dormbase.views.home %}search/" method="get">
 	      <input type="text" class="search-query" placeholder="Search" name="q">
 	    </form>

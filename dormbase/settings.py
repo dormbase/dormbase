@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'registration',
     'dormbase',
     'haystack',
     'photologue',
@@ -164,8 +165,13 @@ LOGGING = {
     }
 }
 
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 HAYSTACK_SITECONF = 'dormbase.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'solr'
 HAYSTACK_SOLR_URL = 'http://127.0.0.1:8088/solr'
 
 PHOTOLOGUE_MAXBLOCK = 1024 * 1024
+
+ACCOUNT_ACTIVATION_DAYS = 7

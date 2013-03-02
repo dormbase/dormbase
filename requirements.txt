@@ -7,3 +7,4 @@ feedparser
 lxml
 IMDbPY
 whoosh
+django-registration
