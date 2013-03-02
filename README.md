@@ -7,13 +7,17 @@
   https://help.github.com/categories/56/articles
 * Visit https://github.com/dormbase/dormbase
 * Click "fork" at the top right
-* To download the code, run `git@github.com:USERNAME/dormbase.git` on your
+* To download the code, run `git clone git@github.com:USERNAME/dormbase.git` on your
   laptop (and it will download the code to a directory called `dormbase`)
 * If you've never used a Github fork before, read
   https://help.github.com/categories/63/articles
 
 # Set up your dev environment
 * Make sure you have python-dev (`sudo apt-get install python-dev`)
+* RECOMMENDED: Create a python virtualenv environment, by running
+  `virtualenv DIR`, and then activate it by running `source
+  DIR/bin/activate`. If you do this, do not run sudo in the following
+  commands.
 * Install all packages in `requirements.txt`
   * Install each one manually (`sudo pip install packagename`)
   * Or install all at once (`sudo pip install -r requirements.txt`)
