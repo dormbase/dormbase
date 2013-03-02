@@ -10,13 +10,9 @@
     <div id="menu" class="info-box">
       <h1>Directory Search</h1>
       <p>For when you need info fast</p>
-
       <ul class="nav nav-tabs">
 	<li class="active">
 	  <a href="#normal" data-toggle="tab">Search</a>
-	</li>
-	<li>
-	  <a href="#normal" data-toggle="tab">Advanced Search</a>
 	</li>
       </ul>
       <form id="searchform" class="form-inline">
@@ -75,13 +71,6 @@
   // prevent enter key from doing a POST
   $("#searchform").submit(function() { search(); return false; });
 
-  $("#firstname").keyup(function() { search(); });
-  $("#lastname").keyup(function() { search(); });
-  $("#title").keyup(function() { search(); });
-  $("#username").keyup(function() { search(); });
-  $("#room").keyup(function() { search(); });
-  $("#year").keyup(function() { search(); });
-  $("#term").keyup(function() { search(); });
 </script>
 
 {% endblock %}
