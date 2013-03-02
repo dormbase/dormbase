@@ -25,7 +25,3 @@ import feedparser
 
 def home(request):
     return render_to_response('index.html', context_instance = RequestContext(request))
-
-def coming_soon(request, title):
-    payload = {'title': title}
-    return render_to_response('comingSoon.html', payload, context_instance = RequestContext(request))

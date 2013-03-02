@@ -45,22 +45,6 @@
 		</a>
 		<ul class="dropdown-menu">
 		  <li><a href="{% url dormbase.movie.views.genre_list %}">Movies</a></li>
-		  <li><a href="{% url dormbase.views.coming_soon title='Games' %}">Games</a></li>
-		  <li><a href="{% url dormbase.views.coming_soon title='Library' %}">Library</a></li>
-		</ul>
-	      </li>
-	      <li class="dropdown {% block classGovernment %}{% endblock %}">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="">
-		  Government
-		  <b class="caret"></b>
-		</a>
-		<ul class="dropdown-menu">
-		  <li><a href="{% url dormbase.views.coming_soon title='Proposals' %}">Proposals</a></li>
-		  <li><a href="{% url dormbase.views.coming_soon title='Meetings' %}">Meetings</a></li>
-		  <li><a href="{% url dormbase.views.coming_soon title='Finances' %}">Finances</a></li>
-		  <li><a href="{% url dormbase.views.coming_soon title='Polls' %}">Polls</a></li>
-		  <li class="divider"></li>
-		  <li><a href="{% url dormbase.views.coming_soon title='Reimbursement' %}">Reimbursement</a></li>
 		</ul>
 	      </li>
 	      <li class="dropdown {% block classFacilities %}{% endblock %}">
@@ -72,11 +56,7 @@
 		  <li><a href="{% url dormbase.menus.views.menus %}">Dining</a></li>
 		  <li><a href="{% url dormbase.nextbus.views.nextbus %}">Shuttle</a></li>
 		  <li><a href="{% url dormbase.laundry.views.laundry %}">Laundry View</a></li>
-		  <li><a href="{% url dormbase.views.coming_soon title='Rooming' %}">Rooming</a></li>
-		  <li><a href="{% url dormbase.views.coming_soon title='Plans' %}">Floor Plans</a></li>
 		  <li><a href="{% url dormbase.facilities.views.report %}">Report a Problem</a></li>
-		  <li class="divider"></li>
-		  <li><a href="{% url dormbase.views.coming_soon title='Reservations' %}">Reservations</a></li>
 		</ul>
 	      </li>
 	      <li {% block classDesk %}{% endblock %}><a href="{% url dormbase.desk.views.dashboard %}">Desk</a></li>
