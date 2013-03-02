@@ -7,4 +7,4 @@ pysolr
 feedparser
 lxml
 IMDbPY
-
+whoosh
