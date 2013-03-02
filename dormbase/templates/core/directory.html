@@ -71,6 +71,9 @@
   // prevent enter key from doing a POST
   $("#searchform").submit(function() { search(); return false; });
 
+  // live search whenever the field changes
+  $("#term").keyup(function() { search(); });
+
 </script>
 
 {% endblock %}
