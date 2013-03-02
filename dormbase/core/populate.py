@@ -30,7 +30,7 @@ def import_test_directory():
     rooms = []    
     MAX_ROOM = 350
     for i in range(0, MAX_ROOM):
-        r = Room(number = str(i), phone = str(random.randint(1111111111, 9999999999)))
+        r = Room(number = str(i))
         r.save()
         rooms.extend([r])
 

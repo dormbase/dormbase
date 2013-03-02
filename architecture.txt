@@ -18,7 +18,6 @@ Directory System
 	room number
 	room meta-information-for-finding (Tower, Entry, etc)
 	GRT section
-	phone
 	
 search by any of these fields
 
