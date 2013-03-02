@@ -21,6 +21,7 @@ from django.shortcuts import render_to_response
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
+from django.core.cache import cache
 import feedparser
 import datetime
 import lxml.html as html
@@ -49,43 +50,49 @@ def fix_bonapetit(thestr):
     return food
         
 def menus(request):
-    halls = [('Baker', '399'),
-             ('Maseeh', '398'),
-             ('McCormick', '400'),
-             ('Next', '401'),
-             ('Simmons', '402'),
-             ]
+    cachedmenus = cache.get('menus')
+    if  cachedmenus == None:
+        halls = [('Baker', '399'),
+                 ('Maseeh', '398'),
+                 ('McCormick', '400'),
+                 ('Next', '401'),
+                 ('Simmons', '402'),
+                 ]
     
-    dorms_menus = {}
-    day = datetime.datetime.now().weekday()
+        dorms_menus = {}
+        day = datetime.datetime.now().weekday()
 
-    for (dorm, i) in halls:
-        # Make the URL and the Feed
-        make_url = 'http://www.cafebonappetit.com/rss/menu/' + i
+        for (dorm, i) in halls:
+            # Make the URL and the Feed
+            make_url = 'http://www.cafebonappetit.com/rss/menu/' + i
 
-        try:
-            raw_feed = feedparser.parse(make_url).entries[day]
-            # Here we need to use lxml to parse the summary
-            parser = html.fromstring(raw_feed.summary)
-            # Now convert the summary into a text-version
-            textversion = html.tostring(parser, method='text', encoding=unicode)
-            # Fix the terrible RSS using a state-machine based parser,
-            # removing weird UTF-8 characters on the way
-            parsed_text = fix_bonapetit(textversion.replace(u'\xa0', ''))
-            # Convery the resulting dictionary into a form that we can
-            # send off to the template engine
-            reformatted = []
-            for (name, desc) in parsed_text.iteritems():
-                reformatted.append({'name': name, 'description': desc})
+            try:
+                raw_feed = feedparser.parse(make_url).entries[day]
+                # Here we need to use lxml to parse the summary
+                parser = html.fromstring(raw_feed.summary)
+                # Now convert the summary into a text-version
+                textversion = html.tostring(parser, method='text', encoding=unicode)
+                # Fix the terrible RSS using a state-machine based parser,
+                # removing weird UTF-8 characters on the way
+                parsed_text = fix_bonapetit(textversion.replace(u'\xa0', ''))
+                # Convery the resulting dictionary into a form that we can
+                # send off to the template engine
+                reformatted = []
+                for (name, desc) in parsed_text.iteritems():
+                    reformatted.append({'name': name, 'description': desc})
         
-            # Add this dorm food
-                dorms_menus[dorm] = {'day': raw_feed.title_detail.value, 
-                                     'meals': reformatted}
-        except:
-            dorms_menus[dorm] = {'day': 'This dining hall is closed today.',
-                                 'meals': [],}
+                # Add this dorm food
+                    dorms_menus[dorm] = {'day': raw_feed.title_detail.value, 
+                                         'meals': reformatted}
+            except:
+                dorms_menus[dorm] = {'day': 'This dining hall is closed today.',
+                                     'meals': [],}
 
-    payload = {'dorms': dorms_menus}
+        cache.set('menus',dorms_menus,3600) #Cache must be regenerated every hour
+        payload = {'dorms': dorms_menus}
+
+    else:
+        payload = {'dorms':  cachedmenus}
 
     return render_to_response('menus/menus.html', payload, 
                               context_instance = RequestContext(request))
