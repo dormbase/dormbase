@@ -20,10 +20,8 @@
 	  <h3>Guest Sign-in</h3>
 	  <hr>
 	  <form class="form-inline">
-	    <input type="text" class="input span2" placeholder="Firstname">
-	    <input type="text" class="input span2" placeholder="Lastname">
-	    <label>&nbsp or &nbsp</label>
-	    <input type="text" class="input span4" placeholder="MIT Username">
+	    {% csrf_token %}
+	    {{guestForm}}
 	    <button type="submit" class="btn btn-primary btn-small">Sign-in</button>
 	  </form>
 	</div>

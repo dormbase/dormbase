@@ -1,0 +1,21 @@
+<span class="div" data-value="{{ choice.pk }}">
+  <div class="name">
+    {{ choice.fullname }} 
+    {% if choice.athena %}
+        ({{ choice.athena }})
+    {% endif %}
+  </div>
+    {% if choice.date_start and choice.date_end %}
+  <div class="date">
+        {{ choice.date_start }} - {{ choice.date_end }}
+  </div>
+    {% elif choice.date_start %}
+  <div class="date">
+        Starting {{ choice.date_start }}
+  </div>
+    {% elif choice.date_end %}
+  <div class="date">
+        Until {{ choice.date_end }}
+  </div>
+    {% endif %}
+</span>
