@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from django import forms
 from django.shortcuts import render_to_response
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
@@ -24,11 +25,24 @@ from django.template import RequestContext
 from dormbase.package.models import PackageForm
 from dormbase.movie.models import MovieForm
 from dormbase.core.models import Resident
+from dormbase.personal.models import Guest
+import autocomplete_light
+autocomplete_light.autodiscover()
+
+from . import autocomplete_light_registry
+
+class GuestSigninForm(forms.Form):
+    guest = forms.ModelChoiceField(
+        Guest.objects.all(),
+        widget=autocomplete_light.ChoiceWidget(
+            "GuestSigninAutocomplete",
+            attrs={'placeholder': 'Username or full name'}))
 
 def dashboard(request):
     pf = PackageForm()
     mf = MovieForm()
     payload = {'packageForm': pf, 
-               'movieForm': mf,}
+               'movieForm': mf,
+               'guestForm': GuestSigninForm()}
 
     return render_to_response('desk/dashboard.html', payload, context_instance = RequestContext(request))

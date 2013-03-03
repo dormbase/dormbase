@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'haystack',
     'photologue',
     'south',
+    'autocomplete_light',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'core',

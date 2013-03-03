@@ -1,4 +1,5 @@
 django>=1.4,<1.5
+django-autocomplete-light
 django-photologue
 django-haystack
 South==0.7.6
