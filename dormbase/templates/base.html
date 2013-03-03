@@ -39,37 +39,37 @@
 	      <li {% block classDirectory %}{% endblock %}><a href="{% url dormbase.core.views.directory %}">Directory</a></li>
 	      <li {% block classPersonal %}{% endblock %}><a href="{% url dormbase.personal.views.profile %}">Personal</a></li>
 	      <li class="dropdown {% block classMediaContent %}{% endblock %}">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="">
-		  Media
-		  <b class="caret"></b>
-		</a>
-		<ul class="dropdown-menu">
-		  <li><a href="{% url dormbase.movie.views.genre_list %}">Movies</a></li>
-		</ul>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+              Media
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url dormbase.movie.views.genre_list %}">Movies</a></li>
+            </ul>
 	      </li>
 	      <li class="dropdown {% block classFacilities %}{% endblock %}">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="">
-		  Facilities
-		  <b class="caret"></b>
-		</a>
-		<ul class="dropdown-menu">
-		  <li><a href="{% url dormbase.menus.views.menus %}">Dining</a></li>
-		  <li><a href="{% url dormbase.nextbus.views.nextbus %}">Shuttle</a></li>
-		  <li><a href="{% url dormbase.laundry.views.laundry %}">Laundry View</a></li>
-		  <li><a href="{% url dormbase.facilities.views.report %}">Report a Problem</a></li>
-		</ul>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+              Facilities
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url dormbase.menus.views.menus %}">Dining</a></li>
+              <li><a href="{% url dormbase.nextbus.views.nextbus %}">Shuttle</a></li>
+              <li><a href="{% url dormbase.laundry.views.laundry %}">Laundry View</a></li>
+              <li><a href="{% url dormbase.facilities.views.report %}">Report a Problem</a></li>
+            </ul>
 	      </li>
 	      <li {% block classDesk %}{% endblock %}><a href="{% url dormbase.desk.views.dashboard %}">Desk</a></li>
 	    </ul>
-            {% if user.email %}
-                <span class="user pull-right">
-                    <span class="username">{{ user.email }}</span> | <a href="{% url django.contrib.auth.views.logout %}">Log out</a>
-                </span>
-            {% else %}
-                <span class="user pull-right">
-                    <a href="{% url django.contrib.auth.views.login %}">Log in</a>
-                </span>
-            {% endif %}
+        {% if user.email %}
+          <span class="user pull-right">
+            <span class="username">{{ user.email }}</span> | <a href="{% url django.contrib.auth.views.logout %}">Log out</a>
+          </span>
+        {% else %}
+          <span class="user pull-right">
+            <a href="{% url django.contrib.auth.views.login %}">Log in</a>
+          </span>
+        {% endif %}
 	    <form class="navbar-search pull-right" action="{% url dormbase.views.home %}search/" method="get">
 	      <input type="text" class="search-query" placeholder="Search" name="q">
 	    </form>
