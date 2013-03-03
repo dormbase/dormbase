@@ -1,66 +1,37 @@
-# Create accounts
-* You need a Github account for making pull requests
-* You need a Launchpad account for bug tracking
+# Welcome to Dormbase. Dormbase is a web-based system that provides MIT 
+dormitories with the tools and services they need for daily operation. It is 
+an open source software project that was started by Simmons Tech in response 
+to their and the resident's need for reliable, modern, and user-friendly 
+online services. Dormbase means a consistent user experience across all of 
+MIT's dorms, accessible to residents, desk workers, and administration. It is 
+a community project that solves a community problem. 
 
-# Fork Dormbase
-* If you've never used Github before, read
-  https://help.github.com/categories/56/articles
-* Visit https://github.com/dormbase/dormbase
-* Click "fork" at the top right
-* To download the code, run `git clone git@github.com:USERNAME/dormbase.git` on your
-  laptop (and it will download the code to a directory called `dormbase`)
-* If you've never used a Github fork before, read
-  https://help.github.com/categories/63/articles
+# Learn About GitHub
+* If you've never used GitHub before, read about [how to authenticate](https://help.github.com/categories/56/articles)
+* If you've  never used a GitHub fork before, read about [pull requests](https://help.github.com/categories/63/articles)
 
-# Set up your dev environment
-* Make sure you have python-dev (`sudo apt-get install python-dev`)
-* RECOMMENDED: Create a python virtualenv environment, by running
-  `virtualenv DIR`, and then activate it by running `source
-  DIR/bin/activate`. If you do this, do not run sudo in the following
-  commands.
-* Install all packages in `requirements.txt`
-  * Install each one manually (`sudo pip install packagename`)
-  * Or install all at once (`sudo pip install -r requirements.txt`)
-* cd into `dormbase` before running any of the following commands
-* Create and populate database tables:
-  * `python manage.py syncdb` (you can answer no to the superuser prompt)
-  * `python manage.py migrate`
-  * `python manage.py shell`, then (inside the shell) `import populate`
-* Set up photologue:
-  * `python manage.py plinit` and use sizes 130x175 for thumbnails, 323x475 for
-    display (as width x height, answers to other questions don't matter)
+# Get Started * RECOMMENDED: Create a python virtualenv environment, by 
+running `virtualenv DIR`, and then activate it by running `source DIR/bin/activate`.
+If you do this, do not run sudo in the following commands. 
+* [Install the dependencies](https://github.com/dormbase/dormbase/wiki/Dependencies)
+* Finish following the [Dev Server Setup](https://github.com/dormbase/dormbase/wiki/Dev-Server-Setup) - 
+  and take the shortcut, if you can!
 * Run the server:
-  * `python manage.py runserver`
-  * Visit http://localhost:8000/ in your web browser
+  * `python manage.py runserver` 
+  * Visit http://localhost:8000/ in your web browser 
 
 # Setting up search locally
 You should almost certainly skip this step. If for some reason you need search
-to work locally, set up Whoosh.
+to work locally, set up Whoosh. 
 
-* Edit `dormbase/settings.py` to comment out:
+* Edit `dormbase/local_settings.py` to comment out: 
 
-~~~
-#HAYSTACK_SEARCH_ENGINE = 'solr'
-#HAYSTACK_SOLR_URL = 'http://127.0.0.1:8088/solr'
-~~~
-
-And right below, add these two lines:
-
-~~~
-HAYSTACK_SEARCH_ENGINE = 'whoosh'
-HAYSTACK_WHOOSH_PATH = 'whoosh_index/'
-~~~
-
-But (until we figure things out better) make sure not to commit this change!
+~~~ #HAYSTACK_SEARCH_ENGINE = 'solr' #HAYSTACK_SOLR_URL = 'http://127.0.0.1:8088/solr' ~~~ 
 
 * Then run `python manage.py rebuild_index`
 
-# Suggested workflow
-* Claim a bug at https://launchpad.net/dormbase
-* Create a new branch for each ticket you're working on (`git checkout -b
-  branchname`)
-* Commit your fix, and push to Github (`git push -u origin branchname`)
-* Visit your forked repo on Github, and click the "pull request" button
-* Someone will review your pull request and may ask you to update your commit,
-  if necessary
+And right below, add these two lines: 
 
+~~~ HAYSTACK_SEARCH_ENGINE = 'whoosh' HAYSTACK_WHOOSH_PATH = 'whoosh_index/' ~~~ 
+
+* Then run `python manage.py rebuild_index` 
