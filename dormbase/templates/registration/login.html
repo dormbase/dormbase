@@ -2,13 +2,15 @@
 {% block content %}
 
 <div id="content-main">
+    <h1>Login</h1>
+
     <form method="post" action="{% url django.contrib.auth.views.login %}">
         {% csrf_token %}
         <table>
             {{ form.as_table }}
         </table>
 
-        <input type="submit" value="login" />
+        <input type="submit" value="Login" />
         <input type="hidden" name="next" value="{{ next }}" />
     </form>
     <span>
