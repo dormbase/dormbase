@@ -1,7 +1,12 @@
-.DS_Store
 *.pyc
 *.pyo
+*~
+*.orig
+*.rej
+.#*
 .installed.cfg
+.DS_Store
+.virtualenv
 bin/*
 develop-eggs
 dist
@@ -9,12 +14,7 @@ downloads
 eggs
 log
 parts
-*~
-*.orig
-*.rej
-.#*
 db.dat
 dormbase/settings_private.py
 dormbase/whoosh_index
-
 dormbase/static/less
