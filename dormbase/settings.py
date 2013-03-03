@@ -175,3 +175,6 @@ HAYSTACK_SOLR_URL = 'http://127.0.0.1:8088/solr'
 PHOTOLOGUE_MAXBLOCK = 1024 * 1024
 
 ACCOUNT_ACTIVATION_DAYS = 7
+
+if os.path.exists("settings_private.py"):
+    execfile("settings_private.py")
