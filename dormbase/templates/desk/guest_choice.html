@@ -5,6 +5,9 @@
         ({{ choice.athena }})
     {% endif %}
   </div>
+  <div class="resident">
+    Guest of {{ choice.resident.getFullName }}
+  </div>
     {% if choice.date_start and choice.date_end %}
   <div class="date">
         {{ choice.date_start }} - {{ choice.date_end }}
