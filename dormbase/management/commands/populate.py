@@ -17,14 +17,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys, os
-sys.path.append('../')
-os.environ["DJANGO_SETTINGS_MODULE"] = 'dormbase.settings'
-
-from dormbase.core.populate import *
-from dormbase.package.populate import *
-from dormbase.movie.populate import *
-from dormbase.personal.populate import *
+from dormbase.core.populate import import_test_directory
+from dormbase.package.populate import import_test_packages
+from dormbase.movie.populate import import_test_movies
 
 def import_test_database():
     import_test_directory()
