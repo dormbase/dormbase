@@ -24,10 +24,12 @@ os.environ["DJANGO_SETTINGS_MODULE"] = 'dormbase.settings'
 from dormbase.core.populate import *
 from dormbase.package.populate import *
 from dormbase.movie.populate import *
+from dormbase.personal.populate import *
 
 def import_test_database():
     import_test_directory()
     import_test_packages()
     import_test_movies()
+    import_test_guests()
 
 import_test_database()
