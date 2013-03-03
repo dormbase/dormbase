@@ -4,6 +4,3 @@
 [submodule "dormbase/static/bootstrap"]
 	path = dormbase/static/bootstrap
 	url = https://github.com/twitter/bootstrap.git
-[submodule "dormbase/contrib/IMDBpy"]
-	path = dormbase/contrib/IMDBpy
-	url = https://github.com/dormbase/IMDBpy.git
