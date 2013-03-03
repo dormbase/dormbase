@@ -31,7 +31,6 @@ class Package(models.Model):
 
     recipient = models.ForeignKey(Resident, null = True)
     location = models.CharField(max_length=8, choices=BINS)
-    perishable = models.BooleanField()
     date_recieved = models.DateField(auto_now_add = True)
     hidden = models.BooleanField(default = False)
     #checked_in_by = models.ForeignKey(AuthUser, null = True, blank = True) # Set to true for development
