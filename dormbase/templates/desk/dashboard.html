@@ -66,14 +66,14 @@
 	<table class="table table-striped table-condensed" id="package-list">
 	  <thead>
 	    <tr> 
-	      <th></th><th>Name</th><th>Bins</th>
+	      <th></th><th>Name</th><th>Bins</th><th>Comment</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	  </tbody>
 	</table>
 
-	<p><icon class="icon-leaf"></icon> = Perishable</p>
+	<p><icon class="icon-warning-sign"></icon> = Urgent</p>
       </div>      
     </div>
   </div>
@@ -120,17 +120,18 @@ function makeMovieRow(row) {
 }
 
 function makePackageRow(row) {
-    function showIconIfNeeded(perishable) {
-        if (perishable) {
-           return '<icon class="icon-leaf"></icon>';
+    function showIconIfNeeded(urgent) {
+        if (urgent) {
+           return '<icon class="icon-warning-sign"></icon>';
         }
         return '';
     }
     return "" + 
         "<tr" + " id='p" + row.id + "'>" +
-        " <td>" + showIconIfNeeded(row.perishable) + "</td>" +
+        " <td>" + showIconIfNeeded(row.urgent) + "</td>" +
         " <td>" + row.recipient + "</td>" +
         " <td>" + row.location + "</td>" + 
+        " <td>" + row.comment + "</td>" +
         " <td>" +
         "  <form class='release-form' action=''>" +
         "   <input type='hidden' name='package_id' value='" + row.id + "'>" +

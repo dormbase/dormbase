@@ -26,6 +26,8 @@ import random
 def import_test_packages():
     residents = Resident.objects.all()[0:random.randint(5, 15)]
 
+    comments = ["", "Perishable, pick up as soon as possible", "This is a comment.", "Hello, world"]
+
     for r in residents:
         if random.randint(0,5) == 5:
             o = True
@@ -33,9 +35,11 @@ def import_test_packages():
             o = False
         
         l = random.choice(['A', 'B', 'C', 'D', 'Floor'])
+        c = random.choice(comments)
     
         p = Package(recipient = r,
-                    perishable = o,
+                    urgent = o,
+                    comment = c,
                     location = l)
         p.save()
 

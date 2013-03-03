@@ -32,7 +32,8 @@ def package_get(request):
         packages.append({
                 'recipient': p.recipient.getFullName(),
                 'location': p.location,
-                'perishable': p.perishable,
+                'urgent': p.urgent,
+                'comment': p.comment,
                 'id': p.id,
                 })
 
@@ -45,12 +46,14 @@ def package_add(request):
             cd = form.cleaned_data
             p = Package(recipient = cd['recipient'], 
                         location = cd['location'], 
-                        perishable = cd['perishable'],)
+                        urgent = cd['urgent'],
+                        comment = cd['comment'])
             p.save()
 
             jsonPackage = json.dumps({'recipient': p.recipient.getFullName(),
                                       'location': p.location,
-                                      'perishable': p.perishable,
+                                      'urgent': p.urgent,
+                                      'comment': p.comment,
                                       'id': p.id})
 
             return HttpResponse(jsonPackage, mimetype="application/json")
