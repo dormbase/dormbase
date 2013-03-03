@@ -136,7 +136,7 @@ INSTALLED_APPS = (
     'core',
     'movie',
     'package',
-    'personal',
+    'residents',
     'nextbus',
     'menus',
     'laundry',

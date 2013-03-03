@@ -73,7 +73,7 @@ class Resident(AbstractResident):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('dormbase.personal.views.profile_username', (),
+        return ('dormbase.residents.views.profile_username', (),
                 {'username': self.athena})
 
 class Group(models.Model):

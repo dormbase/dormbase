@@ -36,8 +36,8 @@
 
 	    <ul class="nav">   
 	      <li {% block classHome %}{% endblock %}><a href="{% url dormbase.views.home %}">Home</a></li>
+	      <li {% block classResidents %}{% endblock %}><a href="{% url dormbase.residents.views.dashboard %}">Residents</a></li>
 	      <li {% block classDirectory %}{% endblock %}><a href="{% url dormbase.core.views.directory %}">Directory</a></li>
-	      <li {% block classPersonal %}{% endblock %}><a href="{% url dormbase.personal.views.profile %}">Personal</a></li>
 	      <li class="dropdown {% block classMediaContent %}{% endblock %}">
             <a class="dropdown-toggle" data-toggle="dropdown" href="">
               Media

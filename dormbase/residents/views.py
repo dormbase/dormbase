@@ -6,8 +6,8 @@ from dormbase.core.models import Resident
 from django.http import Http404
 
 
-def profile(request):
-    return render_to_response('personal/profile.html', context_instance = RequestContext(request))
+def dashboard(request):
+    return render_to_response('residents/dashboard.html', context_instance = RequestContext(request))
 
 def profile_username(request, username):
     try:
@@ -19,4 +19,4 @@ def profile_username(request, username):
                'phone': resident.cell, 'web': resident.url, 'about': resident.about,
                'year': resident.year }
 
-    return render_to_response('personal/user.html', payload, context_instance = RequestContext(request))
+    return render_to_response('residents/user.html', payload, context_instance = RequestContext(request))

@@ -30,7 +30,7 @@ urlpatterns = patterns('',
     url(r'^$', 'dormbase.views.home', name='home'),
 
     # Profile/Personal
-    (r'^accounts/profile/', include('personal.urls')),
+    (r'^residents/', include('residents.urls')),
 
     # Registration
     (r'^accounts/', include('registration.backends.default.urls')),
