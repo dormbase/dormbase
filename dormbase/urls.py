@@ -29,14 +29,17 @@ urlpatterns = patterns('',
     # Home page
     url(r'^$', 'dormbase.views.home', name='home'),
 
+    # Profile/Personal
+    (r'^accounts/profile/', include('personal.urls')),
+
+    # Registration
+    (r'^accounts/', include('registration.backends.default.urls')),
+
     # Directory
     (r'^directory/', include('core.urls')),
 
     # Movie
     (r'^movies/', include('movie.urls')),
-
-    # Profile/Personal
-    (r'^personal/', include('personal.urls')),
 
     # Desk
     (r'^desk/', include('desk.urls')),
