@@ -31,6 +31,7 @@ def package_get(request):
     for p in Package.objects.filter(hidden=False):
         packages.append({
                 'recipient': p.recipient.getFullName(),
+                'recipientId': p.recipient.id,
                 'location': p.location,
                 'perishable': p.perishable,
                 'id': p.id,

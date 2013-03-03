@@ -4,51 +4,82 @@
 
 <h1>Profile</h1>
 
-<div >
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#residents-about" data-toggle="tab">About</a></li>
-  <li><a href="#residents-packages" data-toggle="tab">Packages</a></li>
-  <li><a href="#residents-guest_list" data-toggle="tab">Guest List</a></li>
-  <li><a href="#residents-lounges" data-toggle="tab">Lounges</a></li>
-  <li><a href="#residents-mailing_lists" data-toggle="tab">Mailing Lists</a></li>
-  <li><a href="#residents-reuse" data-toggle="tab">Reuse</a></li>
-</ul>
+<div>
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#residents-home" data-toggle="tab">Home</a></li>
+    <li><a href="#residents-packages" data-toggle="tab">Packages</a></li>
+    <li><a href="#residents-guest_list" data-toggle="tab">Guest List</a></li>
+    <li><a href="#residents-rentals" data-toggle="tab">Rentals</a></li>
+  </ul>
 
-<div class="tab-content">
-  <div class="tab-pane active" id="residents-about">
-    Manage your personal info.
-  </div><!-- END About -->
-  
-  <div class="tab-pane" id="residents-packages">
-    For care packages and much, much more.
-  </div><!-- END Packages -->
+  <div class="tab-content">
+    <div class="tab-pane active" id="residents-home">
+      <div class="row-fluid">
+        <div class="span6">
+          <div>
+            <h3>My Guests</h3>
+            <hr>
+            TODO: display some stats (like your most recent N guests to check in) once we implement guest lists
+          </div>
+        </div>
 
-  <div class="tab-pane" id="residents-guest_list">
-    More windows than friends? I think not.
-  </div><!-- END Guest List -->
-  
-  <div class="tab-pane" id="residents-lounges">
-    Get paid to hang out.
-  </div><!-- END Lounges-->
+        <div class="span6">
+          <div style="padding-bottom: 20px;"> <!-- TODO: put this in less, probably? -->
+            <h3>My Packages</h3>
+            <hr>
+            <div id="package-stats">
+            </div>
+          </div>
+          <div>
+            <h3>My Rentals</h3>
+            <hr>
+            TODO: display some stats (like what movies you have checked out and need to return) once we implement movies
+          </div>
+        </div>
+      </div>
+    </div><!-- END About -->
 
-  <div class="tab-pane" id="residents-mailing_lists">
-    Like drinking from a firehose... for people who like lots of unread emails.
-  </div><!-- END Mailing Lists-->
-  
-  <div class="tab-pane" id="residents-reuse">
-    One man's trash in another one's treasure. Find cool stuff people
-    are giving away for free!
-  </div><!-- END Reuse -->
+    <div class="tab-pane" id="residents-packages">
+      For care packages and much, much more.
+    </div><!-- END Packages -->
 
-  
+    <div class="tab-pane" id="residents-guest_list">
+      More windows than friends? I think not.
+    </div><!-- END Guest List -->
+
+    <div class="tab-pane" id="residents-rentals">
+      Movies that you've rented.
+    </div><!-- END Guest List -->
+
+  </div>
+
 </div>
 
-</div>
 <script type="text/javascript">
-  $(function() {
-  $(".collapse").collapse();
-  $("#myTab").tab('show');
+$(function() {
+    // TODO SECURITY BUG we shouldn't be passing all packages to this user
+    $.getJSON("{% url dormbase.package.views.package_get %}",
+    function(packages) {
+        var myId = "{{ user.id }}";
+        var numPackages = 0;
+        var numPerishable = 0;
+        for (var i in packages) {
+            // TODO note that this will never be true because right now our resident database and Django user table aren't connected
+            if (packages[i].recipientId == myId) {
+                numPackages += 1;
+                if (packages[i].perishable) {
+                    numPerishable += 1;
+                }
+            }
+        }
+        var stats = "You have " + numPackages + " packages.";
+        if (numPerishable) {
+            stats += " " + numPerishable + " of your packages are perishable!";
+        }
+        $("#package-stats").append(stats);
+    });
 });
+
 </script>
 
 {% endblock %}
