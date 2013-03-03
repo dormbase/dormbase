@@ -65,6 +65,10 @@
                 <span class="user pull-right">
                     <span class="username">{{ user.email }}</span> | <a href="{% url django.contrib.auth.views.logout %}">Log out</a>
                 </span>
+            {% else %}
+                <span class="user pull-right">
+                    <a href="{% url django.contrib.auth.views.login %}">Log in</a>
+                </span>
             {% endif %}
 	    <form class="navbar-search pull-right" action="{% url dormbase.views.home %}search/" method="get">
 	      <input type="text" class="search-query" placeholder="Search" name="q">
