@@ -70,8 +70,6 @@
 	  <tbody>
 	  </tbody>
 	</table>
-
-	<p><icon class="icon-leaf"></icon> = Perishable</p>
       </div>      
     </div>
   </div>
@@ -118,15 +116,8 @@ function makeMovieRow(row) {
 }
 
 function makePackageRow(row) {
-    function showIconIfNeeded(perishable) {
-        if (perishable) {
-           return '<icon class="icon-leaf"></icon>';
-        }
-        return '';
-    }
     return "" + 
         "<tr" + " id='p" + row.id + "'>" +
-        " <td>" + showIconIfNeeded(row.perishable) + "</td>" +
         " <td>" + row.recipient + "</td>" +
         " <td>" + row.location + "</td>" + 
         " <td>" +
